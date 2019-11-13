@@ -31,7 +31,7 @@
 %% \documentclass[final,5p,times]{elsarticle}
 %% \documentclass[final,5p,times,twocolumn]{elsarticle}
 
-%% For including figures, graphicx.sty has been loaded in
+%% For including figures, graphicx.sty has been loxaded in
 %% elsarticle.cls. If you prefer to use the old commands
 %% please give \usepackage{epsfig}
 
@@ -151,7 +151,7 @@ In this paper, we are going to present how to take into account those uncertaint
 
 %\arthur{Revoir les notations ($\hat{\bf k}$, ${\bf k}^*$ c'est la meme chose ou pas ? les u, U je ne suis pas sûr que c'est bon non plus)}
 %\victor{Pour moi, ce qui est en majuscule, c'est des v.a., et tous les inputs sont en gras (mais on peut laisser tomber le gras)}
-\introduction%% \introduction[modified heading if necessary]
+%% \introduction[modified heading if necessary]
 %\subsection{Motivation}
 
 Numerical models are widely used to study or forecast natural phenomenon and improve industrial processes. However, by essence models only partially represents reality and sources of uncertainties are ubiquitous (discretisation errors, missing physical processes, poorly known boundary conditions).
@@ -772,7 +772,7 @@ We can see that the mean forecast error squared, on the right side, averaged ove
 Figure~\ref{fig:forecast_squared_error_distrib} shows the distribution of the mean squared error. 
 \begin{figure*}[!h]
 \centering
-\includegraphics[width=10cm]{Figures/forecast_error_distrib_2.pdf}
+\includegraphics[width=10cm]{Figures/distrib_L2norm.pdf}
 \caption{Distribution of the forecast squared error, averaged over the different values of the uncertain parameter in the numerical simulations \victor{doublon avec fig.\ref{fig:forecast_squared_error} ?}}
 \label{fig:forecast_squared_error_distrib}
 \end{figure*}

@@ -1,71 +1,52 @@
-%% Copernicus Publications Manuscript Preparation Template for LaTeX Submissions
-%% ---------------------------------
-%% This template should be used for copernicus.cls
-%% The class file and some style files are bundled in the Copernicus Latex Package, which can be downloaded from the different journal webpages.
-%% For further assistance please contact Copernicus Publications at: production@copernicus.org
-%% https://publications.copernicus.org/for_authors/manuscript_preparation.html
+%% 
+%% Copyright 2007-2019 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% l
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
 
+\documentclass[preprint, 1p]{elsarticle}
 
-%% Please use the following documentclass and journal abbreviations for discussion papers and final revised papers.
+%% Use the option review to obtain double line spacing
+%% \documentclass[preprint,review,12pt]{elsarticle}
 
-%% 2-column papers and discussion papers
-\documentclass[npg, manuscript]{copernicus}
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
 
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
 
-%% Journal abbreviations (please use the same for discussion papers and final revised papers)
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
 
-
-% Advances in Geosciences (adgeo)
-% Advances in Radio Science (ars)
-% Advances in Science and Research (asr)
-% Advances in Statistical Climatology, Meteorology and Oceanography (ascmo)
-% Annales Geophysicae (angeo)
-% Archives Animal Breeding (aab)
-% ASTRA Proceedings (ap)
-% Atmospheric Chemistry and Physics (acp)
-% Atmospheric Measurement Techniques (amt)
-% Biogeosciences (bg)
-% Climate of the Past (cp)
-% DEUQUA Special Publications (deuquasp)
-% Drinking Water Engineering and Science (dwes)
-% Earth Surface Dynamics (esurf)
-% Earth System Dynamics (esd)
-% Earth System Science Data (essd)
-% E&G Quaternary Science Journal (egqsj)
-% Fossil Record (fr)
-% Geographica Helvetica (gh)
-% Geoscientific Instrumentation, Methods and Data Systems (gi)
-% Geoscientific Model Development (gmd)
-% History of Geo- and Space Sciences (hgss)
-% Hydrology and Earth System Sciences (hess)
-% Journal of Micropalaeontology (jm)
-% Journal of Sensors and Sensor Systems (jsss)
-% Mechanical Sciences (ms)
-% Natural Hazards and Earth System Sciences (nhess)
-% Nonlinear Processes in Geophysics (npg)
-% Ocean Science (os)
-% Primate Biology (pb)
-% Proceedings of the International Association of Hydrological Sciences (piahs)
-% Scientific Drilling (sd)
-% SOIL (soil)
-% Solid Earth (se)
-% The Cryosphere (tc)
-% Web Ecology (we)
-% Wind Energy Science (wes)
-
-
-%% \usepackage commands included in the copernicus.cls:
-%\usepackage[german, english]{babel}
-%\usepackage{tabularx}
-%\usepackage{cancel}
-%\usepackage{multirow}
-%\usepackage{supertabular}
-%\usepackage{algorithmic}
-%\usepackage{algorithm}
-%\usepackage{amsthm}
-%\usepackage{float}
-%\usepackage{subfig}
-%\usepackage{rotating}
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
 \usepackage{easy-todo}
 \usepackage{graphicx}
 
@@ -97,56 +78,73 @@
 \newcommand{\elise}[1]{{\itshape \color{red} ({#1})}}
 \newcommand{\victor}[1]{{\itshape \color{green} ({#1})}}
 
+\journal{Journal of Computational Physics}
+
 \begin{document}
 
-\title{Title-- \today{}}%TEXT}
+\begin{frontmatter}
 
+%% Title, authors and addresses
 
-% \Author[affil]{given_name}{surname}
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
 
-\Author[]{Victor}{Trappler}
-\Author[]{Élise}{Arnaud}
-\Author[]{Laurent}{Debreu}
-\Author[]{Arthur}{Vidard}
+\title{Robust calibration of numerical models based on relative regret}
 
-\affil[]{Univ. Grenoble Alpes, CNRS, Inria, Grenoble INP*, LJK, 38000 Grenoble, France}
-% \affil[]{ADDRESS}
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \address[label1]{}
+%% \address[label2]{}
 
-%% The [] brackets identify the author with the corresponding affiliation. 1, 2, 3, etc. should be inserted.
+\author[vt]{Victor Trappler}
+\ead{victor.trappler@univ-grenoble-alpes.fr}
+\author[ea]{Élise Arnaud}
+\author[av]{Arthur Vidard}
+\author[ld]{Laurent Debreu}
 
-
-
-\runningtitle{Title}
-
-\runningauthor{Trappler V.}
-
-\correspondence{Victor Trappler (victor.trappler@univ-grenoble-alpes.fr)}
-
-
-
-\received{}
-\pubdiscuss{} %% only important for two-stage journals
-\revised{}
-\accepted{}
-\published{}
-
-%% These dates will be inserted by Copernicus Publications during the typesetting process.
-
-
-\firstpage{1}
-
-\maketitle
-
-% \listoftodos\
+\address[vt]{Univ. Grenoble Alpes, CNRS, Inria, Grenoble INP*, LJK, 38000 Grenoble, France}
 
 \begin{abstract}
+%% Text of abstract
 Classical methods of parameter estimation usually imply the minimisation of an objective function, that measures the error between some observations and the results obtained by a numerical model. In the presence of random inputs, the objective function becomes a random variable, and notions of robustness have to be introduced.
 
 In this paper, we are going to present how to take into account those uncertainties by defining a notion of robustness based on the distribution of the conditional minimisers and compare it with the minimum in the mean sense, and the minimum of variance.
-\victor{Pour le nom: Il y a l'idée que l'on veut avoir un regret $J(\mathbf{k},\mathbf{u}) - \alpha J^*(\mathbf{u})$ controlé à l'aide de $\alpha$: Relative regret ?}
 \end{abstract}
 
-\copyrightstatement{TEXT}
+% %%Graphical abstract
+% \begin{graphicalabstract}
+% %\includegraphics{grabs}
+% \end{graphicalabstract}
+
+%%Research highlights
+% \begin{highlights}
+% \item Research highlight 1
+% \item Research highlight 2
+% \end{highlights}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+
+%% PACS codes here, in the form: \PACS code \sep code
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+%% \linenumbers
+
+%% main text
+\section*{Introduction}
+\label{}
 
 %----------------------------------------------------------------------------
 % \listoftodos{}
@@ -559,15 +557,15 @@ The different estimators introduced in this paper are summarised in Table~\ref{t
   \caption{Robust estimators, based on a cost function $J$}
   \label{tab:RO_recap}
 \begin{tabular}{lrr}
-  \tophline
+  \hline
   Definition & Related quantities & Interpretation \\
-  \middlehline
+  \hline
    $\argmin_{\mathbf{k}\in\Kspace} \Ex_{\mathbf{U}}\left[J(\mathbf{k},\mathbf{U})\right]$& $\kmean$ & Long run performances\\
    $\argmin_{\mathbf{k}\in\Kspace} \Var_{\mathbf{U}}\left[J(\mathbf{k},\mathbf{U})\right]$& $\kvar$  & Steady performances\\
    $\argmax_{\mathbf{k}\in\Kspace} p_{\mathbf{K}^*}(\mathbf{k})$ & $\kmpe$ & Most probable minimiser\\
     $\inf\left\{ \alpha \mid \exists \checkkp \in \Kspace,\, \Gamma_{\alpha}(\checkkp) \geq p \right\}$ & $(p, \checkkp,\checkap)$ & Acceptable values with fixed probability $p$ \\
     $p_{\mathrm{maxratio}} = \argmax p/\checkap$ & $(p_{\mathrm{maxratio}}, \checkk_{\mathrm{maxratio}}, \checka_{\mathrm{maxratio}})$ & Maximal ratio of $p$ and $\checkap$ \\
-  \bottomhline
+  \hline
 \end{tabular}
 \end{table*}
 
@@ -609,14 +607,14 @@ In order to choose a satisfying level of confidence $p$, we are going to study $
 \caption{Estimation performed for $J_{\mathrm{BH}}$, sorted by value}
 \label{tab:recap_estimates_branin}
 \begin{tabular}{lr}
-\tophline
-Estimate & Value \\ \middlehline
+\hline
+Estimate & Value \\ \hline
 $\hatkvar$ & 1.371 \\ 
 $\kest_p,~p=1$ & 1.557 \\ 
 $\hatkmean$ & 1.587 \\ 
 $\hatkmpe$ & 1.628 \\ 
 $\kest_p,~p=0.95$ & 1.672 \\ 
-$\kest_{\mathrm{maxratio}},~\hat{p}_{\mathrm{maxratio}}=0.654$ & 1.637 \\ \bottomhline
+$\kest_{\mathrm{maxratio}},~\hat{p}_{\mathrm{maxratio}}=0.654$ & 1.637 \\ \hline
 \end{tabular}
 \end{table*}
 
@@ -643,15 +641,15 @@ Compared to the plots for $J_{\mathrm{BH}}$ in Figure~\ref{fig:ratio_BH}, $\hat{
 \centering
 \caption{Estimations performed for $J_{\mathrm{BHswap}}$, sorted by value}
 \label{tab:recap_estimates_BHs}
-\begin{tabular}{lr} \tophline
-Estimate & Value \\ \middlehline
+\begin{tabular}{lr} \hline
+Estimate & Value \\ \hline
 $\kest_{\mathrm{MPE}}$ & 0.606 \\ 
 $\kest_{\mathrm{maxratio}},~ \hat{p}_{\mathrm{maxratio}}=0.766$ & 1.537 \\ 
 $\kest_{\mathrm{mean}}$ & 1.752 \\ 
 $\kest_p,~p=0.90$ & 2.112 \\ 
 $\kest_p,~p=0.95$ & 2.457 \\ 
 $\kest_{\mathrm{var}}$ & 2.638 \\ 
-$\kest_1,~p=1$ & 2.798   \\ \bottomhline
+$\kest_1,~p=1$ & 2.798   \\ \hline
 \end{tabular}
 \end{table*}
 
@@ -695,7 +693,7 @@ J(\mathbf{k},\mathbf{u}) = \frac12 \| \mathcal{G}(\mathbf{k},\mathbf{u}) \|^2 = 
 \end{equation}
 \subsection{The Shallow Water equations}
 
-The model we wish to calibrate is based on the Shallow Water equations, described Eq.~\eqref{eq:SWE_equations}. $h$ is the height of the water column, $q$ is the discharge, and $z$ is the bathymetry, while $g$ is the usual gravitation constant. The parameter to calibrate, $\mathbf{k}$, is the quadratic friction term, proportional to the square of the inverse of Manning-Strickler coefficient. The environmental parameter $\mathbf{u}$ is the amplitude of a sine wave of period $1$. The domain of those two parameters are $\mathcal{K} = [0.0, 1.3]$ and $\mathcal{U} = [0.5, 0.7]$.
+The model we wish to calibrate is based on the Shallow Water equations, described Eq.~\eqref{eq:SWE_equations}. $h$ is the height of the water column, $q$ is the discharge, and $z$ is the bathymetry, while $g$ is the usual gravitation constant. The parameter to calibrate, $\mathbf{k}$, is the quadratic friction term, proportional to the square of the inverse of Manning-Strickler coefficient. The environmental parameter $\mathbf{u}$ is the amplitude of a sine wave of period $1/\omega_0$. The domain of those two parameters are $\mathcal{K} = [0.0, 1.3]$ and $\mathcal{U} = [0.5, 0.7]$.
 
 
 \begin{align}
@@ -704,348 +702,90 @@ The model we wish to calibrate is based on the Shallow Water equations, describe
     \begin{array}{rl}
       \partial_t h + \partial_x q &= 0 \\
       \partial_t q + \partial_x \left(\frac{q^2}{h} + \frac{g}{2}h^2\right) &= - gh\partial_x z - \mathbf{k}q |q|h^{-7/3} \\
-      h(0, t) &= 20.0 + 3\cdot \sin \left(\frac{2\pi t}{2}\right) + 1.5\cdot \mathbf{u} \cdot \sin\left(2 \pi t\right)\\
+      h(0, t) &= 20.0 + 3\cdot \sin \left(\frac{2\pi t}{2}\right) + 1.5\cdot \mathbf{u} \cdot \sin\left(\frac{2 \pi t}{\omega_0}\right)\\
       \partial_x q(0, t) &= 0
       \end{array}
   \right.
 \end{align}
-These equations are integrated using a finite-volume scheme on a discretized domain $[0, L]$, up to a time $T$. The output of the computer code is the sea surface height $h$, on the center of all the volumes and at all the time-steps, that will be denoted $\mathcal{M}(\mathbf{k},\mathbf{u})$.
+These equations are integrated using a finite-volume scheme on a discretized domain $[0, L]$, up to a time $T$. The output of the computer code is the sea surface height $h$, on the center of all the volumes and at all the time-steps, that will be denoted $\mathcal{M}(\mathbf{k},\mathbf{u};\, \omega_0=1.0)$.
 In this setting, the variable input is uniformly distributed on $\mathcal{U}$.
-To generate the observations, we choose $\mathbf{u}^{\mathrm{true}}=2/3$, and define $\mathcal{M}^o$ based on the computer model $\mathcal{M}$, such that $\mathcal{M}^o(\mathbf{u}^{\mathrm{true}}) = \mathcal{M}(\mathbf{k}^{\mathrm{true}}, \mathbf{u}^{\mathrm{true}})$. 
-This true value $\mathbf{k}^{\mathrm{true}} = (k_1^{\mathrm{true}}, k_2^{\mathrm{true}},\dots, k_{N_\mathrm{vol}}^{\mathrm{true}})$ is not constant over the whole domain, and is defined as
+To generate the observations, we choose $\mathbf{u}^{\mathrm{true}}=2/3$, and define $\mathcal{M}^o$ based on the computer model $\mathcal{M}$, such that $\mathcal{M}^o(\mathbf{u}^{\mathrm{true}}) = \mathcal{M}(\mathbf{k}^{\mathrm{true}}, \mathbf{u}^{\mathrm{true}}; \, \omega_0 = 0.999)$. $\omega_0$  
+represents here the uncontrollable error between the observations and the numerical model and will now be omitted systematically in the notation. The true value of the bottom friction $\mathbf{k}^{\mathrm{true}} = (k_1^{\mathrm{true}}, k_2^{\mathrm{true}},\dots, k_{N_\mathrm{vol}}^{\mathrm{true}})$ is not constant over the whole domain, and is defined as
 \begin{equation*}
 {k}^{\mathrm{true}}_i = 0.2\cdot \left(1 + \sin\left(\frac{2 \pi x_i}{L}\right)\right)
 \end{equation*}
-where $x_i$ is the center of the $i$-th volume.
+where $x_i$ is the center of the $i$-th volume. The two sources of representativity errors are $\omega_0$, and the fact that we are looking to estimate $\mathbf{k}$ in a 1-dimensional space $\Kspace$. 
 \subsection{Estimation}
+Given that the numerical model is expensive to evaluate, it has first been evaluated on a relatively small regular grid. A metamodel based on Gaussian process is constructed and the PEI criterion \citep{ginsbourger_bayesian_2014,bossek_learning_2015} allow us to add point to evaluate and to better capture the locus of the conditional minimisers $\{(\mathbf{k}^*(\mathbf{u}), \mathbf{u}) \mid \mathbf{u} \in \Uspace \}$. A bigger regular grid is evaluated by the metamodel once the design space has been sufficiently explored. The different steps of the estimation are illustrated Figure~\ref{fig:estimation_swe}. We can see that the estimation for this problem seems less problematic than the analytical examples shown above, as all derived quantites are unimodal.
+The different estimates however take a wide range of values, as seen on Table~\ref{tab:recap_estimates_metaSWE}.: there is a unique global minimiser on the whole space $\Kspace \times \Uspace$, noted $\kest_{\mathrm{global}}$. As discussed earlier, the estimation of the MPE is dependent on the method used, and then its estimation using KDE in the middle plot of Figure~\ref{fig:estimation_swe} is here only for illustrative purposes.
 
 \begin{figure}[!h]
 \centering
 \includegraphics[width=12cm]{Figures/RobustSWEmis_plots.pdf}
 \caption{Procedure of robust calibration for the shallow water problem. Top: contours of $J$, conditional minimisers and $\{(\mathbf{k},\mathbf{u}) | J(\mathbf{k},\mathbf{u}) = \hat{\alpha}_1 J^*(\mathbf{u})\}$. Middle: Conditional moments and histogram and KDE of the conditional minimisers. Bottom: $\hat{\Gamma}_{\alpha_p}$ for different levels $p$}
-\label{fig:my_label}
+\label{fig:estimation_swe}
 \end{figure}
 \begin{table*}[!h]
 \centering
-\begin{tabular}{lr}
+\caption{Calibrated values of $\mathbf{k}$ according to different criteria}
+\begin{tabular}{lr} \hline
 Estimator & Value \\ \hline
+$\hatkmpe$ & 0.249 \\
+$\kest_{\mathrm{global}}$ & 0.290 \\
 $\hat{\mathbf{k}}_{p},~p=1$ & 0.423 \\ 
 $\hat{\mathbf{k}}_p,~p=0.90$ & 0.458 \\ 
-$\hat{\mathbf{k}}_{\mathrm{mean}}$ & 0.501 \\ 
+$\hatkmean$ & 0.501 \\ 
 $\hat{\mathbf{k}}_p,~p=0.80$ & 0.505 \\ 
 $\hat{\mathbf{k}}_p,~p=0.70$ & 0.560 \\ 
-$\hat{\mathbf{k}}_{\mathrm{var}}$ & 0.990 \\
+$\hatkvar$ & 0.990\\ \hline
 \end{tabular}
-\caption{Estimation of $\mathbf{k}$ according to different criterion}
 \label{tab:recap_estimates_metaSWE}
 \end{table*}
 
 \subsection{Assessing the quality of the forecast of the calibrated model}
-The calibration of the model has been performed on the time-period $[0, T]$, called assimilation window. 
-We now want to compare the quality of the different forecasts depending on the criterion used to calibrate the bottom friction.
-To define those forecasts, the models will be integrated from $T$ to $T_{\mathrm{pred}}$.
+The calibration of the model has been performed using by integrating the model on a time-period $[0, T]$, called assimilation window. 
+We now want to compare the quality of the different forecasts, from different calibrated bottom friction.
+Those forecasts result from the integration of the numerical model between the time $T$ and a time $T_{\mathrm{pred}}$.
 
-Given the probabilistic nature $\mathbf{U}$, the forecasts will also be probabilistic. We will then compare $\mathcal{M}_{\mathrm{pred}}^o(\mathbf{U})$ and $\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{U})$, for a calibrated $\mathbf{k}$.
+Given the probabilistic nature of the environmental conditions $\mathbf{U}$, the forecasts will also be probabilistic. We will then compare $\mathcal{M}_{\mathrm{pred}}^o(\mathbf{U})$ and $\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{U})$, for a calibrated $\mathbf{k}$.
 
 \subsubsection{Squared forecast error}
-Let us assume that the observations result from the parameter $\mathbf{u}'$, while the computer simulation is run using $\mathbf{u}$.
-The squared forecast error given $\mathbf{u}$ and $\mathbf{u}'$ is
+Given two environmental conditions $\mathbf{u}$, used to run the computer simulation and $\mathbf{u}'$, used to generate the observations, the squared forecast error for the parameter $\mathbf{k}$ is
 \begin{equation}
 \label{eq:squared_forecast_error}
 S_{\mathrm{pred}}(\mathbf{k},\mathbf{u},\mathbf{u}') = \left(\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{u}) - \mathcal{M}^{o}_{\mathrm{pred}}(\mathbf{u}')\right)^2
 \end{equation}
-We can then get an estimation of the mean squared forecast per volume per time step:
-
+By averaging over $\mathbf{u}$ and $\mathbf{u}'$ using a Monte-Carlo approximation, we can define the mean squared forecast error, defined on every point of the spatial domain, and at every time-steps.
 \begin{equation}
   \label{eq:squared_forecast_error_averaged}
-  S(\mathbf{k}) = \frac{1}{N_{\mathbf{u}} N_{\mathbf{u}'}}\sum_{\mathbf{u},\mathbf{u}'} S_{\mathrm{pred}}(\mathbf{k},\mathbf{u},\mathbf{u}') = \frac{1}{N_{\mathbf{u}} N_{\mathbf{u}'}}\sum_{\mathbf{u},\mathbf{u}'}\left(\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{u}) - \mathcal{M}^{o}_{\mathrm{pred}}(\mathbf{u}')\right)^2
+  S(\mathbf{k}) = \frac{1}{N_{\mathbf{u}} N_{\mathbf{u}'}}\sum_{\mathbf{u},\mathbf{u}'\sim \mathbf{U}} S_{\mathrm{pred}}(\mathbf{k},\mathbf{u},\mathbf{u}') = \frac{1}{N_{\mathbf{u}} N_{\mathbf{u}'}}\sum_{\mathbf{u},\mathbf{u}'\sim \mathbf{U}} \left(\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{u}) - \mathcal{M}^{o}_{\mathrm{pred}}(\mathbf{u}')\right)^2
 \end{equation}
+The mean squared forecast error is then averaged over all time-steps between $T$ and $T_{\mathrm{pred}}$, indicating on which point of the domain the forecast error is greater as seen on the left plot of Figure~\ref{fig:forecast_squared_error}.
+\begin{figure*}[!h]
+\centering
+\includegraphics[width=12cm]{Figures/forecast_error.pdf}
+\caption{Quality of forecast, depending on the calibrated parameter. The left figures show the metric averaged over time, while the right figure show the mean forecast error, averaged over time and space}
+\label{fig:forecast_squared_error}
+\end{figure*}
+We can see that the mean forecast error squared, on the right side, averaged over time and space is the smallest for $\kest_{\mathrm{global}}$, while $\kest_{1.0}$ performs slightly better $\hatkmean$.
 
-\subsubsection{Averaged Quantile score}
-A first approach is to compare the quantiles obtained by the prediction $\mathcal{M}_{\mathrm{pred}}(\kest,\mathbf{U})$, with the quantiles observed of $\mathcal{M}^o_{\mathrm{pred}}(\mathbf{U})$.
-We are first going to introduce the pinball loss, or checkloss function:
-\begin{equation}
-\label{eq:checkloss}
-\rho_{\tau}(x) = \begin{cases}
-    \tau |x| \quad \text{ if } x \geq 0 \\
-    (1- \tau) |x| \quad \text{ if } x < 0
-\end{cases}
-\end{equation}
-
-Given the time index $j$, and the volume indexed by $i$, the quantile of order $\tau\in [0, 1]$ of $\mathcal{M}(\kest, \mathbf{U})_{(i,j)}$ is $q_{(i,j)}(\tau)$.
-Given an obse
-\begin{figure*}[t]
-\includegraphics[width=12cm]{Figures/forecast_metric.pdf}
-\caption{Quality of forecast, depending on the calibrated parameter. The left figures show the metric averaged over time, while the right figures show}
-\label{fig:forecast_metric}
+Figure~\ref{fig:forecast_squared_error_distrib} shows the distribution of the mean squared error. 
+\begin{figure*}[!h]
+\centering
+\includegraphics[width=10cm]{Figures/forecast_error_distrib_2.pdf}
+\caption{Distribution of the forecast squared error, averaged over the different values of the uncertain parameter in the numerical simulations \victor{doublon avec fig.\ref{fig:forecast_squared_error} ?}}
+\label{fig:forecast_squared_error_distrib}
 \end{figure*}
 
-
-% \subsection{The Lorenz-63 model}
-% A classical toy problem in data assimilation is the Lorenz-63 model, introduced in \cite{lorenz_deterministic_1963}. 
-% % xb
-% The evolution of the state vector $(x,y,z)$ is described by the non-linear differential system of Eq.~\eqref{eq:lorenz_equations}
-% \begin{align}
-%   \label{eq:lorenz_equations}
-%   \left\{
-%     \begin{array}{l}
-%       \dot{x} = \sigma\left(y-x \right) \\
-%       \dot{y} = \rho x - y - xz \\
-%       \dot{z} = xy - \beta z
-%       \end{array}
-%   \right.
-% \end{align}
-% Despite its apparent simplicity, this system is known to show chaotic behaviour for $(\sigma,\rho,\beta) = (10, 28, 8/3)$. 
-% This differential system is solved numerically using a Runge-Kutta scheme, over $N=100$ time-steps of length $\Delta t = 0.05$. In that time-period, the chaotic behaviour is not yet too apparent.
-
-% The inputs of the computer code are the initial conditions $\left(x_0,y_0,z_0\right)$ and $(\sigma, \beta, \rho)$. The parameter to calibrate is $\mathbf{k}=x_0-1$ with $\mathbf{k}\in[-0.05,0.05]$, and the uncertain parameter is $\mathbf{u}=\beta - 8/3$ with $\mathbf{u} \in \Uspace=[-0.05, 0.05]$. Finally, we suppose that the random variable $\mathbf{U}$ follows an uniform distribution on $\Uspace$. Solving numerically the differential system using those settings yields $x_{i}(\mathbf{k},\mathbf{u})$ for $i$ between $1$ and $N$.
-
-% This problem of calibration will be studied in a twin experiments framework: the target state $x^{o}_i$ for $1\leq i \leq N$ has been generated by the computer code, where the parameters used to generate it are detailed in Table~\ref{tab:lorenz_modelling}. One can notice the discrepancy of $\rho$ between the observations and the model, introduced to ensure that no perfect fit can be achieved, for any set of parameters. 
-% \begin{table*}[h]
-%   \caption{Choice of modelling of the Lorenz-63 system}
-%   \label{tab:lorenz_modelling}
-% \begin{tabular}{crrl}
-%   \tophline
-%   Parameter & Observation: $x_{1:N}^o$ & Modelling: $\mathcal{G}(\mathbf{k},\mathbf{u})$ & Type \\
-%   \middlehline
-%  $\sigma$ & $10$ & $10$ & Fixed\\
-%   $\rho$ & $29$ & $28$ & A priori chosen and fixed \\
-%   $\beta$ & ${8}/{3}$ & ${8}/{3} + \mathbf{u}$ & A priori chosen and uncertain \\
-%  $x_0$ & $1$ & $1 + \mathbf{k}$ & Calibrated \\
-%   $y_0$ & $0$ & $0$ & Fixed \\
-%  $z_0$ & $0$ & $0$ & Fixed \\
-%   \bottomhline
-% \end{tabular}
-% \end{table*}
-
-
-% The misfit between the observations and the output of the numerical model is quantified using the cost function:
-% \begin{equation}
-% \label{eq:cost_fun_lorenz}
-% J(\mathbf{k},\mathbf{u}) = \frac{1}{2}\|\mathcal{G}(\mathbf{k},\mathbf{u}) \|^2 = \frac{1}{2} \|x_{1:N}(\mathbf{k},\mathbf{u}) - x^o_{1:N} \|^2 = \frac{1}{2}\sum_{i=1}^N (x_i(\mathbf{k},\mathbf{u}) - x_i^o)^2
-% \end{equation}
-
-% This toy model is cheap to evaluate, so the global minimum can be computed using numerical methods, at different starting points to avoid local minimums.
-% \begin{equation}
-% \label{eq:min_global_lorenz}
-% \min_{(\mathbf{k},\mathbf{u}) \in \Kspace\times\Uspace} J(\mathbf{k},\mathbf{u}) = 38.886712815 \quad \argmin_{(\mathbf{k},\mathbf{u}) \in \Kspace\times\Uspace} J(\mathbf{k},\mathbf{u}) = (0.02414384, -0.00551042)
-% \end{equation}
-
-% \subsubsection{MPE and conditional moments}
-% Figure~\ref{fig:lorenz_kde_moments} shows the cost function $J$, computed on a regular grid over $\Kspace\times\Uspace$. Using this grid, the conditional mean and standard deviation have been computed, while the MPE has been estimated by KDE. For a single $\mathbf{u}$, it may appear that there are multiple $\mathbf{k}^*(\mathbf{u})$. This is due to the fact that the conditional minimiser jumps back and forth between the two curves.
-
-% \begin{figure}[!h]
-% \includegraphics[width=12cm]{Figures/lorenz_kde_moments.pdf}
-% \caption{Cost function, locus of conditional minimisers, MPE estimated with KDE, conditional moments and their associated estimates}
-% \label{fig:lorenz_kde_moments}
-% \end{figure}
-
-% \subsubsection{Relaxation of the constraint}
-% Based on the computations described before, the coefficient $\checkap$ have been computed for $p=0.9$, $0.95$ and $p=1$, and reported in Table~\ref{tab:recap_estimates_lorenz}. The curve $R_{\checka_1}$ is plotted in Figure~\ref{fig:lorenz_relax}, where the acceptable region for $\checka_1$ is filled in yellow.
-
-% \begin{figure}[!h]
-% \includegraphics[width=12cm]{Figures/lorenz_f3.pdf}
-% \caption{Relaxation of the constraint for the Lorenz model. Acceptable region in yellow}
-% \label{fig:lorenz_relax}
-% \end{figure}
-
-% We can see that for $\mathbf{k}$ being approximately between $0$ and $0.01$, the probability $R_{\checka_1}$ is very close to $1$. Indeed, the cost function seems to be relatively flat on this region, as $\checkk_{0.9} \approx \kmpe$.
-
-% \begin{table*}[!h]
-%   \caption{Estimates computed numerically on the Lorenz-63 model}
-%   \label{tab:recap_estimates_lorenz}
-%   \begin{tabular}{*{3}{r}}\tophline
-%     Estimate & Value & Related quantities\\
-%     \middlehline
-%     $\hatkmean$        & $ 0.008779$ &$\left(\mu(\kmean),\sigma(\kmean)\right) = (42.965, 4.921)$\\
-%     $\hatkvar$         & $-0.025338$ &$\left(\mu(\kvar),\sigma(\kvar)\right)= (50.704, 2.024)$\\
-%     $\hatkmpe$         & $ 0.008779$ & $\Gamma_1(\kmpe) = 0.053$ \\
-%     $\hat{\checkk}_{0.9}$ & $ 0.008729$ & $\hat{\checka}_{0.9}  = 1.202788$ \\
-%     $\hat{\checkk}_{0.95}$& $ 0.006078$ & $\hat{\checka}_{0.95} = 1.226050$ \\
-%     $\hat{\checkk}_{1}$   & $ 0.000275$ & $\hat{\checka}_{1}    = 1.311002$ \\
-%     \bottomhline
-%     \end{tabular}
-% \end{table*}
-
-% \subsubsection{Selection of the couple $(p,\checkap)$}
-% The evolution of $\checkap$ with respect to $p$ is shown on the left plot of Figure~\ref{fig:evolution_p_lorenz}. We can see that $\checkap$ presents two abrupt positive change of slope, for $p$ set to $0.85$ and just before $1$. Those confidence levels corresponds to the local maxima of the ratio $p/\checkap$, that is shown on the right plot of Figure~\ref{fig:evolution_p_lorenz}. The profile of $\checkk_{0.85}$ corresponding to the local maximum of the ratio, has not been plotted as it corresponds to the same profile of $\kmean$.
-
-% \begin{figure*}[!h]
-% \includegraphics[width=12cm]{Figures/evol_p_lorenz.pdf}
-% \caption{Evolution of $p$ and $\checkap$}
-% \label{fig:evolution_p_lorenz}
-% \end{figure*}
-% In order to compare the values taken by the objective function, the profiles have been represented on Figure~\ref{fig:lorenz_profiles}.
-% \begin{figure}[!h]
-% % \includegraphics[width=12cm]{Figures/lorenz_cdf_profile.pdf}
-% \includegraphics[width=12cm]{Figures/profile_lorenz_all_estimates.pdf}
-% \caption{Profiles of different $\mathbf{k}$ for the Lorenz model}
-% \label{fig:lorenz_profiles}
-% \end{figure}
-% The profile of $\kmean$ presents a good insight on the performances of this estimate: for most values of the uncertain variables, the objective is low. In contrast, for $\mathbf{u}$ close to $0.05$, a maximum is reached. 
-%\begin{figure}[!h]
-%\includegraphics[width=8.3cm]{Figures/cdf_lorenz_with_ratio.pdf}
-%\caption{CDF corresponding to different $\mathbf{k}$ for the Lorenz model}
-%\label{fig:lorenz_cdf}
-%\end{figure}
-
-
-
-% \clearpage
-% \subsection{Context: Shallow water equations and bottom friction}
-
-% The quality of water circulation modelling in coastal areas is largely dependent on the boundary conditions, (e.g.\ the tide), the bathymetry and the friction induced by the rugosity of the ocean bed \citep{boutet_estimation_2015}. The latter will then be estimated in a robust manner, by applying the criteria introduced above.
-
-
-% The model studied is based on the one-dimensional shallow water equations, described Eq.~\eqref{eq:SWE_equations}, solved numerically on a domain $D$. $h$ is the height of the water column, $q$ is the discharge, and $z$ is the bathymetry, while $g$ is the usual gravitation constant. $\mathbf{k}$ is a quadratic friction term, proportional to the square of the inverse of Manning-Strickler coefficient.
-% \begin{align}
-%   \label{eq:SWE_equations}
-%   \left\{
-%     \begin{array}{l}
-%       \partial_t h + \partial_x q = 0 \\
-%       \partial_t q + \partial_x \left(\frac{q^2}{h} + \frac{g}{2}h^2\right) = - gh\partial_x z - \mathbf{k}q |q|h^{-7/3} \\
-%       h(0, t) = 20.0 + \mathrm{Amplitude} \cdot \sin \left(\frac{2\pi}{\mathbf{u}}t\right) \\
-%       q(0, t) = 0
-%       \end{array}
-%   \right.
-% \end{align}
-
-% The estimation of the bottom friction and/or topography has been treated in a deterministic setting, % in Section~\ref{sec:deterministic}
-% using tools from variational data assimilation~\cite[e.g.][]{das_estimation_1991,das_variational_1992,honnorat_identification_2010}.
-% If the boundary conditions are not well-known, the estimation will then compensate this misspecification. The resulting estimate will then be optimal for this particular configuration, but will not acknowledge the uncertainty upon the boundary conditions. Instead, we are looking for an estimate that is robust considering the variability of the uncertain boundary conditions.
-
-
-% The problem of the estimation of the bottom friction will be studied using twin experiments. For this purpose, a few references simulations have been performed in order to produce different observations $\mathbf{y}^o$. Those scenarios are detailed Table~\ref{tab:optim_scenar}. The true bottom friction $\mathbf{k}^t$ is the same for all simulations, and is a non-constant function of the spatial domain $D = [0, L]$ defined as:
-% \begin{equation}
-%   \label{eq:defnition_kt}
-%   \mathbf{k}^t= \mathbf{k}^t(x) = 0.2\cdot (1 + \sin(2\pi x/L))
-% \end{equation}
-% However, the space $\Kspace$ in which we wish to estimate the bottom friction is one-dimensional. This leads to the strict positivity of the cost function, as no perfect fit can be achieved.
-
-% As presented on Table~\ref{tab:RO_modelling}, we consider two a priori chosen variable: $\mathbf{u} \in \Uspace$ that is the period of the sine wave on the left boundary. The aleatoric uncertainty on this variable is modelled by a random variable distributed uniformly on $\Uspace$.
-% The amplitude of the sine wave is also chosen a priori and set to an arbitrary value, that may be different from the true amplitude used to generate $\mathbf{y}^o$. 
-
-
-
-% \begin{table*}[t]
-%   \caption{Modelling of the estimation problem}
-%   \label{tab:RO_modelling}
-% \begin{tabular}{rrr}
-%   \tophline
-%   Parameter & Modelling & Type of parameter \\
-%   \middlehline
-%   Bottom friction: $\mathbf{k}$  &$\Kspace=[0, 1]$ & Calibrated parameter \\
-%   Period: $\mathbf{U}$ & $\mathrm{Unif}\left([14.7, 15.3]\right)$ & A priori chosen and uncertain\\
-%   Amplitude &  5.0 & A priori chosen and fixed\\
-%   \bottomhline
-% \end{tabular}
-% \end{table*}
-
-% % ----------------------------------------------------------------------------
-% \section{Deterministic optimisation}
-% \label{ssec:deterministic_optimisation}
-% The problem has first been studied in a deterministic setting. The following optimisation problem has been performed numerically:
-% \begin{equation}
-%   \label{eq:opt_deter}
-%   \text{Minimise } \mathbf{k}\in\Kspace \mapsto J(\mathbf{k},\mathbf{u}^b)\quad \text{for }\mathbf{u}^b= \Ex_{\mathbf{U}}[\mathbf{U}] = 15.0
-% \end{equation}
-% At the same time, the background value of the amplitude is fixed and set to $5.0$.
-% Different scenario have been established (i.e.\ different $\mathbf{u}^t$ and amplitude producing different $\mathbf{y}^o$), and are detailed in Table~\ref{tab:optim_scenar}. The configurations correspond to different values of the amplitude (letter~``A'') and the period (letter~``P''). If the truth value is greater (resp.\ smaller) than the background value, the lowercase letter ``p'' follows (resp.\ ``m'').
-
-% On the same table, are shown the result $\kest$ of the optimisation defined in Eq.~\eqref{eq:opt_deter} for each one of the different operating conditions.
-
-
-% \begin{table*}[t]
-%   \caption{Settings for reference simulations, and optimisation results}
-%   \label{tab:optim_scenar}
-% \begin{tabular}{rrrrrrrr} \tophline
-% Scenario for $\mathbf{u}^t$: &$\Ex_{\mathbf{U}}[\mathbf{U}]$  & Pm & ApPm & AmPm & Pp & ApPp & AmPp \\ \middlehline
-%   $\mathbf{u}^t- \mathbf{u}^b$ & 0.0            & -0.1  & -0.2 & -0.1 & +0.2 & +0.1 & +0.2 \\
-%   $\mathrm{Amplitude}- 5.0$   & 0.0             &  0.0  & +0.1 & -0.2 &  0.0 & +0.2 & -0.1 \\ \middlehline
-%   $\kest$      & 0.1043          & 0.2028 & 0.2709 & 0.2427 & 0.0  & 0.0 & 0.0015 \\\bottomhline
-% \end{tabular}
-% \end{table*}
-
-
-% Optimising without uncertainties (meaning that the $\mathbf{u}^b=\mathbf{u}^t$) yields an optimal value $\kest$ close to $0.10$, that we define to be $\kest_{\mathrm{opt}}$
-% We can observe two different regimes, depending on the sign of $\mathbf{u}^t-\Ex_{\mathbf{U}}[\mathbf{U}]$. If this quantity is positive, optimisation will produce an estimation close to $0$. If it is negative, the estimate is larger than $0.20$.
-
-% % ----------------------------------------------------------------------------
-% \subsection{Robust estimates}
-% In order to compute the robust estimates, the cost function has been evaluated on a regular grid of $150\times150$ points over $\Kspace\times\Uspace$. $\kmean$, $\kvar$, $\checkk_{.9}$, $\checkk_{.95}$ and $\checkk_{1}$ (along with their corresponding factors $\checka_p$) have been evaluated for the different configurations, detailed in Table~\ref{tab:optim_scenar}. As shown on Table~\ref{tab:res_robust}, $\checkkp$ does not vary significantly when the level of confidence $p$ increases.
-
-% \begin{table*}[t]
-%   \caption{Mean and variance optimisers, and $\checkkp$ for different levels of confidence $p$}
-%   \label{tab:res_robust}
-%   \begin{tabular}{rrrrrrrr} \tophline
-%     Scenario&$\Ex_{\mathbf{U}}[\mathbf{U}]$ & Pm & ApPm & AmPm & Pp & ApPp & AmPp \\  \middlehline
-%   $\kmean$ & 0.1678    & 0.2214  & 0.2617 & 0.2685 & 0.0872 & 0.0738 & 0.1275 \\
-%   $\kvar$  & 1.0      &  1.0  & 1.0 & 1.0 &  1.0 & 1.0 & 1.0 \\ \middlehline
-%   $\checkk_{.90}$ & 0.1074 & 0.1074 & 0.0872 & 0.1678 & 0.1074  & 0.0738 & 0.1275 \\
-%   $\checka_{.90}$    & 1.1754  & 1.1718 & 1.1779 & 1.1293 & 1.1768  & 1.1807 & 1.1406 \\\middlehline
-
-%   $\checkk_{.95}$ & 0.1074 & 0.1074 & 0.0872 & 0.1611 & 0.1074  & 0.0671 & 0.1275 \\
-%   $\checka_{.95}$ & 1.1802 & 1.1806 & 1.1868 & 1.1320 & 1.1861  & 1.2027 & 1.1525 \\\middlehline
-%     $\checkk_{1}$& 0.1074 & 0.1074 & 0.0872 & 0.1611 & 0.1074  & 0.0671 & 0.1275 \\
-%   $\checka_{1}$ & 1.1944    & 1.1922 & 1.1961 & 1.1321 & 1.1976  & 1.2035 & 1.1682 \\\middlehline
-% \end{tabular}
-% \end{table*}
-
-
-% In that case, the minimiser of the variance $\kvar$ is the right boundary of $\Kspace$, regardless of the value of $\mathbf{u}^t$. This is due to the fact that at this point, the cost function produces bad, yet steady performances. From a physical point of view, increasing the bottom friction will decrease the momentum. The movement of the water surface will be damped, and the operating conditions will have less effects.
-
-
-% Looking at $\kmean$, we can see that the estimates obtained are larger than $0.22$ when $\mathbf{u}^t< \Ex_{\mathbf{U}}[\mathbf{U}]$ (that is for Pm, ApPm, and AmPm). Those results are similar to the one obtained in the deterministic setting of Table~\ref{tab:optim_scenar}. However, for $\mathbf{u}^t> \Ex_{\mathbf{U}}[\mathbf{U}]$ (Pp, ApPp, and AmPp), $\kmean$ is much closer to $\kest_{\mathrm{opt}}$, the optimal value without uncertainties.
-
-% Now for $\checkk_1$, while the estimates for scenarios Pp, ApPp and AmPp are similar to $\kmean$, the obtained values for the other scenarios are close to $\kest$.
-% Figures~\ref{fig:SWE_checkalpha} and~\ref{fig:SWE_profiles} show the contour plot and profiles of the cost function in centered conditions ($\Ex_{\mathbf{U}}[\mathbf{U}]$ scenario). Figures~\ref{fig:SWE_checkalphaApPp} and \ref{fig:SWE_profilesApPp} (resp. Figures~\ref{fig:SWE_checkalphaAmPm} and~\ref{fig:SWE_profilesAmPm}) show the contour plot and profiles of the cost function for the ApPp scenario (resp. AmPm scenario).
-
-% The concentration of $\checkkp$ close to $\kest_{\mathrm{opt}}$ is caused by the very small value of the cost function at its minimum over $\Kspace\times \Uspace$. Close to this minimum, the region of acceptable $\mathbf{k}$ will be growing slowly as $\alpha$ increases, weighing the estimation toward $\kest_{\mathrm{opt}}$.
-
-% The fact that we retrieved values close to the optimal one should not overlook that a robust estimate is not necessarily $\kest_{\mathrm{opt}}$, and that this result is specific to this problem.
-
-% \clearpage
-% \begin{figure*}[!h]
-% \includegraphics[width=8cm]{Figures/SWE_big3.pdf}
-% \caption{Top: Cost function of the SWE problem ($\Ex_{\mathbf{U}}[\mathbf{U}]$ scenario) and its conditional minimisers. The thick yellow lines represent the boundary of the region where $\phi_\alpha<0$. The red dashed line is the estimate $\checkk_{1}$. Bottom: $R_{\checka}$}
-% \label{fig:SWE_checkalpha}
-% \end{figure*}
-
-% \begin{figure*}[!h]
-%   \centering
-%   \includegraphics[width=8cm]{Figures/profile_swe.pdf}
-%   \caption{Profiles of different estimates of $\mathbf{k}$ for the $\Ex_{\mathbf{U}}[\mathbf{U}]$ scenario}
-%   \label{fig:SWE_profiles}
-% \end{figure*}
-
-% \begin{figure*}[!h]
-% \includegraphics[width=8cm]{Figures/SWE_ApPp3.pdf}
-% \caption{Top: Cost function of the SWE problem (ApPp scenario) and its conditional minimisers. The thick yellow lines represent the boundary of the region where $\phi_\alpha<0$. The red dashed line is the estimate $\checkk_{1}$. Bottom: $R_{\checka}$}
-% \label{fig:SWE_checkalphaApPp}
-% \end{figure*}
-
-% \begin{figure*}[!h]
-%   \centering
-%   \includegraphics[width=7cm]{Figures/SWE_ApPp_profile.pdf}
-%   \caption{Profiles of different estimates of $\mathbf{k}$ for the ApPp scenario}
-%   \label{fig:SWE_profilesApPp}
-% \end{figure*}
-
-% \begin{figure*}[!h]
-% \includegraphics[width=8cm]{Figures/SWE_AmPm3.pdf}
-% \caption{Top: Cost function of the SWE problem (AmPm scenario) and its conditional minimisers. The thick yellow lines represent the boundary of the region where $\phi_\alpha<0$. The red dashed line is the estimate $\checkk_{1}$. Bottom: $R_{\checka}$}
-% \label{fig:SWE_checkalphaAmPm}
-% \end{figure*}
-
-% \begin{figure*}[!h]
-%   \centering
-%   \includegraphics[width=8cm]{Figures/SWE_AmPm_profile.pdf}
-%   \caption{Profiles of different estimates of $\mathbf{k}$ for the AmPm scenario}
-%   \label{fig:SWE_profilesAmPm}
-% \end{figure*}
+\subsubsection{Continuous Ranked Probability Score}
+The Continuous ranked probability score (CRPS) measure the squared difference between the predicted CDF $F_{\mathrm{pred}}$ using a calibrated value, and the CDF of the observation $F_{\mathrm{pred}}^o$. 
+\begin{equation}
+\label{eq:def_crps}
+\mathrm{CRPS}(\mathbf{k}) = \int_{\mathbb{R}} (F_{\mathrm{pred}}(x,\mathbf{k}) - F^o_{\mathrm{pred}}(x))^2 \,\mathrm{d}x
+\end{equation}
 
 \clearpage
-\conclusions  %% \conclusions[modified heading if necessary]
+\section*{Conclusion}  %% \conclusions[modified heading if necessary]
 This paper deals with the problem of robust calibration of a computer code in the presence of uncertain inputs. 
 
 Our contribution consists in introducing a new criterion of robustness, based on the distribution of the minimisers. More specifically, this estimate is bounding the ratio between the cost function and its conditional minimum.
@@ -1063,13 +803,6 @@ Finally, the adaptibility of this method has to be studied in a higher dimension
 %% The following commands are for the statements about the availability of data sets and/or software code corresponding to the manuscript.
 %% It is strongly recommended to make use of these sections in case data sets and/or software code have been part of your research the article is based on.
 
-\codeavailability{TEXT} %% use this section when having only software code available
-
-
-% \dataavailability{TEXT} %% use this section when having only data sets available
-
-
-\codedataavailability{TEXT} %% use this section when having data sets and software code available
 
 
 % \sampleavailability{TEXT} %% use this section when having geoscientific samples available
@@ -1079,229 +812,22 @@ Finally, the adaptibility of this method has to be studied in a higher dimension
 % \appendix
 % \section{}    %% Appendix A
 
-% \subsection{}     %% Appendix A1, A2, etc.
-
-
-% \noappendix       %% use this to mark the end of the appendix section
-
-%% Regarding figures and tables in appendices, the following two options are possible depending on your general handling of figures and tables in the manuscript environment:
-
-%% Option 1: If you sorted all figures and tables into the sections of the text, please also sort the appendix figures and appendix tables into the respective appendix sections.
-%% They will be correctly named automatically.
-
-%% Option 2: If you put all figures after the reference list, please insert appendix tables and figures after the normal tables and figures.
-%% To rename them correctly to A1, A2, etc., please add the following commands in front of them:
-
-\appendixfigures  %% needs to be added in front of appendix figures
-
-\appendixtables   %% needs to be added in front of appendix tables
-
-%% Please add \clearpage between each table and/or figure. Further guidelines on figures and tables can be found below.
-
-
-
-\authorcontribution{TEXT} %% it is strongly recommended to make use of this section
-
-\competinginterests{TEXT} %% this section is mandatory even if you declare that no competing interests are present
-
-\disclaimer{TEXT} %% optional section
-
-\begin{acknowledgements}
-TEXT
-\end{acknowledgements}
-
-
-
-
-%% REFERENCES
-
-%% The reference list is compiled as follows:
-
-% \begin{thebibliography}{}
-
-% \bibitem[AUTHOR(YEAR)]{LABEL1}
-% REFERENCE 1
-
-% \bibitem[AUTHOR(YEAR)]{LABEL2}
-% REFERENCE 2
-
-% \end{thebibliography}
-
-%% Since the Copernicus LaTeX package includes the BibTeX style file copernicus.bst,
-%% authors experienced with BibTeX only have to include the following two lines:
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
 %%
+%%  \bibliographystyle{elsarticle-num-names} 
+%%  \bibliography{<your bibdatabase>}
 
-\bibliographystyle{copernicus}
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+\bibliographystyle{elsarticle-num-names} 
 \bibliography{bibzotero}
 
-%%
-%% URLs and DOIs can be entered in your BibTeX file as:
-%%
-%% URL = {http://www.xyz.org/~jones/idx_g.htm}
-%% DOI = {10.5194/xyz}
-
-
-%% LITERATURE CITATIONS
-%%
-%% command                        & example result
-%% \citet{jones90}|               & Jones et al. (1990)
-%% \citep{jones90}|               & (Jones et al., 1990)
-%% \citep{jones90,jones93}|       & (Jones et al., 1990, 1993)
-%% \citep[p.~32]{jones90}|        & (Jones et al., 1990, p.~32)
-%% \citep[e.g.,][]{jones90}|      & (e.g., Jones et al., 1990)
-%% \citep[e.g.,][p.~32]{jones90}| & (e.g., Jones et al., 1990, p.~32)
-%% \citeauthor{jones90}|          & Jones et al.
-%% \citeyear{jones90}|            & 1990
-
-
-
-%% FIGURES
-
-%% When figures and tables are placed at the end of the MS (article in one-column style), please add \clearpage
-%% between bibliography and first table and/or figure as well as between each table and/or figure.
-
-
-%% ONE-COLUMN FIGURES
-
-%%f
-%\begin{figure}[t]
-%\includegraphics[width=8.3cm]{FILE NAME}
-%\caption{TEXT}
-%\end{figure}
-%
-%%% TWO-COLUMN FIGURES
-%
-%%f
-%\begin{figure*}[t]
-%\includegraphics[width=12cm]{FILE NAME}
-%\caption{TEXT}
-%\end{figure*}
-%
-%
-%%% TABLES
-%%%
-%%% The different columns must be seperated with a & command and should
-%%% end with \\ to identify the column brake.
-%
-%%% ONE-COLUMN TABLE
-%
-%%t
-%\begin{table}[t]
-%\caption{TEXT}
-%\begin{tabular}{column = lcr}
-%\tophline
-%
-%\middlehline
-%
-%\bottomhline
-%\end{tabular}
-%\belowtable{} % Table Footnotes
-%\end{table}
-%
-%%% TWO-COLUMN TABLE
-%
-%%t
-%\begin{table*}[t]
-%\caption{TEXT}
-%\begin{tabular}{column = lcr}
-%\tophline
-%
-%\middlehline
-%
-%\bottomhline
-%\end{tabular}
-%\belowtable{} % Table Footnotes
-%\end{table*}
-%
-%%% LANDSCAPE TABLE
-%
-%%t
-%\begin{sidewaystable*}[t]
-%\caption{TEXT}
-%\begin{tabular}{column = lcr}
-%\tophline
-%
-%\middlehline
-%
-%\bottomhline
-%\end{tabular}
-%\belowtable{} % Table Footnotes
-%\end{sidewaystable*}
-%
-%
-%%% MATHEMATICAL EXPRESSIONS
-%
-%%% All papers typeset by Copernicus Publications follow the math typesetting regulations
-%%% given by the IUPAC Green Book (IUPAC: Quantities, Units and Symbols in Physical Chemistry,
-%%% 2nd Edn., Blackwell Science, available at: http://old.iupac.org/publications/books/gbook/green_book_2ed.pdf, 1993).
-%%%
-%%% Physical quantities/variables are typeset in italic font (t for time, T for Temperature)
-%%% Indices which are not defined are typeset in italic font (x, y, z, a, b, c)
-%%% Items/objects which are defined are typeset in roman font (Car A, Car B)
-%%% Descriptions/specifications which are defined by itself are typeset in roman font (abs, rel, ref, tot, net, ice)
-%%% Abbreviations from 2 letters are typeset in roman font (RH, LAI)
-%%% Vectors are identified in bold italic font using \vec{x}
-%%% Matrices are identified in bold roman font
-%%% Multiplication signs are typeset using the LaTeX commands \times (for vector products, grids, and exponential notations) or \cdot
-%%% The character * should not be applied as mutliplication sign
-%
-%
-%%% EQUATIONS
-%
-%%% Single-row equation
-%
-%\begin{equation}
-%
-%\end{equation}
-%
-%%% Multiline equation
-%
-%\begin{align}
-%& 3 + 5 = 8\\
-%& 3 + 5 = 8\\
-%& 3 + 5 = 8
-%\end{align}
-%
-%
-%%% MATRICES
-%
-%\begin{matrix}
-%x & y & z\\
-%x & y & z\\
-%x & y & z\\
-%\end{matrix}
-%
-%
-%%% ALGORITHM
-%
-%\begin{algorithm}
-%\caption{...}
-%\label{a1}
-%\begin{algorithmic}
-%...
-%\end{algorithmic}
-%\end{algorithm}
-%
-%
-%%% CHEMICAL FORMULAS AND REACTIONS
-%
-%%% For formulas embedded in the text, please use \chem{}
-%
-%%% The reaction environment creates labels including the letter R, i.e. (R1), (R2), etc.
-%
-%\begin{reaction}
-%%% \rightarrow should be used for normal (one-way) chemical reactions
-%%% \rightleftharpoons should be used for equilibria
-%%% \leftrightarrow should be used for resonance structures
-%\end{reaction}
-%
-%
-%%% PHYSICAL UNITS
-%%%
-%%% Please use \unit{} and apply the exponential notation
-
-
 \end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-num-names.tex'.
 
 %%% Local Variables:
 %%% mode: latex

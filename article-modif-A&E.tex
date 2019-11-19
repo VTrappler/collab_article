@@ -493,7 +493,7 @@ Given that $J>0$, $\Gamma_{\alpha}(\mathbf{k})$ is increasing with respect to $\
   \checkap &= \inf\left\{ \alpha\geq 1 \mid \exists \checkkp \in \Kspace,\, \Gamma_{\alpha}(\checkkp) \geq p \right\} \nonumber \\
    &= \inf \left\{ \alpha \geq 1 \mid \max_{\mathbf{k}\in\Kspace} \Gamma_{\alpha}(\mathbf{k}) \geq p \right\}   \label{eq:def_alpha_check}
 \end{align}
-that is the smallest $\alpha$, such that there exists a particular $\checkkp \in \Kspace$ for which $J(\checkkp,\mathbf{U}) \leq \checkap J^*(\mathbf{U})$ with probability $p$. This formulation can be linked to the quantiles and Value-at-Risk of the random variable $\max_{\mathbf{k}} \{ \frac{J(\mathbf{k},\mathbf{U})}{J^*(\mathbf{U})}\}$, that is a measure of risk usually applied in the financial sector (see~\cite{rockafellar_deviation_2002}). For different levels $p$, and thus different $\alpha_p$, Figure~\ref{fig:illu_alpha_p} shows examples of $\Gamma_{\alpha_p}$. By definition, the associated $\mathbf{k}_p$ is then the first value for which $\Gamma_{\alpha_p}$ reaches $p$. We can see that changing the level $p$ shifts the maximiser of $\Gamma_{\alpha_p}$.
+that is the smallest $\alpha$, such that there exists a particular $\checkkp \in \Kspace$ for which $J(\checkkp,\mathbf{U}) \leq \checkap J^*(\mathbf{U})$ with probability $p$. This formulation can be linked to the quantiles and Value-at-Risk of the random variable $\max_{\mathbf{k}} \{ \frac{J(\mathbf{k},\mathbf{U})}{J^*(\mathbf{U})}\}$, that is a measure of risk usually applied in the financial sector (see~\cite{rockafellar_deviation_2002}). For different levels $p$, and thus different $\alpha_p$, Figure~\ref{fig:illu_alpha_p} shows examples of $\Gamma_{\alpha_p}$. By definition, the associated $\mathbf{k}_p$ is then the first value for which $\Gamma_{\alpha_p}$ reaches $p$. We can see that changing the level $p$ shifts the maximiser of $\Gamma_{\alpha_p}$, and that for small $\alpha$, $\Gamma_{\alpha}(\mathbf{k}_1)$ is also very small. This indicates that $\mathbf{k}_1$ is located quite far from the conditional minimisers, and thus represents a compromise.
 
 \begin{figure}[!ht]
 \centering
@@ -557,10 +557,8 @@ Another possibility is to combine directly $p$ and $\checkap$ in order to find a
 
 The different estimators introduced in this paper are summarised in Table~\ref{tab:RO_recap}.
 
-
-\begin{table*}[t]
+\begin{table}[t]
   \centering
-\label{tab:RO_recap}
 \begin{tabular}{lrr}
   \toprule
   Definition & Related quantities & Interpretation \\ \midrule
@@ -571,9 +569,9 @@ The different estimators introduced in this paper are summarised in Table~\ref{t
     $p_{\mathrm{maxratio}} = \argmax p/\checkap$ & $(p_{\mathrm{maxratio}}, \checkk_{\mathrm{maxratio}}, \checka_{\mathrm{maxratio}})$ & Maximal ratio of $p$ and $\checkap$ \\
   \bottomrule
 \end{tabular}
+\label{tab:RO_recap}
   \caption{Robust estimators, based on a cost function $J$}
-
-\end{table*}
+\end{table}
 
 %We are now going to compute and compare those estimators on the $J_{\mathrm{BH}}$and $J_{\mathrm{BHswap}}$ function.
 
@@ -629,7 +627,8 @@ $\kest_p,~p=0.95$ & 1.672 \\ \bottomrule
 
 Practically speaking, in order to compare the effective values taken by the objective function given an estimate $\kest$ we are going to consider the functions of the form $\mathbf{u} \mapsto J(\kest,\mathbf{u})$, that we will call ``profile of $\kest$''. Those profiles are well suited for the representation of the cost function for an estimate $\kest$ fixed as the uncertain variable is modelled with a 1D uniform random variable.
 
-For the $J_{\mathrm{BH}}$ function, the curves are plotted in Figure~\ref{fig:profiles_branin}. Based on its definition, the profile of $\hat{\checkk}_1$ is always within the shaded region, corresponding to $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$. The profile of $\hatkmean$ in contrast, exceeds $\hat{\checka}_1 J^*(\mathbf{u})$ for $\mathbf{u}$ close to $5$, while the profile of $\hatkvar$ does for $\mathbf{u}$ close to $0$. 
+For the $J_{\mathrm{BH}}$ function, the curves are plotted in Figure~\ref{fig:profiles_branin}. Based on its definition, the profile of $\hat{\checkk}_1$ is always within the shaded region, corresponding to $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$. The profile of $\hatkmean$ in contrast, exceeds $\hat{\checka}_1 J^*(\mathbf{u})$ for $\mathbf{u}$ close to $5$, while the profile of $\hatkvar$ does for $\mathbf{u}$ close to $0$.
+As the different $\kest$ are very close for every criteria introduced in this paper, the profiles are almost undistinguishable.
 
 \begin{figure*}[t]
   \centering
@@ -667,7 +666,8 @@ $\kest_1,~p=1$ & 2.798   \\ \bottomrule
 
 In a similar fashion, the profiles of the different estimates for the $J_{\mathrm{BHswap}}$ function are shown in Figure~\ref{fig:profiles_branin_switch}.
 
-In this case, $\hatkmpe$, $\hatkmean$ and $\hat{\checkk}_{\mathrm{maxratio}}$ present a similar behaviour. They perform very well for $\mathbf{u}>2$, especially for $\hatkmpe$ which is very close to the minimal value; for $\mathbf{u}<2$, it produces high values of the function. 
+In this case, $\hatkmpe$, $\hatkmean$ and $\hat{\checkk}_{\mathrm{maxratio}}$ present a similar behaviour. They perform very well for $\mathbf{u}>2$, especially for $\hatkmpe$ which is very close to the minimal value; However for $\mathbf{u}<2$, they produce high values of the function.
+
 The performances of $\hat{\checkk}_1$ are closer to the performances of $\hatkvar$ for this function, but it performs worse than $\hatkmean$ and $\hatkvar$ for $\mathbf{u}>2$, even though its range is designed to stay within the interval $[J^*(\mathbf{u}); \hat{\checka}_1 J^*(\mathbf{u})]$.
 
 
@@ -729,7 +729,9 @@ represents here the uncontrollable error between the observations and the numeri
 where $x_i$ is the center of the $i$-th volume. The two sources of representativity errors are $\omega_0$, and the fact that we are looking to estimate $\mathbf{k}$ in a 1-dimensional space $\Kspace$. 
 \subsection{Estimation}
 Given that the numerical model is expensive to evaluate, it has first been evaluated on a relatively small regular grid. A metamodel based on Gaussian process is constructed and the PEI criterion \citep{ginsbourger_bayesian_2014,bossek_learning_2015} allow us to add point to evaluate and to better capture the locus of the conditional minimisers $\{(\mathbf{k}^*(\mathbf{u}), \mathbf{u}) \mid \mathbf{u} \in \Uspace \}$. A bigger regular grid is evaluated by the metamodel once the design space has been sufficiently explored. The different steps of the estimation are illustrated Figure~\ref{fig:estimation_swe}. We can see that the estimation for this problem seems less problematic than the analytical examples shown above, as all derived quantites are unimodal.
-The different estimates however take a wide range of values, as seen on Table~\ref{tab:recap_estimates_metaSWE}.: there is a unique global minimiser on the whole space $\Kspace \times \Uspace$, noted $\kest_{\mathrm{global}}$. As discussed earlier, the estimation of the MPE is dependent on the method used, and then its estimation using KDE in the middle plot of Figure~\ref{fig:estimation_swe} is here only for illustrative purposes.
+The different estimates however take a wide range of values, as seen on Table~\ref{tab:recap_estimates_metaSWE}. As a basis for comparison, the global minimiser of $J$ over $\Kspace \times \Uspace$ has been computed, and $\kest_{\mathrm{global}}$ is then obtained by discarding the $\mathbf{u}$ value. An interesting comparison arises when comparing with $\kest_{\mathrm{global}}$, where $\kest_1$ outperforms the global minimiser for $\mathbf{u} < 0.625$.
+
+As discussed earlier, the estimation of the MPE is dependent on the method used, and then its estimation using KDE in the middle plot of Figure~\ref{fig:estimation_swe} is here only for illustrative purposes.
 
 \begin{figure}[!h]
 \centering
@@ -753,14 +755,15 @@ $\hatkvar$ & 0.990\\ \bottomrule
 \end{tabular}
 \label{tab:recap_estimates_metaSWE}
 \end{table*}
-
+Similarly as for $\JBH$ and $\JBHS$, the profiles are depicted Figure~\ref{fig:profiles_swe}.
 \begin{figure}[!h]
   \centering
   \includegraphics[width=.8\textwidth]{Figures/profile_swe}
   \caption{Profiles for the calibration problem}
 \label{fig:profiles_swe}
 \end{figure}
-
+We can see that the performances of $\kest_1$ and $\hatkmean$ are very similar, but $\kest_1$ has better performances when $\mathbf{u} > 0.6$.
+\clearpage
 \subsection{Assessing the quality of the forecast of the calibrated model}
 The calibration of the model has been performed using by integrating the model on a time-period $[0, T]$, called assimilation window. 
 We now want to compare the quality of the different forecasts, from different calibrated bottom friction.

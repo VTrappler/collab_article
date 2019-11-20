@@ -204,7 +204,7 @@ For instance, in data assimilation, $J$ describes a distance between the output 
 For a practical purpose, we assume that $\forall~ \mathbf{u}$ a realisation of $\mathbf{U}$, finding ${\mathbf{k}}_{\mathbf{u}}$ that minimises the cost function $J(\mathbf{k}, \mathbf{U}=\mathbf{u})$ is a well-posed problem, and that the optimum is unique.
 Additionally, the following assumption are made: the cost function is strictly positive, and $\forall~  \mathbf{k} \in \Kspace$, the random variable $J(\mathbf{k},\mathbf{U})$ has finite first- and second-order moments. 
  
-In this paper, we aim at finding $\kest$ a {\it robust} estimator of $\mathbf{k}$.
+In this paper, we aim at finding $\kest$ a {\it robust\/} estimator of $\mathbf{k}$.
 The definition of robustness differs depending on the context in which it is used. Indeed, one definition of the robustness of an estimate is a measure of the sensibility of said estimate to outliers~\citep{huber_robust_2011}. This lead to the introduction of robust norms in data assimilation \citep{rao_robust_2015}. %The point of this norm is to assume Gaussian distribution for small errors (the usual $L_2$ norm), while the large errors are assumed to be Laplace distributed (so the $L_1$ norm).
 In a Bayesian framework, robustness may refer to the sensitivity to a wrong specification of the priors~\citep{berger_overview_1994}.
 %
@@ -283,7 +283,11 @@ In order to take into account the spread around the mean value, one can choose t
   \kvar = \argmin_{\mathbf{k} \in \Kspace} \sigma^2(\mathbf{k})
 \end{equation}
 
-A lot of different methods are readily available to solve these minimisation problems. For instance, stochastic Sample Approximation \citep{juditsky_stochastic_2009,kim_guide_2015} is based on a finite and fixed set of samples $\{ \mathbf{u}^{i}\}_{i=1 \dots N}$  of $\mathbf{U}$.
+A lot of different methods are readily available to solve these
+minimisation problems. For instance, stochastic Sample Approximation
+\citep{juditsky_stochastic_2009,kim_guide_2015} is based on a finite
+and fixed set of samples $\{ \mathbf{u}^{i}\}_{i=1 \dots N}$ of
+$\mathbf{U}$.
 %the sampling of a certain amount of $\mathbf{U}$ 
 The estimations at a given $\mathbf{k}$ are computed using standard Monte Carlo, resulting in the following optimisation problems:
 \begin{equation}
@@ -353,7 +357,7 @@ KDE is a non-parametric estimation technique based on the use of a kernel functi
 \hat{p}_{\mathbf{K}^*}(\mathbf{k}) = \frac{1}{Nh^{\dim \Kspace}} \sum_{i=1}^N f\left(\frac{\mathbf{k} - \mathbf{k}_{\mathbf{u}^i}}{h}\right)
 \end{equation}
 where $h$ is the bandwidth. In a multidimensional setting, one usually consider a kernel based on the product of 1D kernels, applied independently to all components: $f(\mathbf{k}) = \prod_{j=1}^{\dim \Kspace} f_{\mathrm{1D}} (k^{(j)})$
-where $k^{(j)}$ is the $j$-th component of $\mathbf{k}$. There is wide choice of available $f_{\mathrm{1D}}$, such as a rectangle function, $f_{\mathrm{1D}}(x) = 1 \text{ if } |x|< \frac{1}{2}$ and  $0$ elsewhere, or a Gaussian kernel $f_{\mathrm{1D}}(x)= \frac{1}{\sqrt{2\pi}}\exp(-x^2 / 2)$. One can notice that the rectangle function as a kernel yields non-smooth densities, very similar to the histogram of the minimisers.
+where $k^{(j)}$ is the $j$-th component of $\mathbf{k}$.  There is wide choice of available $f_{\mathrm{1D}}$, such as a rectangle function, $f_{\mathrm{1D}}(x) = 1 \text{ if } |x|< \frac{1}{2}$ and  $0$ elsewhere, or a Gaussian kernel $f_{\mathrm{1D}}(x)= \frac{1}{\sqrt{2\pi}}\exp(-x^2 / 2)$. One can notice that the rectangle function as a kernel yields non-smooth densities, very similar to the histogram of the minimisers.
 
 The EM algorithm can also be used to estimate the density, by minimising the statistical distance between the empirical distribution and a mixture of $\nu$ Gaussian densities. The estimation has then the following form:
 \begin{equation}
@@ -411,7 +415,7 @@ Even though the functions are quite similar, the asymmetric roles of $\mathbf{k}
 The random variable $\mathbf{U}$ is assumed to be uniformly distributed over $\Uspace$.
 %The definition and the estimation of $\kmean$ and $\kvar$ is pretty standard.  
 The estimations are %$\mathbf{k}\mapsto \mu(\mathbf{k})$ and $\mathbf{k}\mapsto\sigma(\mathbf{k})$ 
-based on a $1000 \times 1000$ regular grid over $\Kspace\times\Uspace$. Both cost functions are shown in  Figure~\ref{fig:branin_moments}, top row.
+based on a $1000 \times 1000$ regular grid over $\Kspace\times\Uspace$. Both cost functions are shown on~Figure~\ref{fig:branin_moments}, top row.
 
 
  The left, respectively right, column stands for $J_{\mathrm{BH}}$, respectively $J_{\mathrm{BHswap}}$ function. Functions $\mu(\mathbf{k})$ and $\sigma(\mathbf{k})$ are drawn on the bottom row, respectively in purple and green. The corresponding minimizers $\hatkmean$ and $\hatkvar$ are also plotted.
@@ -439,7 +443,12 @@ The left, respectively right, column stands for $J_{\mathrm{BH}}$, respectively 
 For the $J_{\mathrm{BHswap}}$ function, we can observe that those three methods give coherent results, as $\hatkmpe {}_{,\mathrm{KDE}} =\hatkmpe {}_{,\mathrm{EM}}=\hatkmpe {}_{,\mathrm{histogram}}\approx 0.8$. This is not the case for the  $J_{\mathrm{BH}}$ function however. Using Kernel density estimation (Gaussian), the estimation of $\kmpe$ is $\hatkmpe {}_{,\mathrm{KDE}} \approx 1.5$, while using the histogram and Gaussian mixture, $\hatkmpe {}_{,\mathrm{histogram}}=\hatkmpe {}_{,\mathrm{EM}}=3.8$.
 This difference is explained by the accumulation of minimisers at this point: this challenges the assumption that $\mathbf{K}^*$ is continuous. As the density estimation techniques traditionally assume this continuity, the EM algorithm fits this using a normal distribution with a very small variance, while the KDE considers a sum of Gaussian kernels of constant bandwidth, located at the same point. This particular problem highlights the issue with $\kmpe$, as its estimation is highly sensitive to the density approximation procedure.
 
-Alternatively, we can consider the mixing coefficients of the EM density estimation. The Gaussian centered at $1.5$ has been attributed a weight of $0.608$, while the one centered at $3.8$ has a mixing weight of $0.226$. Ultimately, an optimiser would be more likely to be close to $1.5$, but we do not have information on its performance in this region around this value.
+Alternatively, we can consider the mixing coefficients of the EM
+density estimation. The Gaussian centered at $1.5$ has been attributed
+a weight of $0.608$, while the one centered at $3.8$ has a mixing
+weight of $0.226$. Ultimately, an optimiser would be more likely to be
+close to $1.5$, but we do not have information on its performance in
+this region around this value.
 
 % as we can argue that both values may be a sensible choice for the MPE. This comes from the fact that the hypothesis that $\mathbf{K}^*$ is a continuous r.v.\ is violated. 
 A way to avoid this issue is to introduce a bit of leeway for a value to be optimal, or at least ``acceptably not optimal''. This slackness takes the form of a relaxation coefficient, whose choice leads to a new family of robust estimators, along with a measure of their robustness via the coefficient.
@@ -493,7 +502,7 @@ Given that $J>0$, $\Gamma_{\alpha}(\mathbf{k})$ is increasing with respect to $\
   \checkap &= \inf\left\{ \alpha\geq 1 \mid \exists \checkkp \in \Kspace,\, \Gamma_{\alpha}(\checkkp) \geq p \right\} \nonumber \\
    &= \inf \left\{ \alpha \geq 1 \mid \max_{\mathbf{k}\in\Kspace} \Gamma_{\alpha}(\mathbf{k}) \geq p \right\}   \label{eq:def_alpha_check}
 \end{align}
-that is the smallest $\alpha$, such that there exists a particular $\checkkp \in \Kspace$ for which $J(\checkkp,\mathbf{U}) \leq \checkap J^*(\mathbf{U})$ with probability $p$. This formulation can be linked to the quantiles and Value-at-Risk of the random variable $\max_{\mathbf{k}} \{ \frac{J(\mathbf{k},\mathbf{U})}{J^*(\mathbf{U})}\}$, that is a measure of risk usually applied in the financial sector (see~\cite{rockafellar_deviation_2002}). For different levels $p$, and thus different $\alpha_p$, Figure~\ref{fig:illu_alpha_p} shows examples of $\Gamma_{\alpha_p}$. By definition, the associated $\mathbf{k}_p$ is then the first value for which $\Gamma_{\alpha_p}$ reaches $p$. We can see that changing the level $p$ shifts the maximiser of $\Gamma_{\alpha_p}$, and that for small $\alpha$, $\Gamma_{\alpha}(\mathbf{k}_1)$ is also very small. This indicates that $\mathbf{k}_1$ is located quite far from the conditional minimisers, and thus represents a compromise.
+that is the smallest $\alpha$, such that there exists a particular $\checkkp \in \Kspace$ for which $J(\checkkp,\mathbf{U}) \leq \checkap J^*(\mathbf{U})$ with probability $p$. This formulation can be linked to the quantiles and Value-at-Risk of the random variable $\max_{\mathbf{k}} \{ \frac{J(\mathbf{k},\mathbf{U})}{J^*(\mathbf{U})}\}$, that is a measure of risk usually applied in the financial sector (see~\cite{rockafellar_deviation_2002}). For different levels $p$, and thus different $\alpha_p$, Figure~\ref{fig:illu_alpha_p} shows examples of $\Gamma_{\alpha_p}$. By definition, the associated $\mathbf{k}_p$ is then the first value for which $\Gamma_{\alpha_p}$ reaches $p$. We can see that changing the level $p$ shifts the maximiser of $\Gamma_{\alpha_p}$, and that for small $\alpha$, $\Gamma_{\alpha}(\mathbf{k}_1)$ is also very small. This indicates that $\mathbf{k}_1$ is located quite far from the conditional minimisers, and arise as a compromise when the relaxation is large enough.
 
 \begin{figure}[!ht]
 \centering
@@ -573,7 +582,7 @@ The different estimators introduced in this paper are summarised in Table~\ref{t
   \caption{Robust estimators, based on a cost function $J$}
 \end{table}
 
-%We are now going to compute and compare those estimators on the $J_{\mathrm{BH}}$and $J_{\mathrm{BHswap}}$ function.
+% We are now going to compute and compare those estimators on the $J_{\mathrm{BH}}$and $J_{\mathrm{BHswap}}$ function.
 
 
 
@@ -728,8 +737,8 @@ represents here the uncontrollable error between the observations and the numeri
 \end{equation*}
 where $x_i$ is the center of the $i$-th volume. The two sources of representativity errors are $\omega_0$, and the fact that we are looking to estimate $\mathbf{k}$ in a 1-dimensional space $\Kspace$. 
 \subsection{Estimation}
-Given that the numerical model is expensive to evaluate, it has first been evaluated on a relatively small regular grid. A metamodel based on Gaussian process is constructed and the PEI criterion \citep{ginsbourger_bayesian_2014,bossek_learning_2015} allow us to add point to evaluate and to better capture the locus of the conditional minimisers $\{(\mathbf{k}^*(\mathbf{u}), \mathbf{u}) \mid \mathbf{u} \in \Uspace \}$. A bigger regular grid is evaluated by the metamodel once the design space has been sufficiently explored. The different steps of the estimation are illustrated Figure~\ref{fig:estimation_swe}. We can see that the estimation for this problem seems less problematic than the analytical examples shown above, as all derived quantites are unimodal.
-The different estimates however take a wide range of values, as seen on Table~\ref{tab:recap_estimates_metaSWE}. As a basis for comparison, the global minimiser of $J$ over $\Kspace \times \Uspace$ has been computed, and $\kest_{\mathrm{global}}$ is then obtained by discarding the $\mathbf{u}$ value. An interesting comparison arises when comparing with $\kest_{\mathrm{global}}$, where $\kest_1$ outperforms the global minimiser for $\mathbf{u} < 0.625$.
+Given that the numerical model is expensive to evaluate, it has first been evaluated on a relatively small regular grid. A metamodel based on Gaussian process is constructed and the PEI criterion~\citep{ginsbourger_bayesian_2014,bossek_learning_2015} allow us to add point to evaluate and to better capture the locus of the conditional minimisers $\{(\mathbf{k}^*(\mathbf{u}), \mathbf{u}) \mid \mathbf{u} \in \Uspace \}$. A bigger regular grid is evaluated by the metamodel once the design space has been sufficiently explored. The different steps of the estimation are illustrated Figure~\ref{fig:estimation_swe}. We can see that the estimation for this problem seems less problematic than the analytical examples shown above, as all derived quantites are unimodal.
+The different estimates however take a wide range of values, as seen on Table~\ref{tab:recap_estimates_metaSWE}. As a basis for comparison, the global minimiser of $J$ over $\Kspace \times \Uspace$ has been computed, and $\kest_{\mathrm{global}}$ is then obtained by discarding the $\mathbf{u}$ value.
 
 As discussed earlier, the estimation of the MPE is dependent on the method used, and then its estimation using KDE in the middle plot of Figure~\ref{fig:estimation_swe} is here only for illustrative purposes.
 

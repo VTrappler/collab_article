@@ -1,4 +1,4 @@
-%% 
+%%
 %% Copyright 2007-2019 Elsevier Ltd
 %% 
 %% This file is part of the 'Elsarticle Bundle'.
@@ -357,7 +357,8 @@ KDE is a non-parametric estimation technique based on the use of a kernel functi
 \hat{p}_{\mathbf{K}^*}(\mathbf{k}) = \frac{1}{Nh^{\dim \Kspace}} \sum_{i=1}^N f\left(\frac{\mathbf{k} - \mathbf{k}_{\mathbf{u}^i}}{h}\right)
 \end{equation}
 where $h$ is the bandwidth. In a multidimensional setting, one usually consider a kernel based on the product of 1D kernels, applied independently to all components: $f(\mathbf{k}) = \prod_{j=1}^{\dim \Kspace} f_{\mathrm{1D}} (k^{(j)})$
-where $k^{(j)}$ is the $j$-th component of $\mathbf{k}$.  There is wide choice of available $f_{\mathrm{1D}}$, such as a rectangle function, $f_{\mathrm{1D}}(x) = 1 \text{ if } |x|< \frac{1}{2}$ and  $0$ elsewhere, or a Gaussian kernel $f_{\mathrm{1D}}(x)= \frac{1}{\sqrt{2\pi}}\exp(-x^2 / 2)$. One can notice that the rectangle function as a kernel yields non-smooth densities, very similar to the histogram of the minimisers.
+where $k^{(j)}$ is the $j$-th component of $\mathbf{k}$.  There is wide choice of available $f_{\mathrm{1D}}$, and a popular choice is  %such as a rectangle function, $f_{\mathrm{1D}}(x) = 1 \text{ if } |x|< \frac{1}{2}$ and  $0$ elsewhere,
+the Gaussian kernel $f_{\mathrm{1D}}(x)= \frac{1}{\sqrt{2\pi}}\exp(-x^2 / 2)$. % One can notice that the rectangle function as a kernel yields non-smooth densities, very similar to the histogram of the minimisers.
 
 The EM algorithm can also be used to estimate the density, by minimising the statistical distance between the empirical distribution and a mixture of $\nu$ Gaussian densities. The estimation has then the following form:
 \begin{equation}
@@ -654,7 +655,7 @@ We are now going to shift our focus on the $J_{\mathrm{BHswap}}$ function, as Fi
 \label{fig:ratio_BHs}
 \end{figure}
 
-Compared to the plots for $J_{\mathrm{BH}}$ in Figure~\ref{fig:ratio_BH}, $\hat{\checka}_p$ exhibits a smoother behaviour for the $J_{\mathrm{BHswap}}$ function as no change of slope is easily discernable. The computation of the ratio advocates for a level of confidence $p_{\mathrm{maxratio}}$ close to $0.75$. The numerical values of the estimations $\hat{k}$ presented in Table~\ref{tab:recap_estimates_BHs} show that contrary to the $J_{\mathrm{BH}}$ function, the objective are concurrent.
+Compared to the plots for $J_{\mathrm{BH}}$ in Figure~\ref{fig:ratio_BH}, $\hat{\checka}_p$ exhibits a smoother behaviour for the $J_{\mathrm{BHswap}}$ function as no change of slope is easily discernable. The computation of the ratio advocates for a level of confidence $p_{\mathrm{maxratio}}$ close to $0.75$. The numerical values of the estimations $\hat{k}$ presented in Table~\ref{tab:recap_estimates_BHs} show that, contrary to the $J_{\mathrm{BH}}$ function, the objective are concurrent.
 
 \begin{table*}[!h]
 \centering
@@ -771,7 +772,10 @@ Similarly as for $\JBH$ and $\JBHS$, the profiles are depicted Figure~\ref{fig:p
   \caption{Profiles for the calibration problem}
 \label{fig:profiles_swe}
 \end{figure}
-We can see that the performances of $\kest_1$ and $\hatkmean$ are very similar, but $\kest_1$ has better performances when $\mathbf{u} > 0.6$.
+We can see that the performances of $\kest_1$ and $\hatkmean$ are very similar, but $\kest_1$ has better performances when $\mathbf{u} > 0.6$. When comparing with the global optimiser $\kest_{\mathrm{global}}$, $\kest_1$ performs better when $\mathbf{u}<0.625$. As $\mathbf{U}$ is uniformly distributed on $\Uspace=[0.5,0.7]$, we can graphically estimate that the probability that $\kest_1$ outperforms $\kest_{\mathrm{global}}$ is greater than $0.5$, that is that $\Prob_\mathbf{U}\left[J(\kest_1,\mathbf{U})<J(\kest_{\mathrm{global}},\mathbf{U})\right] > 0.5$.
+
+
+The calibration of this numerical model is done in order to get a calibrated value $\kest$, that will be used for forecasts, using the same numerical model. We are now going to compare how well three of those values compare in a forecast context: $\kest_1$, $\hatkmean$ and $\kest_{\mathrm{global}}$, as the first two refer quite naturally to the notion of robustness, and the latter is an example of an estimate that does not take into account the uncertainties.
 \clearpage
 \subsection{Assessing the quality of the forecast of the calibrated model}
 The calibration of the model has been performed using by integrating the model on a time-period $[0, T]$, called assimilation window. 
@@ -786,12 +790,13 @@ Given two environmental conditions $\mathbf{u}$, used to run the computer simula
 \label{eq:squared_forecast_error}
 S_{\mathrm{pred}}(\mathbf{k},\mathbf{u},\mathbf{u}') = \left(\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{u}) - \mathcal{M}^{o}_{\mathrm{pred}}(\mathbf{u}')\right)^2
 \end{equation}
-By averaging over $\mathbf{u}$ and $\mathbf{u}'$ using a Monte-Carlo approximation, we can define the mean squared forecast error, defined on every point of the spatial domain, and at every time-steps.
+Averaging over $\mathbf{u}$, $\mathbf{u}'$ defines the mean squared forecast error, defined on every point of the spatial domain, and at every time-steps. This can be done using a Monte-Carlo approximation: as $\mathbf{u}$ and $\mathbf{u}'$ are iid, let us assume that we have a set of samples $\{\mathbf{u}^i\}_{1\leq i \leq N_{\mathbf{u}}}$. 
 \begin{equation}
   \label{eq:squared_forecast_error_averaged}
-  S(\mathbf{k}) = \frac{1}{N_{\mathbf{u}} N_{\mathbf{u}'}}\sum_{\mathbf{u},\mathbf{u}'\sim \mathbf{U}} S_{\mathrm{pred}}(\mathbf{k},\mathbf{u},\mathbf{u}') = \frac{1}{N_{\mathbf{u}} N_{\mathbf{u}'}}\sum_{\mathbf{u},\mathbf{u}'\sim \mathbf{U}} \left(\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{u}) - \mathcal{M}^{o}_{\mathrm{pred}}(\mathbf{u}')\right)^2
+  S(\mathbf{k}) = \frac{1}{N_{\mathbf{u}}^2 }\sum_{i=1}^{N_{\mathbf{u}}}\sum_{j=1}^{N_{\mathbf{u}}} S_{\mathrm{pred}}(\mathbf{k},\mathbf{u}^i,\mathbf{u}^j) = \frac{1}{N_{\mathbf{u}}^2 }\sum_{i=1}^{N_{\mathbf{u}}}\sum_{j=1}^{N_{\mathbf{u}}}  \left(\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{u}^i) - \mathcal{M}^{o}_{\mathrm{pred}}(\mathbf{u}^j)\right)^2
 \end{equation}
-The mean squared forecast error is then averaged over all time-steps between $T$ and $T_{\mathrm{pred}}$, indicating on which point of the domain the forecast error is greater as seen on the left plot of Figure~\ref{fig:forecast_squared_error}.
+The mean squared forecast error averaged over the whole space and over all the time-steps gives an indication on the overall prediction quality of the prediction given this metric, and are represented on the right plot of Figure~\ref{fig:forecast_squared_error}. We can see that $\kest_{\mathrm{global}}$ performs slightly better than $\kest_1$, itself performing slightly better than $\hatkmean$.
+Averaging $S(\mathbf{\kest}$ over only the time steps between $T$ and $T_{\mathrm{pred}}$, we have an indication on the quality of the forecast in the squared sense depending on the spatial position, as seen on the left plot of Figure~\ref{fig:forecast_squared_error}.
 \begin{figure*}[!h]
 \centering
 \includegraphics[width=.9\textwidth]{Figures/forecast_error.pdf}
@@ -822,7 +827,8 @@ The Continuous ranked probability score (CRPS) measures the squared difference b
 \end{equation}
 
 \clearpage
-\section*{Conclusion}  %% \conclusions[modified heading if necessary]
+\section*{Conclusion}  
+\victor{À faire à la fin}
 This paper deals with the problem of robust calibration of a computer code in the presence of uncertain inputs. 
 
 Our contribution consists in introducing a new criterion of robustness, based on the distribution of the minimisers. More specifically, this estimate is bounding the ratio between the cost function and its conditional minimum.

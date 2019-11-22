@@ -25,3 +25,5 @@
 *.zip
 _region*
 prv*
+*.pdf
+*.spl

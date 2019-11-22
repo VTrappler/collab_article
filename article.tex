@@ -59,10 +59,10 @@
 \newcommand{\Prob}{\mathbb{P}}
 \newcommand{\Cov}{\textsf{Cov}}
 \newcommand{\tra}{\mathrm{tr}}
-\newcommand{\kmean}{{\mathbf{k}}_{\mathrm{mean}}}
-\newcommand{\hatkmean}{\hat{\mathbf{k}}_{\mathrm{mean}}}
-\newcommand{\kvar}{{\mathbf{k}}_{\mathrm{var}}}
-\newcommand{\hatkvar}{\hat{\mathbf{k}}_{\mathrm{var}}}
+\newcommand{\kmean}{{\mathbf{k}}_{\Ex}}
+\newcommand{\hatkmean}{\hat{\mathbf{k}}_{\Ex}}
+\newcommand{\kvar}{{\mathbf{k}}_{\mathbb{V}}}
+\newcommand{\hatkvar}{\hat{\mathbf{k}}_{\mathbb{V}}}
 \newcommand{\kmpe}{{\mathbf{k}}_{\mathrm{MPE}}}
 \newcommand{\hatkmpe}{\hat{\mathbf{k}}_{\mathrm{MPE}}}
 \newcommand{\kest}{\hat{\mathbf{k}}}
@@ -71,6 +71,7 @@
 \newcommand{\checka}{{\alpha}}
 \newcommand{\checkk}{\mathbf{k}}
 \newcommand{\checkkp}{{\mathbf{k}}_p}
+\newcommand{\hatkp}{\hat{\mathbf{k}}_p}
 \newcommand{\Kspace}{\mathbb{K}}
 \newcommand{\Uspace}{\mathbb{U}}
 \newcommand{\JBH}{J_{\mathrm{BH}}}
@@ -305,9 +306,9 @@ Even though $\kmean$ is a reasonable choice, there is no guarantee that $J(\kmea
 %Chebyshev's inequality gives an upper bound on the probability of being more than $\lambda>0$ units from the mean:
 %\begin{equation}
 %  \label{eq:cheby_ineq}
-%  \Prob_{\mathbf{U}}\left[|J(\mathbf{k}% _{\mathrm{mean}}
-%    ,\mathbf{U}) - \mu(\mathbf{k}% _{\mathrm{mean}}
-%    )|> \lambda\right] \leq \frac{\sigma^2(\mathbf{k}% _{\mathrm{mean}}
+%  \Prob_{\mathbf{U}}\left[|J(\mathbf{k}% _{\Ex}
+%    ,\mathbf{U}) - \mu(\mathbf{k}% _{\Ex}
+%    )|> \lambda\right] \leq \frac{\sigma^2(\mathbf{k}% _{\Ex}
 %    )}{\lambda^2}
 %\end{equation}
 %
@@ -665,10 +666,10 @@ Compared to the plots for $J_{\mathrm{BH}}$ in Figure~\ref{fig:ratio_BH}, $\hat{
 Estimate & Value \\ \midrule
 $\kest_{\mathrm{MPE}}$ & 0.606 \\ 
 $\kest_{\mathrm{maxratio}},~ \hat{p}_{\mathrm{maxratio}}=0.766$ & 1.537 \\ 
-$\kest_{\mathrm{mean}}$ & 1.752 \\ 
+$\hatkmean$ & 1.752 \\ 
 $\kest_p,~p=0.90$ & 2.112 \\ 
 $\kest_p,~p=0.95$ & 2.457 \\ 
-$\kest_{\mathrm{var}}$ & 2.638 \\ 
+$\hatkvar$ & 2.638 \\ 
 $\kest_1,~p=1$ & 2.798   \\ \bottomrule
 \end{tabular}
 \end{table*}
@@ -756,11 +757,11 @@ As discussed earlier, the estimation of the MPE is dependent on the method used,
 Estimator & Value \\ \midrule
 $\hatkmpe$ & 0.249 \\
 $\kest_{\mathrm{global}}$ & 0.290 \\
-$\hat{\mathbf{k}}_{p},~p=1$ & 0.423 \\ 
-$\hat{\mathbf{k}}_p,~p=0.90$ & 0.458 \\ 
+$\hatkp,~p=1$ & 0.423 \\ 
+$\hatkp,~p=0.90$ & 0.458 \\ 
 $\hatkmean$ & 0.501 \\ 
-$\hat{\mathbf{k}}_p,~p=0.80$ & 0.505 \\ 
-$\hat{\mathbf{k}}_p,~p=0.70$ & 0.560 \\ 
+$\hatkp,~p=0.80$ & 0.505 \\ 
+$\hatkp,~p=0.70$ & 0.560 \\ 
 $\hatkvar$ & 0.990\\ \bottomrule
 \end{tabular}
 \label{tab:recap_estimates_metaSWE}
@@ -799,14 +800,14 @@ The mean squared forecast error averaged over the whole space and over all the t
 Averaging $S(\mathbf{\kest}$ over only the time steps between $T$ and $T_{\mathrm{pred}}$, we have an indication on the quality of the forecast in the squared sense depending on the spatial position, as seen on the left plot of Figure~\ref{fig:forecast_squared_error}.
 \begin{figure*}[!h]
 \centering
-\includegraphics[width=.9\textwidth]{Figures/forecast_error.pdf}
+\includegraphics[width=.9\textwidth]{Figures/L2_full.pdf}
 \caption{Quality of forecast, depending on the calibrated parameter. The left figures show the metric averaged over time, while the right figure show the mean forecast error, averaged over time and space}
 \label{fig:forecast_squared_error}
 \end{figure*}
 We can see that the mean forecast error squared, on the right side, averaged over time and space is the smallest for $\kest_{\mathrm{global}}$, while $\kest_{1.0}$ performs slightly better $\hatkmean$.
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=.9\textwidth]{Figures/forecast_CRPS}
+  \includegraphics[width=.9\textwidth]{Figures/CRPS_full}
   \caption{CRPS computed for different calibrated parameters}
 \label{fig:forecast_crps}
 \end{figure}

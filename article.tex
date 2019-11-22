@@ -390,7 +390,7 @@ estimations of $\hatkmpe$ when using different methods as illustrated in next su
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Numerical illustration}
 \label{ssec:num_illu}
-Before going further in the explanation of our approach, let us illustrate the nature of the 3 previously detailled estimator, $\hatkmean, \hatkvar$ and $\hatkmpe$ on two analytical cost functions. These functions are based on the Branin-Hoo's function, slightly modified to ensure strict positivity:
+Before going further in the explanation of our approach, let us illustrate the nature of previously detailed estimators, $\hatkmean, \hatkvar$ and $\hatkmpe$ on two analytical cost functions. These functions are based on the Branin-Hoo's function, slightly modified to ensure strict positivity:
 \begin{align}
   \label{eq:branin_hoo}
  \mathrm{BH}(x_1,x_2) &= \frac{1}{51.95}\left[\left(\bar{x}_2 - \frac{5.1 \bar{x}_1^2}{4\pi^2} + \frac{5\bar{x}_1}{\pi} -6 \right)^2 + \left(10 - \frac{10}{8\pi}\right)\cos(\bar{x}_1)-44.81\right]+2\\
@@ -408,8 +408,7 @@ Even though the functions are quite similar, the asymmetric roles of $\mathbf{k}
 \begin{figure*}[!ht]
   \centering
   \includegraphics[width=12cm]{Figures/branin_side_moments_noscale.pdf}
-  \caption{Left: Contour of the $J_{\mathrm{BH}}$ function, conditional mean and variance. The estimates $\hatkmean$ and $\hatkvar$ are plotted with the dashed line. Right: $J_{\mathrm{BHswap}}$ function. The scale of the bottom plots have not been represented.} %TODO revoir
-\label{fig:branin_moments}
+  \caption{The left column concerns the $J_{\mathrm{BH}}$ function, while the right one deals with $J_{\mathrm{BHswap}}$. Contours of both functions are plotted on the top, and curves of  $\mu(\mathbf{k})$ and $\sigma(\mathbf{k})$ are shown on the bottom (respective scales are note represented). Estimates $\hatkmean$ and $\hatkvar$ are plotted with the dashed line. } \label{fig:branin_moments}
 \end{figure*}
 %\clearpage % Pour lisibilité dans le preview
 
@@ -421,12 +420,12 @@ based on a $1000 \times 1000$ regular grid over $\Kspace\times\Uspace$. Both cos
 
 
  The left, respectively right, column stands for $J_{\mathrm{BH}}$, respectively $J_{\mathrm{BHswap}}$ function. Functions $\mu(\mathbf{k})$ and $\sigma(\mathbf{k})$ are drawn on the bottom row, respectively in purple and green. The corresponding minimizers $\hatkmean$ and $\hatkvar$ are also plotted.
-On this figure, we can observe that $\hatkmean$ and $\hatkvar$ are close for the $J_{\mathrm{BH}}$ function, while have significant different value for the $J_{\mathrm{BHswap}}$ function.
+On this figure, we can observe that $\hatkmean$ and $\hatkvar$ are close for the $J_{\mathrm{BH}}$ function, while being significantly different for the $J_{\mathrm{BHswap}}$ function.
 %\clearpage
 
 
-Illustrations related to $\hatkmpe$ are depicted on Figure~\ref{fig:contours}. As before, the set of $\mathbf{u}^i$ is taken from a regular grid. Top row shows the contour plot of both functions as well as the set of conditional minimisers $\{\mathbf{k}_{\mathbf{u}^i}\}_{1\leq i \leq N}$ in red, as defined in Eq.~\eqref{eq:conditional_minimiser}.
-The left, respectively right, column stands for $J_{\mathrm{BH}}$, respectively $J_{\mathrm{BHswap}}$ function. The bottom rows presents three approximations of the density of minimisers: the histogram in grey (bin size selected using Freedman-Diaconis from~\cite{freedman_histogram_1981}), the result of a kernel density estimation (KDE) with Gaussian kernels in red (using Scott's rule from~\cite{scott_optimal_1979} for bandwidth selection), and the estimation by a Gaussian mixture. The latter has been calculated with the EM algorithm. The number of Gaussians has been fixed to 3, a guess based on the general shape of the histogram. Respective estimations of $\hatkmpe$ are also depicted using dashed lines. 
+Similarly $\hatkmpe$ estimations are depicted on Figure~\ref{fig:contours}.  Top row shows the contour plot of both functions as well as the set of conditional minimisers $\{\mathbf{k}_{\mathbf{u}^i}\}_{1\leq i \leq N}$ in red, as defined in Eq.~\eqref{eq:conditional_minimiser}.
+The bottom rows presents three approximations of the density of minimisers: the histogram in grey (bin size selected using Freedman-Diaconis from~\cite{freedman_histogram_1981}), the result of a kernel density estimation (KDE) with Gaussian kernels in red (using Scott's rule from~\cite{scott_optimal_1979} for bandwidth selection), and the estimation by a Gaussian mixture. The latter has been calculated with the EM algorithm. The number of Gaussians has been fixed to 3, a guess based on the general shape of the histogram. Respective estimations of $\hatkmpe$ are also depicted using dashed lines. 
 
 %The computation of the MPE is more problematic. Indeed, an analytical form of the distribution of the minimisers $p_{\mathbf{K}^*}$ is usually impossible to obtain, so an approximation must be used, and its maximum computed to get the MPE.
 %Computationally speaking, to compute a realisation of $\mathbf{K}^*$, a value $\mathbf{u}$ is sampled from $\mathbf{U}$, and a minimisation problem is solved to get $\mathbf{k}^*(\mathbf{u})$. Using the grid mentioned before, 1000 realisations of $\mathbf{K}^*$ have been obtained by direct search on grid.
@@ -438,7 +437,7 @@ The left, respectively right, column stands for $J_{\mathrm{BH}}$, respectively 
 \begin{figure*}
   \centering
   \includegraphics[width=12cm]{Figures/branin_side_66.pdf}
-  \caption{Top Left:  $J_{\mathrm{BH}}$ function along with conditional minimisers in red. Bottom left: Estimated density using KDE and EM algorithm and conditional mean. The dashed lines indicate the MPE found using those methods. Right: Same quantities with $J_{\mathrm{BHswap}}$. The estimation of the MPE is consistent between the methods for $J_{\mathrm{BHswap}}$, but not for  $J_{\mathrm{BH}}$}
+  \caption{Top Left:  $J_{\mathrm{BH}}$ function along with conditional minimisers in red. Bottom left: Estimated density using KDE and EM algorithm and conditional mean. The dashed lines indicate the MPE found using those methods. Right: Same quantities with $J_{\mathrm{BHswap}}$.}
 \label{fig:contours}
 \end{figure*}
 
@@ -450,7 +449,7 @@ density estimation. The Gaussian centered at $1.5$ has been attributed
 a weight of $0.608$, while the one centered at $3.8$ has a mixing
 weight of $0.226$. Ultimately, an optimiser would be more likely to be
 close to $1.5$, but we do not have information on its performance in
-this region around this value.
+this region around this value. \arthur{je ne comprends pas ce passage}
 
 % as we can argue that both values may be a sensible choice for the MPE. This comes from the fact that the hypothesis that $\mathbf{K}^*$ is a continuous r.v.\ is violated. 
 A way to avoid this issue is to introduce a bit of leeway for a value to be optimal, or at least ``acceptably not optimal''. This slackness takes the form of a relaxation coefficient, whose choice leads to a new family of robust estimators, along with a measure of their robustness via the coefficient.
@@ -464,7 +463,7 @@ A way to avoid this issue is to introduce a bit of leeway for a value to be opti
 
 \section{Relative regret-based family of estimators}%A new family of robust estimators \elise{titre a revoir}}
 \label{sec:relax_constraint}
-\subsection{Taking the neighborhood into consideration}
+\subsection{Relaxing the optimality constraint}
 The density of minimisers has been estimated by optimising $\mathbf{k}\mapsto J(\mathbf{k},\mathbf{u})$ over $\Kspace$ for different realisations of $\mathbf{u}$. Instead of only considering  optimal values, we propose to consider their {\it acceptable} neighbourhood in terms of performance of the cost function as well, as illustrated in Figure~\ref{fig:relax_tuto}. 
 To do so, for each $\mathbf{u}$, we define as acceptable values of the cost function, the values that are below $\alpha J^*(\mathbf{u})$, with $\alpha > 1$. 
 

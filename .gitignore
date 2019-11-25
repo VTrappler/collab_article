@@ -23,3 +23,7 @@
 *.synctex.gz
 *.tex~
 *.zip
+_region*
+prv*
+*.pdf
+*.spl

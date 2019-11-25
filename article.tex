@@ -81,56 +81,73 @@
 \newcommand{\elise}[1]{{\itshape\color{red} ({#1})}}
 \newcommand{\victor}[1]{{\itshape\color{green} ({#1})}}
 
+\journal{Journal of Computational Physics}
+
 \begin{document}
 
-\title{Title-- \today{}}%TEXT}
+\begin{frontmatter}
 
+%% Title, authors and addresses
 
-% \Author[affil]{given_name}{surname}
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
 
-\Author[]{Victor}{Trappler}
-\Author[]{Élise}{Arnaud}
-\Author[]{Laurent}{Debreu}
-\Author[]{Arthur}{Vidard}
+\title{Robust calibration of numerical models based on relative regret}
 
-\affil[]{Univ. Grenoble Alpes, CNRS, Inria, Grenoble INP*, LJK, 38000 Grenoble, France}
-% \affil[]{ADDRESS}
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \address[label1]{}
+%% \address[label2]{}
 
-%% The [] brackets identify the author with the corresponding affiliation. 1, 2, 3, etc. should be inserted.
+\author[vt]{Victor Trappler}
+\ead{victor.trappler@univ-grenoble-alpes.fr}
+\author[ea]{Élise Arnaud}
+\author[av]{Arthur Vidard}
+\author[ld]{Laurent Debreu}
 
-
-
-\runningtitle{Title}
-
-\runningauthor{Trappler V.}
-
-\correspondence{Victor Trappler (victor.trappler@univ-grenoble-alpes.fr)}
-
-
-
-\received{}
-\pubdiscuss{} %% only important for two-stage journals
-\revised{}
-\accepted{}
-\published{}
-
-%% These dates will be inserted by Copernicus Publications during the typesetting process.
-
-
-\firstpage{1}
-
-\maketitle
-
-% \listoftodos\
+\address[vt]{Univ. Grenoble Alpes, CNRS, Inria, Grenoble INP*, LJK, 38000 Grenoble, France}
 
 \begin{abstract}
+%% Text of abstract
 Classical methods of parameter estimation usually imply the minimisation of an objective function, that measures the error between some observations and the results obtained by a numerical model. In the presence of random inputs, the objective function becomes a random variable, and notions of robustness have to be introduced.
 
 In this paper, we are going to present how to take into account those uncertainties by defining a notion of robustness based on the distribution of the conditional minimisers and compare it with the minimum in the mean sense, and the minimum of variance.
-\victor{Pour le nom: Il y a l'idée que l'on veut avoir un regret $J(\mathbf{k},\mathbf{u}) - \alpha J^*(\mathbf{u})$ controlé à l'aide de $\alpha$: Relative regret ?}
 \end{abstract}
 
-\copyrightstatement{TEXT}
+% %%Graphical abstract
+% \begin{graphicalabstract}
+% %\includegraphics{grabs}
+% \end{graphicalabstract}
+
+%%Research highlights
+% \begin{highlights}
+% \item Research highlight 1
+% \item Research highlight 2
+% \end{highlights}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+
+%% PACS codes here, in the form: \PACS code \sep code
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+%% \linenumbers
+
+%% main text
+\section*{Introduction}
+\label{}
 
 %----------------------------------------------------------------------------
 % \listoftodos{}
@@ -1103,16 +1120,11 @@ For instance,~\cite{ginsbourger_bayesian_2014}
 uses Gaussian Process regression and sequential methods to explore the conditional minimisers.
 
 Finally, the adaptibility of this method has to be studied in a higher dimensional setting. High-dimensional density estimation is a challenge in itself, but is necessary in order to tackle more realistic applications.
+
+
 %% The following commands are for the statements about the availability of data sets and/or software code corresponding to the manuscript.
 %% It is strongly recommended to make use of these sections in case data sets and/or software code have been part of your research the article is based on.
 
-\codeavailability{TEXT} %% use this section when having only software code available
-
-
-% \dataavailability{TEXT} %% use this section when having only data sets available
-
-
-\codedataavailability{TEXT} %% use this section when having data sets and software code available
 
 
 % \sampleavailability{TEXT} %% use this section when having geoscientific samples available
@@ -1122,232 +1134,24 @@ Finally, the adaptibility of this method has to be studied in a higher dimension
 % \appendix
 % \section{}    %% Appendix A
 
-% \subsection{}     %% Appendix A1, A2, etc.
-
-
-% \noappendix       %% use this to mark the end of the appendix section
-
-%% Regarding figures and tables in appendices, the following two options are possible depending on your general handling of figures and tables in the manuscript environment:
-
-%% Option 1: If you sorted all figures and tables into the sections of the text, please also sort the appendix figures and appendix tables into the respective appendix sections.
-%% They will be correctly named automatically.
-
-%% Option 2: If you put all figures after the reference list, please insert appendix tables and figures after the normal tables and figures.
-%% To rename them correctly to A1, A2, etc., please add the following commands in front of them:
-
-\appendixfigures  %% needs to be added in front of appendix figures
-
-\appendixtables   %% needs to be added in front of appendix tables
-
-%% Please add \clearpage between each table and/or figure. Further guidelines on figures and tables can be found below.
-
-
-
-\authorcontribution{TEXT} %% it is strongly recommended to make use of this section
-
-\competinginterests{TEXT} %% this section is mandatory even if you declare that no competing interests are present
-
-\disclaimer{TEXT} %% optional section
-
-\begin{acknowledgements}
-TEXT
-\end{acknowledgements}
-
-
-
-
-%% REFERENCES
-
-%% The reference list is compiled as follows:
-
-% \begin{thebibliography}{}
-
-% \bibitem[AUTHOR(YEAR)]{LABEL1}
-% REFERENCE 1
-
-% \bibitem[AUTHOR(YEAR)]{LABEL2}
-% REFERENCE 2
-
-% \end{thebibliography}
-
-%% Since the Copernicus LaTeX package includes the BibTeX style file copernicus.bst,
-%% authors experienced with BibTeX only have to include the following two lines:
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
 %%
+%%  \bibliographystyle{elsarticle-num-names} 
+%%  \bibliography{<your bibdatabase>}
 
-\bibliographystyle{copernicus}
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+\bibliographystyle{elsarticle-num-names} 
 \bibliography{bibzotero}
 
-%%
-%% URLs and DOIs can be entered in your BibTeX file as:
-%%
-%% URL = {http://www.xyz.org/~jones/idx_g.htm}
-%% DOI = {10.5194/xyz}
-
-
-%% LITERATURE CITATIONS
-%%
-%% command                        & example result
-%% \citet{jones90}|               & Jones et al. (1990)
-%% \citep{jones90}|               & (Jones et al., 1990)
-%% \citep{jones90,jones93}|       & (Jones et al., 1990, 1993)
-%% \citep[p.~32]{jones90}|        & (Jones et al., 1990, p.~32)
-%% \citep[e.g.,][]{jones90}|      & (e.g., Jones et al., 1990)
-%% \citep[e.g.,][p.~32]{jones90}| & (e.g., Jones et al., 1990, p.~32)
-%% \citeauthor{jones90}|          & Jones et al.
-%% \citeyear{jones90}|            & 1990
-
-
-
-%% FIGURES
-
-%% When figures and tables are placed at the end of the MS (article in one-column style), please add \clearpage
-%% between bibliography and first table and/or figure as well as between each table and/or figure.
-
-
-%% ONE-COLUMN FIGURES
-
-%%f
-%\begin{figure}[t]
-%\includegraphics[width=8.3cm]{FILE NAME}
-%\caption{TEXT}
-%\end{figure}
-%
-%%% TWO-COLUMN FIGURES
-%
-%%f
-%\begin{figure*}[t]
-%\includegraphics[width=12cm]{FILE NAME}
-%\caption{TEXT}
-%\end{figure*}
-%
-%
-%%% TABLES
-%%%
-%%% The different columns must be seperated with a & command and should
-%%% end with \\ to identify the column brake.
-%
-%%% ONE-COLUMN TABLE
-%
-%%t
-%\begin{table}[t]
-%\caption{TEXT}
-%\begin{tabular}{column = lcr}
-%\tophline
-%
-%\middlehline
-%
-%\bottomhline
-%\end{tabular}
-%\belowtable{} % Table Footnotes
-%\end{table}
-%
-%%% TWO-COLUMN TABLE
-%
-%%t
-%\begin{table*}[t]
-%\caption{TEXT}
-%\begin{tabular}{column = lcr}
-%\tophline
-%
-%\middlehline
-%
-%\bottomhline
-%\end{tabular}
-%\belowtable{} % Table Footnotes
-%\end{table*}
-%
-%%% LANDSCAPE TABLE
-%
-%%t
-%\begin{sidewaystable*}[t]
-%\caption{TEXT}
-%\begin{tabular}{column = lcr}
-%\tophline
-%
-%\middlehline
-%
-%\bottomhline
-%\end{tabular}
-%\belowtable{} % Table Footnotes
-%\end{sidewaystable*}
-%
-%
-%%% MATHEMATICAL EXPRESSIONS
-%
-%%% All papers typeset by Copernicus Publications follow the math typesetting regulations
-%%% given by the IUPAC Green Book (IUPAC: Quantities, Units and Symbols in Physical Chemistry,
-%%% 2nd Edn., Blackwell Science, available at: http://old.iupac.org/publications/books/gbook/green_book_2ed.pdf, 1993).
-%%%
-%%% Physical quantities/variables are typeset in italic font (t for time, T for Temperature)
-%%% Indices which are not defined are typeset in italic font (x, y, z, a, b, c)
-%%% Items/objects which are defined are typeset in roman font (Car A, Car B)
-%%% Descriptions/specifications which are defined by itself are typeset in roman font (abs, rel, ref, tot, net, ice)
-%%% Abbreviations from 2 letters are typeset in roman font (RH, LAI)
-%%% Vectors are identified in bold italic font using \vec{x}
-%%% Matrices are identified in bold roman font
-%%% Multiplication signs are typeset using the LaTeX commands \times (for vector products, grids, and exponential notations) or \cdot
-%%% The character * should not be applied as mutliplication sign
-%
-%
-%%% EQUATIONS
-%
-%%% Single-row equation
-%
-%\begin{equation}
-%
-%\end{equation}
-%
-%%% Multiline equation
-%
-%\begin{align}
-%& 3 + 5 = 8\\
-%& 3 + 5 = 8\\
-%& 3 + 5 = 8
-%\end{align}
-%
-%
-%%% MATRICES
-%
-%\begin{matrix}
-%x & y & z\\
-%x & y & z\\
-%x & y & z\\
-%\end{matrix}
-%
-%
-%%% ALGORITHM
-%
-%\begin{algorithm}
-%\caption{...}
-%\label{a1}
-%\begin{algorithmic}
-%...
-%\end{algorithmic}
-%\end{algorithm}
-%
-%
-%%% CHEMICAL FORMULAS AND REACTIONS
-%
-%%% For formulas embedded in the text, please use \chem{}
-%
-%%% The reaction environment creates labels including the letter R, i.e. (R1), (R2), etc.
-%
-%\begin{reaction}
-%%% \rightarrow should be used for normal (one-way) chemical reactions
-%%% \rightleftharpoons should be used for equilibria
-%%% \leftrightarrow should be used for resonance structures
-%\end{reaction}
-%
-%
-%%% PHYSICAL UNITS
-%%%
-%%% Please use \unit{} and apply the exponential notation
-
-
 \end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-num-names.tex'.
 
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
 %%% End:
-

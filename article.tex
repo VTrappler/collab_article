@@ -162,7 +162,7 @@ Numerical models are widely used to study or forecast natural phenomenon and imp
 %
 %Various sources of uncertainties can corrupt the model quality, such as the discretisation of the domain, or presence of  small scale phenomena that can not be fully represented. 
 Moreover, such uncertainties may be of different nature. 
-~\cite{walker_defining_2003} propose two to consider two categories of uncertainties. On the one hand aleatoric uncertainties,  coming from the inherent variability of a phenomenon, e.g.\ intrinsic randomness of some environmental variables. On the other hand, epistemic uncertainties coming from a lack of knowledge about the properties and conditions of the phenomena underlying the behaviour of the system under study.
+~\cite{walker_defining_2003} proposes to consider two categories of uncertainties. On the one hand aleatoric uncertainties,  coming from the inherent variability of a phenomenon, e.g.\ intrinsic randomness of some environmental variables. On the other hand, epistemic uncertainties coming from a lack of knowledge about the properties and conditions of the phenomena underlying the behaviour of the system under study.
 The latter can be accounted for through the introduction of ad-hoc correcting terms in the numerical model, that need to be properly estimated. Thus, reducing the epistemic uncertainty can be done through parameters estimation approaches. 
 %when one is having observations of the reality. 
 This is usually done using optimal control techniques, leading to an optimisation of a well chosen cost function which is typically built as a comparison with reference observations.
@@ -559,7 +559,7 @@ Similarly, if $p$ is fixed, the corresponding $\hat{\checka}_p$ is computed by s
 Without posing any constraints on $p$ nor on $\alpha$, a compromise between $p$ and $\alpha$ would be preferable, and a rough idea of this balance can be obtained by studying $p \mapsto \checkap$, and particularly its slope.
 If this curve presents a steep increase, the multiplicative constant $\checkap$ must be increased by a large amount in order to increase the probability $p$ by a small amount. Interesting couples $(p,\checkap)$ would then be the ones located before an abrupt increase of the slope of $p \mapsto \checkap$.
 
-Another possibility is to combine directly $p$ and $\checkap$ in order to find a compromise. We opted to model this compromise by the ratio $(p/\checkap)$, as it increases with respect to $p$ and decreases with respect to $\checka_p$. The level of confidence $p_{\mathrm{maxratio}}$ is then defined as the maximiser of $p\mapsto p / \checka_p$.
+Another possibility is to combine directly $p$ and $\checkap$ in order to find a compromise. We opted to model this compromise by the ratio $(p/\checkap)$, as it increases with respect to $p$ and decreases with respect to $\checka_p$. The level of confidence $p_{\mathrm{ratio}}$ is then defined as the maximiser of $p\mapsto p / \checka_p$.
 
 
 
@@ -567,14 +567,14 @@ The different estimators introduced in this paper are summarised in Table~\ref{t
 
 \begin{table}[t]
   \centering
-\begin{tabular}{lrr}
+\begin{tabular}{lrp{5cm}}
   \toprule
   Definition & Related quantities & Interpretation \\ \midrule
    $\argmin_{\mathbf{k}\in\Kspace} \Ex_{\mathbf{U}}\left[J(\mathbf{k},\mathbf{U})\right]$& $\kmean$ & Long run performances\\
    $\argmin_{\mathbf{k}\in\Kspace} \Var_{\mathbf{U}}\left[J(\mathbf{k},\mathbf{U})\right]$& $\kvar$  & Steady performances\\
    $\argmax_{\mathbf{k}\in\Kspace} p_{\mathbf{K}^*}(\mathbf{k})$ & $\kmpe$ & Most probable minimiser\\
-    $\inf\left\{ \alpha \mid \exists \checkkp \in \Kspace,\, \Gamma_{\alpha}(\checkkp) \geq p \right\}$ & $(p, \checkkp,\checkap)$ & Acceptable values with fixed probability $p$ \\
-    $p_{\mathrm{maxratio}} = \argmax p/\checkap$ & $(p_{\mathrm{maxratio}}, \checkk_{\mathrm{maxratio}}, \checka_{\mathrm{maxratio}})$ & Maximal ratio of $p$ and $\checkap$ \\
+    $\inf\left\{ \alpha \mid \exists \checkkp \in \Kspace,\, \Gamma_{\alpha}(\checkkp) \geq p \right\}$ & $(p, \checkkp,\checkap)$ & Acceptable values\newline with fixed probability $p$ \\
+    $p_{\mathrm{ratio}} = \argmax p/\checkap$ & $(p_{\mathrm{ratio}}, \checkk_{\mathrm{ratio}}, \checka_{\mathrm{ratio}})$ & Maximal ratio of $p$ and $\checkap$ \\
   \bottomrule
 \end{tabular}
 \label{tab:RO_recap}
@@ -628,7 +628,7 @@ $\hatkvar$ & 1.371 \\
 $\kest_p,~p=1$ & 1.557 \\ 
 $\hatkmean$ & 1.587 \\ 
   $\hatkmpe$ & 1.628 \\
-  $\kest_{\mathrm{maxratio}},~\hat{p}_{\mathrm{maxratio}}=0.654$ & 1.637 \\
+  $\kest_{\mathrm{ratio}},~\hat{p}_{\mathrm{ratio}}=0.654$ & 1.637 \\
 $\kest_p,~p=0.95$ & 1.672 \\ \bottomrule
 \end{tabular}
 \end{table*}
@@ -638,7 +638,7 @@ Practically speaking, in order to compare the effective values taken by the obje
 For the $J_{\mathrm{BH}}$ function, the curves are plotted in Figure~\ref{fig:profiles_branin}. Based on its definition, the profile of $\hat{\checkk}_1$ is always within the shaded region, corresponding to $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$. The profile of $\hatkmean$ in contrast, exceeds $\hat{\checka}_1 J^*(\mathbf{u})$ for $\mathbf{u}$ close to $5$, while the profile of $\hatkvar$ does for $\mathbf{u}$ close to $0$.
 As the different $\kest$ are very close for every criteria introduced in this paper, the profiles are almost undistinguishable.
 
-\begin{figure*}[t]
+\begin{figure*}[!h]
   \centering
 \includegraphics[width=10cm]{Figures/profile_BH_all_estimates_noku.pdf}
 \caption{Profiles of the different estimates for the $J_{\mathrm{BH}}$ function, corresponding to the vertical cross sections of the contour. The shaded region corresponds to the interval $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$. The red dashed line, corresponding to the values taken by the cost function when the control variable is set to $\mathbf{k}_1$, is always between $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$ per design.}
@@ -653,7 +653,7 @@ We are now going to shift our focus on the $J_{\mathrm{BHswap}}$ function, as Fi
 \label{fig:ratio_BHs}
 \end{figure}
 
-Compared to the plots for $J_{\mathrm{BH}}$ in Figure~\ref{fig:ratio_BH}, $\hat{\checka}_p$ exhibits a smoother behaviour for the $J_{\mathrm{BHswap}}$ function as no change of slope is easily discernable. The computation of the ratio advocates for a level of confidence $p_{\mathrm{maxratio}}$ close to $0.75$. The numerical values of the estimations $\hat{k}$ presented in Table~\ref{tab:recap_estimates_BHs} show that, contrary to the $J_{\mathrm{BH}}$ function, the objective are concurrent.
+Compared to the plots for $J_{\mathrm{BH}}$ in Figure~\ref{fig:ratio_BH}, $\hat{\checka}_p$ exhibits a smoother behaviour for the $J_{\mathrm{BHswap}}$ function as no change of slope is easily discernable. The computation of the ratio advocates for a level of confidence $p_{\mathrm{ratio}}$ close to $0.75$. The numerical values of the estimations $\hat{k}$ presented in Table~\ref{tab:recap_estimates_BHs} show that, contrary to the $J_{\mathrm{BH}}$ function, the objective are concurrent.
 
 \begin{table*}[!h]
 \centering
@@ -662,7 +662,7 @@ Compared to the plots for $J_{\mathrm{BH}}$ in Figure~\ref{fig:ratio_BH}, $\hat{
 \begin{tabular}{lr} \toprule
 Estimate & Value \\ \midrule
 $\kest_{\mathrm{MPE}}$ & 0.606 \\ 
-$\kest_{\mathrm{maxratio}},~ \hat{p}_{\mathrm{maxratio}}=0.766$ & 1.537 \\ 
+$\kest_{\mathrm{ratio}},~ \hat{p}_{\mathrm{ratio}}=0.766$ & 1.537 \\ 
 $\hatkmean$ & 1.752 \\ 
 $\kest_p,~p=0.90$ & 2.112 \\ 
 $\kest_p,~p=0.95$ & 2.457 \\ 
@@ -674,12 +674,12 @@ $\kest_1,~p=1$ & 2.798   \\ \bottomrule
 
 In a similar fashion, the profiles of the different estimates for the $J_{\mathrm{BHswap}}$ function are shown in Figure~\ref{fig:profiles_branin_switch}.
 
-In this case, $\hatkmpe$, $\hatkmean$ and $\hat{\checkk}_{\mathrm{maxratio}}$ present a similar behaviour. They perform very well for $\mathbf{u}>2$, especially for $\hatkmpe$ which is very close to the minimal value; However for $\mathbf{u}<2$, they produce high values of the function.
+In this case, $\hatkmpe$, $\hatkmean$ and $\hat{\checkk}_{\mathrm{ratio}}$ present a similar behaviour. They perform very well for $\mathbf{u}>2$, especially for $\hatkmpe$ which is very close to the minimal value; However for $\mathbf{u}<2$, they produce high values of the function.
 
 The performances of $\hat{\checkk}_1$ are closer to the performances of $\hatkvar$ for this function, but it performs worse than $\hatkmean$ and $\hatkvar$ for $\mathbf{u}>2$, even though its range is designed to stay within the interval $[J^*(\mathbf{u}); \hat{\checka}_1 J^*(\mathbf{u})]$.
 
 
-\begin{figure*}[t]
+\begin{figure*}[!h]
   \centering
 \includegraphics[width=10cm]{Figures/profile_BHs_all_estimates_noku.pdf}
 \caption{Profiles of the different estimates for the $J_{\mathrm{BHswap}}$ function. Those profiles are the vertical cross sections of the contours above. The shaded region corresponds to the interval $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$. The red dashed line, corresponding to the values taken by the cost function when the control variable is set to $\mathbf{k}_1$, is always between $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$ per design.}
@@ -774,7 +774,7 @@ We can see that the performances of $\kest_1$ and $\hatkmean$ are very similar, 
 
 
 The calibration of this numerical model is done in order to get a calibrated value $\kest$, that will be used for forecasts, using the same numerical model. We are now going to compare how well three of those values compare in a forecast context: $\kest_1$, $\hatkmean$ and $\kest_{\mathrm{global}}$, as the first two refer quite naturally to the notion of robustness, and the latter is an example of an estimate that does not take into account the uncertainties.
-\clearpage
+
 \subsection{Assessing the quality of the forecast of the calibrated model}
 The calibration of the model has been performed using by integrating the model on a time-period $[0, T]$, called assimilation window. 
 We now want to compare the quality of the different forecasts, from different calibrated bottom friction.
@@ -797,17 +797,11 @@ Averaging $S(\mathbf{\kest})$ over the time steps between $T$ and $T_{\mathrm{pr
 \begin{figure*}[!h]
 \centering
 \includegraphics[width=.9\textwidth]{Figures/L2_full.pdf}
-\caption{Quality of forecast, depending on the calibrated parameter. The left figures show the metric averaged over time, while the right figure show the mean forecast error, averaged over time and space}
+\caption{Squared forecast error, depending on the calibrated parameter. The left figures show the metric averaged over time, while the right figure show the mean forecast error, averaged over time and space}
 \label{fig:forecast_squared_error}
 \end{figure*}
 We can see that the mean forecast error squared, on the right side, averaged over time and space is the smallest for $\kest_{\mathrm{global}}$, while $\kest_{1.0}$ performs slightly better $\hatkmean$.
 
-% \begin{figure*}[!h]
-% \centering
-% \includegraphics[width=10cm]{Figures/distrib_L2norm.pdf}
-% \caption{Distribution of the forecast squared error, averaged over the different values of the uncertain parameter in the numerical simulations \victor{doublon avec fig.\ref{fig:forecast_squared_error} ?}}
-% \label{fig:forecast_squared_error_distrib}
-% \end{figure*}
 One issue with the squared forecast error is that it will penalize strongly a high sensitivity to the environmental conditions \todo{à conserver/changer ?}. A way to deal with this is to use another metric, that takes the probabilistic nature of the forecasts into account.
 \subsubsection{Continuous Ranked Probability Score}
 Given the random variables $\mathcal{M}_{\mathrm{pred}}(\kest, \mathbf{U})$ and $\mathcal{M}_{\mathrm{pred}}^o(\mathbf{U})$, representing the probabilistic forecast and the probabilistic observations, we can define the cumulative distribution functions (CDF) $F_{\mathrm{pred}}(\cdot, \kest)$ and $F^o_{\mathrm{pred}}(\cdot)$
@@ -816,7 +810,7 @@ The Continuous ranked probability score (CRPS) measures the squared difference b
 \label{eq:def_crps}
 \mathrm{CRPS}(\mathbf{k}) = \int_{\mathbb{R}} (F_{\mathrm{pred}}(x,\mathbf{k}) - F^o_{\mathrm{pred}}(x))^2 \,\mathrm{d}x
 \end{equation}
-
+The left plot of Figure~\ref{fig:forecast_crps} shows the CRPS averaged over time, and the right plot shows the value of the CRPS averaged over time and space. The difference between the squared forecast error and the CRPS is apparent when comparing the general trends shared by the different calibrated parameters. According to the squared error, the region around $x=4$ is not well predicted, while around $x=8$, the prediction are better. On the other hand, according to the CRPS, the region around $x=8$ provide worse forecasts than the one at $x=4$ and $x=7$. 
 
 \begin{figure}[!h]
   \centering
@@ -824,9 +818,12 @@ The Continuous ranked probability score (CRPS) measures the squared difference b
   \caption{CRPS computed for different calibrated parameters}
 \label{fig:forecast_crps}
 \end{figure}
+The numerical evaluations of the CRPS for different parameters show the same order of performances observed for the squared error.
+The calibrated parameters that present the best performances for forecasts according to those two metrics are $\kest^*(0.7)$, $\kest^*(0.65)$ which is very similar to $\kest_{\mathrm{global}}$.
 
 
 \clearpage
+
 \section*{Conclusion}  
 \victor{À faire à la fin}
 This paper deals with the problem of robust calibration of a computer code in the presence of uncertain inputs. 

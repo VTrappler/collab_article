@@ -577,8 +577,8 @@ The different estimators introduced in this paper are summarised in Table~\ref{t
     $p_{\mathrm{ratio}} = \argmax p/\checkap$ & $(p_{\mathrm{ratio}}, \checkk_{\mathrm{ratio}}, \checka_{\mathrm{ratio}})$ & Maximal ratio of $p$ and $\checkap$ \\
   \bottomrule
 \end{tabular}
+\caption{Robust estimators, based on a cost function $J$}
 \label{tab:RO_recap}
-  \caption{Robust estimators, based on a cost function $J$}
 \end{table}
 
 % We are now going to compute and compare those estimators on the $J_{\mathrm{BH}}$and $J_{\mathrm{BHswap}}$ function.
@@ -592,7 +592,9 @@ As stated before, we chose to model the uncertainties as a random variable unifo
 From now on, $\hatkmpe$ is estimated using KDE with Gaussian kernels.
 The smallest relaxation $\hat{\checka}_1$ and the corresponding $\hat{\checkk}_1$ has been computed for the $J_{\mathrm{BH}}$ and $J_{\mathrm{BHswap}}$ functions, using a regular grid of $1000 \times 1000$ points on $\Kspace\times\Uspace$. The contour plots of those functions can be seen in the top plots of Figure~\ref{fig:contour_alpha}. The frontier corresponding to the couples of points $(\mathbf{k},\mathbf{u})$ verifying $\{J(\mathbf{k},\mathbf{u}) = \alpha J^*(\mathbf{u})\}$ has been drawn on top of these contour plots, for $\alpha=\hat{\checka}_1$ and an arbitrary $\alpha=1.5<\hat{\checka}_1$, to illustrate the effect of the acceptable region when the relaxation $\alpha$ increases. 
 On the bottom plots, the curves $\mathbf{k}\mapsto \hat{\Gamma}_{\alpha}(\mathbf{k})$ for $\alpha=\hat{\checka}_1$ and $\alpha=1.5$ along with the histogram of the minimisers are represented.
-One can notice that the relaxation does not present an issue with the accumulation of the minimisers of $\JBH$ at $3.8$, as opposed to the MPE and its dependence on the estimation procedure of the distribution.
+
+
+One can notice that the relaxation allows us to avoid the issue brought by the accumulation of the minimisers of $\JBH$ at $3.8$, as opposed to the MPE and its dependence on the estimation procedure of the distribution.
 
 \begin{figure*}[!ht]
   \centering
@@ -615,7 +617,7 @@ In order to choose a satisfying level of confidence $p$, we are going to study $
 \label{fig:ratio_BH}
 \end{figure}
  
- For the $J_{\mathrm{BH}}$ function, the numerical values can be found in Table~\ref{tab:recap_estimates_branin}. One can notice that the different estimates are close to each other for this problem.
+ For the $J_{\mathrm{BH}}$ function, the numerical values can be found in Table~\ref{tab:recap_estimates_branin}. For this particular problem, the different estimates are close to each other.
  
 \begin{table*}[!ht]
 \centering
@@ -653,7 +655,7 @@ We are now going to shift our focus on the $J_{\mathrm{BHswap}}$ function, as Fi
 \label{fig:ratio_BHs}
 \end{figure}
 
-Compared to the plots for $J_{\mathrm{BH}}$ in Figure~\ref{fig:ratio_BH}, $\hat{\checka}_p$ exhibits a smoother behaviour for the $J_{\mathrm{BHswap}}$ function as no change of slope is easily discernable. The computation of the ratio advocates for a level of confidence $p_{\mathrm{ratio}}$ close to $0.75$. The numerical values of the estimations $\hat{k}$ presented in Table~\ref{tab:recap_estimates_BHs} show that, contrary to the $J_{\mathrm{BH}}$ function, the objective are concurrent.
+Compared to the plots for $J_{\mathrm{BH}}$ in Figure~\ref{fig:ratio_BH}, $\hat{\checka}_p$ exhibits a smoother behaviour for the $J_{\mathrm{BHswap}}$ function as no change of slope is easily discernable. The computation of the ratio advocates for a level of confidence $p_{\mathrm{ratio}}$ close to $0.75$. The numerical values of the estimations $\kest$ presented in Table~\ref{tab:recap_estimates_BHs} show that contrary to the $J_{\mathrm{BH}}$ function, the calibrated values are more spread on $\Kspace$.
 
 \begin{table*}[!h]
 \centering
@@ -703,17 +705,17 @@ The performances of $\hat{\checkk}_1$ are closer to the performances of $\hatkva
  We will follow \citeauthor{kennedy_bayesian_2001}'s approach in order to establish the function $\mathcal{G}$ described in the first section in Eq.~\eqref{eq:def_cost_fun}, and the resulting cost function $J$.
  
  Calibration of a numerical model is usually based on the comparison between the numerical model and some observations in a fixed time interval $[0, T]$ called assimilation window.
-The physical system at stake is based on an input $\mathbf{u} \in \mathcal{U}$, that represents some operating conditions. This system can then be seen as a map from $\mathcal{U}$ to $\mathcal{Y}$, denoted as $\mathcal{M}^o : \mathbf{u}\mapsto \mathcal{M}^o(\mathbf{u})$. 
+The physical system at stake is based on an input $\mathbf{u} \in \Uspace$, that represents some operating conditions. This system can then be seen as a map from $\Uspace$ to $\mathcal{Y}$, denoted as $\mathcal{M}^o : \mathbf{u}\mapsto \mathcal{M}^o(\mathbf{u})$. 
 
-In addition to the operating conditions $\mathbf{u}$, the numerical model is also dependent on some other input $\mathbf{k}\in\mathcal{K}$. This additional parametrization comes usually from the successive simplifications needed to implement a numerical model of the physical system observed, and from some unobserved physical parameters. These parameters need to be calibrated accordingly, so that the numerical model can be used to predict the behaviour of the physical system under different operating conditions.
+In addition to the operating conditions $\mathbf{u}$, the numerical model is also dependent on some other input $\mathbf{k}\in\Kspace$. This additional parametrization comes usually from the successive simplifications needed to implement a numerical model of the physical system observed, and from some unobserved physical parameters. These parameters need to be calibrated accordingly, so that the numerical model can be used to predict the behaviour of the physical system under different operating conditions.
 
-The true value taken by the physical system during this window is denoted by $\mathcal{M}^o(\mathbf{u}^{\mathrm{true}}) \in \mathcal{Y}$, where $\mathbf{u}^{\mathrm{true}} \in \mathcal{U}$ is unknown. The misfit $\mathcal{G}$ and the cost function $J$ defined Eq.\eqref{eq:def_cost_fun} can then be defined as
+The true value taken by the physical system during this window is denoted by $\mathcal{M}^o(\mathbf{u}^{\mathrm{true}}) \in \mathcal{Y}$, where $\mathbf{u}^{\mathrm{true}} \in \Uspace$ is unknown. The misfit $\mathcal{G}$ and the cost function $J$ defined Eq.\eqref{eq:def_cost_fun} can then be defined as
 \begin{equation}
 J(\mathbf{k},\mathbf{u}) = \frac12 \| \mathcal{G}(\mathbf{k},\mathbf{u}) \|^2 = \frac12 \|\mathcal{M}(\mathbf{k},\mathbf{u}) - \mathcal{M}^{o}(\mathbf{u}^{\mathrm{true}}) \|^2
 \end{equation}
 \subsection{The Shallow Water equations}
 
-The model we wish to calibrate is based on the Shallow Water equations, described Eq.~\eqref{eq:SWE_equations}. $h$ is the height of the water column, $q$ is the discharge, and $z$ is the bathymetry, while $g$ is the usual gravitation constant. The parameter to calibrate, $\mathbf{k}$, is the quadratic friction term, proportional to the square of the inverse of Manning-Strickler coefficient. The environmental parameter $\mathbf{u}$ is the amplitude of a sine wave of period $1/\omega_0$. The domain of those two parameters are $\mathcal{K} = [0.0, 1.3]$ and $\mathcal{U} = [0.5, 0.7]$.
+The model we wish to calibrate is based on the Shallow Water equations, described Eq.~\eqref{eq:SWE_equations}. $h$ is the height of the water column, $q$ is the discharge, and $z$ is the bathymetry, while $g$ is the usual gravitation constant. The parameter to calibrate, $\mathbf{k}$, is the quadratic friction term, proportional to the square of the inverse of Manning-Strickler coefficient. The environmental parameter $\mathbf{u}$ is the amplitude of a sine wave of period $1/\omega_0$. The domain of those two parameters are $\Kspace = [0.0, 1.3]$ and $\Uspace = [0.5, 0.7]$.
 
 
 \begin{align}
@@ -728,7 +730,7 @@ The model we wish to calibrate is based on the Shallow Water equations, describe
   \right.
 \end{align}
 These equations are integrated using a finite-volume scheme on a discretized domain $[0, L]$, up to a time $T$. The output of the computer code is the sea surface height $h$, on the center of all the volumes and at all the time-steps, that will be denoted $\mathcal{M}(\mathbf{k},\mathbf{u};\, \omega_0=1.0)$.
-In this setting, the variable input is uniformly distributed on $\mathcal{U}$.
+In this setting, the variable input is uniformly distributed on $\Uspace$.
 To generate the observations, we choose $\mathbf{u}^{\mathrm{true}}=2/3$, and define $\mathcal{M}^o$ based on the computer model $\mathcal{M}$, such that $\mathcal{M}^o(\mathbf{u}^{\mathrm{true}}) = \mathcal{M}(\mathbf{k}^{\mathrm{true}}, \mathbf{u}^{\mathrm{true}}; \, \omega_0 = 0.999)$. $\omega_0$  
 represents here the uncontrollable error between the observations and the numerical model and will now be omitted systematically in the notation. The true value of the bottom friction $\mathbf{k}^{\mathrm{true}} = (k_1^{\mathrm{true}}, k_2^{\mathrm{true}},\dots, k_{N_\mathrm{vol}}^{\mathrm{true}})$ is not constant over the whole domain, and is defined as
 \begin{equation*}
@@ -786,12 +788,12 @@ We will also feature the global minimiser $\kest_{\mathrm{global}}$, and the con
 The conditional minimiser $\kest^*(0.6)$ has been omitted as it results in a value very similar to the minimum of the expectation.
 
 \subsubsection{Squared forecast error}
-Given two environmental conditions $\mathbf{u}$, used to run the computer simulation and $\mathbf{u}'$, used to generate the observations, the squared forecast error for the parameter $\mathbf{k}$ is
+Given two environmental conditions $\mathbf{u}$ and $\mathbf{u}'\in \Uspace$, the former used to run the computer simulation and the latter to generate the observations, the squared forecast error for the parameter $\mathbf{k}$ is
 \begin{equation}
 \label{eq:squared_forecast_error}
 S_{\mathrm{pred}}(\mathbf{k},\mathbf{u},\mathbf{u}') = \left(\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{u}) - \mathcal{M}^{o}_{\mathrm{pred}}(\mathbf{u}')\right)^2
 \end{equation}
-Averaging over $\mathbf{u}$, $\mathbf{u}'$ defines the mean squared forecast error, defined on every point of the spatial domain, and at every time-steps. This can be done using a Monte-Carlo approximation: as $\mathbf{u}$ and $\mathbf{u}'$ are iid, let us assume that we have a set of samples $\{\mathbf{u}^i\}_{1\leq i \leq N_{\mathbf{u}}}$. The squared forecast error can then be approximated using this finite set of samples:
+Averaging over both $\mathbf{u}$ and $\mathbf{u}'$ defines the mean squared forecast error, defined on every point of the spatial domain, and at every time-steps. This can be done using a Monte-Carlo approximation. As $\mathbf{u}$ and $\mathbf{u}'$ are iid, assuming that we have a set of samples $\{\mathbf{u}^i\}_{1\leq i \leq N_{\mathbf{u}}}$, the squared forecast error can then be approximated using this finite set of samples:
 \begin{equation}
   \label{eq:squared_forecast_error_averaged}
   S(\mathbf{k}) = \frac{1}{N_{\mathbf{u}}^2 }\sum_{i=1}^{N_{\mathbf{u}}}\sum_{j=1}^{N_{\mathbf{u}}} S_{\mathrm{pred}}(\mathbf{k},\mathbf{u}^i,\mathbf{u}^j) = \frac{1}{N_{\mathbf{u}}^2 }\sum_{i=1}^{N_{\mathbf{u}}}\sum_{j=1}^{N_{\mathbf{u}}}  \left(\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{u}^i) - \mathcal{M}^{o}_{\mathrm{pred}}(\mathbf{u}^j)\right)^2

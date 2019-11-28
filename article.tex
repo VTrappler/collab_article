@@ -437,8 +437,8 @@ The bottom rows presents three approximations of the density of minimisers: the 
 \label{fig:contours}
 \end{figure*}
 
-For the $J_{\mathrm{BHswap}}$ function, we can observe that those three methods give coherent results, as $\hatkmpe {}_{,\mathrm{KDE}} =\hatkmpe {}_{,\mathrm{EM}}=\hatkmpe {}_{,\mathrm{histogram}}\approx 0.8$. This is not the case for the  $J_{\mathrm{BH}}$ function however. Using Kernel density estimation (Gaussian), the estimation of $\kmpe$ is $\hatkmpe {}_{,\mathrm{KDE}} \approx 1.5$, while using the histogram and Gaussian mixture, $\hatkmpe {}_{,\mathrm{histogram}}=\hatkmpe {}_{,\mathrm{EM}}=3.8$.
-This difference in the estimation of the mode is explained by the accumulation of minimisers at this point: this challenges the assumption that $\mathbf{K}^*$ is continuous. As the density estimation techniques traditionally assume this continuity, the EM algorithm fits this using a normal distribution with a very small variance, while the KDE considers a sum of Gaussian kernels of constant bandwidth, located at the same point. This particular problem highlights the issue with $\kmpe$, as its estimation is highly sensitive to the density approximation procedure.
+For the $J_{\mathrm{BHswap}}$ function, we can observe that those three methods give consistent results, as $\hatkmpe {}_{,\mathrm{KDE}} =\hatkmpe {}_{,\mathrm{EM}}=\hatkmpe {}_{,\mathrm{histogram}}\approx 0.8$. This is not the case for the  $J_{\mathrm{BH}}$ function however. Using Kernel density estimation (Gaussian), the estimation of $\kmpe$ is $\hatkmpe {}_{,\mathrm{KDE}} \approx 1.5$, while using the histogram and Gaussian mixture, $\hatkmpe {}_{,\mathrm{histogram}}=\hatkmpe {}_{,\mathrm{EM}}=3.8$.
+This difference is explained by the accumulation of minimisers at this point: this challenges the assumption that $\mathbf{K}^*$ is continuous. As the density estimation techniques traditionally assume this continuity, the EM algorithm fits this using a normal distribution with a very small variance, while the KDE considers a sum of Gaussian kernels of constant bandwidth, located at the same point. This particular problem highlights an issue with $\kmpe$, as its estimation is possibly sensitive to the density approximation procedure.
 % Alternatively, when considering the mixing coefficients of the EM estimation, the Gaussian centered at $1.5$ has the largest weight, of $0.608$. In other words, according to this estimated density, the optimal value $K^*$ has a probability of $0.608$ of being distributed normally around $1.5$.
 % Alternatively, we can consider the mixing coefficients of the EM
 % density estimation. The Gaussian centered at $1.5$ has been attributed
@@ -447,10 +447,11 @@ This difference in the estimation of the mode is explained by the accumulation o
 % close to $1.5$, but we do not have information on its performance in
 % this region around this value. \arthur{je ne comprends pas ce passage}
 
-% as we can argue that both values may be a sensible choice for the MPE. This comes from the fact that the hypothesis that $\mathbf{K}^*$ is a continuous r.v.\ is violated.
+% as we can argue that both values may be a sensible choice for the MPE. This comes from the fact that the hypothesis that $\mathbf{K}^*$ is a continuous r.v.\ is
 
 
-A way to avoid this issue is to introduce a bit of leeway for a value to be optimal, or at least ``acceptably not optimal''. This slackness takes the form of a relaxation coefficient, whose choice leads to a new family of robust estimators, along with a measure of their robustness via the coefficient.
+Instead of just considering the optimal minimisers, we introduce a bit of leeway, and look for ``acceptably not optimal'' parameters.
+ This slackness takes the form of a relaxation coefficient, whose choice leads to a new family of robust estimators, along with a measure of their robustness via the relaxation coefficient.
 %This leads us to the definition of a new family of estimators, for which one can attribute a {\it level of robustness} \elise{je me rend bien compte que cette phrase est un peu bizarre ...mais bon c'est l'idee}
 
 
@@ -462,41 +463,49 @@ A way to avoid this issue is to introduce a bit of leeway for a value to be opti
 \section{Relative regret-based family of estimators}%A new family of robust estimators \elise{titre a revoir}}
 \label{sec:relax_constraint}
 \subsection{Relaxing the optimality constraint}
-The density of minimisers has been estimated by optimising $\mathbf{k}\mapsto J(\mathbf{k},\mathbf{u})$ over $\Kspace$ for different realisations of $\mathbf{u}$. Instead of only considering  optimal values, we propose to consider their {\it acceptable} neighbourhood in terms of performance of the cost function as well, as illustrated in Figure~\ref{fig:relax_tuto}. 
-To do so, for each $\mathbf{u}$, we define as acceptable values of the cost function, the values that are below $\alpha J^*(\mathbf{u})$, with $\alpha > 1$. 
+The density of minimisers has been estimated by optimising $\mathbf{k}\mapsto J(\mathbf{k},\mathbf{u})$ over $\Kspace$ for different realisations of $\mathbf{u}$. Instead of focusing on optimal values, we propose to consider their {\it acceptable} neighbourhood in terms of performance of the cost function as well.
+To do so, for each $\mathbf{u}$, $\mathbf{k}$ is deemed acceptable when  $J(\mathbf{k},\mathbf{u}) \leq \alpha J^*(\mathbf{u})$, with $\alpha > 1$. 
 
-For each $\mathbf{u}$, we construct a region around the optimiser that produces acceptable values of the cost function, as seen on the bottom left plot. Looking at it the other way around, for a given $\mathbf{k}$, the set $R_{\alpha}(\mathbf{k}) \subset \Uspace$ is defined as the set of $\mathbf{u}$ verifying the condition of acceptability:
+
+In this context, for a given $\mathbf{k}$, the set $R_{\alpha}(\mathbf{k}) \subset \Uspace$ is defined as the set of $\mathbf{u}$, for which $\mathbf{k}$ is acceptable:
 \begin{equation}
 \label{eq:def_Ralpha}
 R_{\alpha}(\mathbf{k}) = \left\{ \mathbf{u} \in \Uspace \mid J(\mathbf{k},\mathbf{u}) \leq \alpha J^*(\mathbf{u}) \right\}
 \end{equation}
+In Figure~\ref{fig:relax_tuto} \victor{Mettre description}. 
 % This notion of acceptability will be introduced later.
-Finally, for each $\mathbf{k}$, we will measure (with respect to $\Prob_{\mathbf{U}}$) the set of $\mathbf{u}$ within this acceptable neighbourhood, as illustrated in the bottom right plot. 
+% Finally, for each $\mathbf{k}$, we will measure (with respect to $\Prob_{\mathbf{U}}$) the set of $\mathbf{u}$ within this acceptable neighbourhood. 
+
 
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=12cm]{Figures/relaxation_tuto.pdf}
-\caption{Principle of the relaxation of the constraint on $J_{\mathrm{BHswap}}$, and illustration of $R_\alpha(\mathbf{k})$}
+\caption{Principle of the relaxation of the constraint on $J_{\mathrm{BHswap}}$, and illustration of $R_\alpha(\mathbf{k})$. Top plots: mieux décrire}
 \label{fig:relax_tuto}
 \end{figure*}
 
 %In order to construct this region, we introduce a factor $\alpha \geq 1$, that will be multiplied to $J^*$:
 %for a given $\mathbf{u}$, $\mathbf{k}$ is deemed acceptable if $J(\mathbf{k},\mathbf{u}) \leq \alpha J^*( \mathbf{u})$.
-Introducing the random nature of $\mathbf{U}$, $\Gamma_\alpha(\mathbf{k})$ is defined as the probability that $\mathbf{k}$ is acceptable given $\alpha$:
+Introducing the random nature of $\mathbf{U}$, one can define $\Gamma_\alpha(\mathbf{k})$ as the probability that $\mathbf{k}$ is acceptable given $\alpha$:
 \begin{equation}
   \label{eq:def_Gamma}
   \Gamma_\alpha(\mathbf{k}) = \Prob_{\mathbf{U}}\left[\mathbf{U} \in R_\alpha(\mathbf{k})\right] = \Prob_{\mathbf{U}}\left[J(\mathbf{k},\mathbf{U}) \leq 
     \alpha J^*(\mathbf{U}) \right]
 \end{equation}
-In other words, $\Gamma_{\alpha}(\mathbf{k})$ is then the probability that $J(\mathbf{k},\mathbf{U})$ is between 
+In other words, $\Gamma_{\alpha}(\mathbf{k})$ is the probability that $J(\mathbf{k},\mathbf{U})$ is between 
 $J^*(\mathbf{U})$ and 
-$\alpha J^*(\mathbf{U})$. Without relaxation, i.e.\ when $\alpha$ is set to $1$, $\Gamma_1$ is non-zero if the set $\{\mathbf{u}\in\Uspace \mid J(\mathbf{k},\mathbf{u}) = J^*(\mathbf{u})\}$ has non-zero measure with respect to $\Prob_{\mathbf{U}}$, that is when the distribution of $\mathbf{K}^*$ presents atoms. This can be linked to the definition of the MPE from Eq.~\eqref{eq:MPE}. In the more general case, the MPE can be seen as the limiting case when $\alpha$ tends to $1$.
+$\alpha J^*(\mathbf{U})$.
+
+
+Noting that without relaxation, \textit{i.e.} when $\alpha$ is set to $1$, $\Gamma_1$ is non-zero if the set $\{\mathbf{u}\in\Uspace \mid J(\mathbf{k},\mathbf{u}) = J^*(\mathbf{u})\}$ has non-zero measure with respect to $\Prob_{\mathbf{U}}$. It happens when the distribution of $\mathbf{K}^*$ presents atoms \victor{?}. This can be linked to the definition of the MPE from Eq.~\eqref{eq:MPE}. In the more general case, the MPE can be seen as the limiting case when $\alpha$ tends to $1$.
 
 The motivation behind this relaxation is to take into account the local behaviour of the function around the conditional minimisers.
 For a given set of environmental conditions $\mathbf{u}$, if the function $\mathbf{k} \mapsto J(\mathbf{k},\mathbf{u})$ is flat around its minimum $\mathbf{k}^*(\mathbf{u})$, then choosing  $\mathbf{k}^*(\mathbf{u}) + \epsilon$ (for a small $\epsilon$) will produce a value closer to the minimum than when the function has a high curvature.
-In addition to that, relaxing the constraint using a multiplicative constant puts more weight (i.e.\ a slower increase of the acceptable region) on the values of $\mathbf{k}^*(\mathbf{u})$ when $J^*(\mathbf{u})$ is close to zero.
+In addition to that, relaxing the constraint using a multiplicative constant puts more weight on the values of $\mathbf{k}^*(\mathbf{u})$ when $J^*(\mathbf{u})$ is small.
 
-Given that $J>0$, $\Gamma_{\alpha}(\mathbf{k})$ is increasing with respect to $\alpha$ for any $\mathbf{k}\in\Kspace$. We can then focus on the smallest value of $\alpha$ such that $\Gamma_\alpha$ reaches a certain level of confidence $p\in[0,1]$. This leads to the definition of $\checkap$
+
+The choice of the relaxation constant $\alpha$ can be made to enforce some probability on the acceptability of the 
+For instance, given that $J>0$, $\Gamma_{\alpha}(\mathbf{k})$ is increasing with respect to $\alpha$ for any $\mathbf{k}\in\Kspace$. We can then focus on the smallest value of $\alpha$ such that $\Gamma_\alpha$ reaches a certain level of confidence $p\in[0,1]$. This leads to the definition of $\checkap$
 \begin{align}
   \checkap &= \inf\left\{ \alpha\geq 1 \mid \exists \checkkp \in \Kspace,\, \Gamma_{\alpha}(\checkkp) \geq p \right\} \nonumber \\
    &= \inf \left\{ \alpha \geq 1 \mid \max_{\mathbf{k}\in\Kspace} \Gamma_{\alpha}(\mathbf{k}) \geq p \right\}   \label{eq:def_alpha_check}
@@ -535,11 +544,13 @@ it follows then that
   \checka_1 = \sup_{\mathbf{u}\in\Uspace} \frac{J(\mathbf{k}_1,\mathbf{u})}{J^*(\mathbf{u})} =  \inf_{\mathbf{k}\in\Kspace} \left\{ \sup_{\mathbf{u}\in\Uspace} \frac{J(\mathbf{k},\mathbf{u})}{J^*(\mathbf{u})} \right\} 
 \end{equation}
 
-This alternative definition of $\checka_1$ is useful to estimate quickly $\hat{\checka}_1$ whenever a grid over $\mathbb{K}\times\mathbb{U}$ has already been evaluated, thus avoiding multiple computations of $\Gamma_{\alpha}(\mathbf{k})$ until its maximum reaches $1$. By Eq.\eqref{eq:upper_bound_alpha_check}, choosing a level of confidence equal to $1$ is then equivalent to looking for the worst-case scenario of the ratio $\frac{J(\mathbf{k},\mathbf{u})}{J^*(\mathbf{u})}$, and therefore suffers from the same pitfall of the worst-case approach. As mentioned in the introduction, this returns over-conservative solution, and is not suited for random variable with unbounded support.
+This alternative definition of $\checka_1$ is useful to estimate it quickly whenever a grid over $\mathbb{K}\times\mathbb{U}$ has already been evaluated, thus avoiding multiple computations of $\Gamma_{\alpha}(\mathbf{k})$ until its maximum reaches $1$. From Eq.\eqref{eq:upper_bound_alpha_check}, choosing a level of confidence equal to $1$ is then equivalent to looking for the worst-case scenario of the ratio $\frac{J(\mathbf{k},\mathbf{u})}{J^*(\mathbf{u})}$. Therefore it may suffer from the same pitfall as the worst-case approach. As mentioned in the introduction, this is not suited for random variable with unbounded support as it may return over-conservative solution, 
 
 
+$\checkap$ can be an indicator of the robustness of $\ckeckkp$.  
 A high value of $\checka_1$ corresponds to a high ratio $\frac{J(\mathbf{k},\mathbf{u})}{J^*(\mathbf{u})}$ for at least one particular $\mathbf{u}$. In that sense, $J(\checkk_1,\mathbf{u})$ may be possibly very high.
-More generally, for a level of confidence $p$ fixed, $\checkap$ is the slackness needed to be able to reach the probability $p$. So, in addition to the value of the estimate $\checkkp$, we have an indicator of the robustness associated. We can then see that it is sensible to study jointly $p$, $\checkap$ and $\checkkp$ in order to make a final decision.
+More generally, for a fixed level of confidence $p$, $\checkap$ is the slackness needed to be able to reach the probability $p$. % So, in addition to the value of the estimate $\checkkp$, we have an indicator of the robustness associated.
+We can then see that it is sensible to study jointly $p$, $\checkap$ and $\checkkp$.
 
 
 \subsection{Concurrence between $p$ and $\alpha$}%Finding a balance between $p$ and $\checkap$}%Selection of a level of confidence}

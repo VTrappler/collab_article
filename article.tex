@@ -779,7 +779,11 @@ The calibration of this numerical model is done in order to get a calibrated val
 The calibration of the model has been performed using by integrating the model on a time-period $[0, T]$, called assimilation window. 
 We now want to compare the quality of the different forecasts, from different calibrated bottom friction.
 Those forecasts result from the integration of the numerical model between the time $T$ and a time $T_{\mathrm{pred}}$.
-Given the probabilistic nature of the environmental conditions $\mathbf{U}$, the forecasts will also be probabilistic. We will then compare $\mathcal{M}_{\mathrm{pred}}^o(\mathbf{U})$ and $\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{U})$, for a calibrated $\mathbf{k}$. The metric of comparison will be the squared forecast error, and the Continuous Ranked Probability Score (CRPS). The calibrated values that are compared are the minimiser of the expectation $\hatkmean$, the minimiser of the variance $\hatkvar$, the relative regret of level $p=1$: $\kest_1$ as described in the previous section, but also the global minimiser $\kest_{\mathrm{global}}$, and some conditional minimisers $\kest^*(\mathbf{u}^i)$ where the chosen environmental variables are $\{\mathbf{u}^i\}_{1\leq i \leq 4} = \{0.5, 0.55, 0.65, 0.7\}$. $\kest^*(0.6)$ has been omitted due to the fact that it result in a value very similar to the minimum of the expectation. These have been included in order to compare the different metrics obtained without using a robust approach. \todo{à revoir}
+
+Given the probabilistic nature of the environmental conditions $\mathbf{U}$, the forecasts will also be probabilistic. We will then compare $\mathcal{M}_{\mathrm{pred}}^o(\mathbf{U})$ and $\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{U})$, for a calibrated $\mathbf{k}$. Two metrics of comparison will be computed: the squared forecast error, and the Continuous Ranked Probability Score (CRPS). The ``robust'' parameters that are compared are the minimiser of the expectation $\hatkmean$, the minimiser of the variance $\hatkvar$ and the relative regret of level $p=1$, $\kest_1$ as described in the previous section.
+
+We will also feature the global minimiser $\kest_{\mathrm{global}}$, and the conditional minimisers $\kest^*(\mathbf{u}^i)$ where the chosen environmental variables are $\{\mathbf{u}^i\}_{1\leq i \leq 4} = \{0.5, 0.55, 0.65, 0.7\}$. Those values are introduced in order to have a more precise idea on the possible performances of a deterministic version of the calibration problem.
+The conditional minimiser $\kest^*(0.6)$ has been omitted as it results in a value very similar to the minimum of the expectation.
 
 \subsubsection{Squared forecast error}
 Given two environmental conditions $\mathbf{u}$, used to run the computer simulation and $\mathbf{u}'$, used to generate the observations, the squared forecast error for the parameter $\mathbf{k}$ is
@@ -800,9 +804,12 @@ Averaging $S(\mathbf{\kest})$ over the time steps between $T$ and $T_{\mathrm{pr
 \caption{Squared forecast error, depending on the calibrated parameter. The left figures show the metric averaged over time, while the right figure show the mean forecast error, averaged over time and space}
 \label{fig:forecast_squared_error}
 \end{figure*}
-We can see that the mean forecast error squared, on the right side, averaged over time and space is the smallest for $\kest_{\mathrm{global}}$, while $\kest_{1.0}$ performs slightly better $\hatkmean$.
+We can see that the mean forecast error squared, on the right side, averaged over time and space is the smallest for the conditional minimisers $\kest^*(0.7)$ and $\kest^*(0.65)$, then $\kest_{\mathrm{global}}$, while $\kest_{1.0}$ performs slightly better $\hatkmean$. The range of those performance metrics carry also information on the limited impact of the choice of $\mathbf{k}$ in the calibration.
 
-One issue with the squared forecast error is that it will penalize strongly a high sensitivity to the environmental conditions \todo{à conserver/changer ?}. A way to deal with this is to use another metric, that takes the probabilistic nature of the forecasts into account.
+One issue with the squared forecast error is that it will penalize strongly the forecasts that present high variability with respect to the environmental conditions.
+
+A way to deal with this is to use another metric, that takes the probabilistic nature of the forecasts into account.
+
 \subsubsection{Continuous Ranked Probability Score}
 Given the random variables $\mathcal{M}_{\mathrm{pred}}(\kest, \mathbf{U})$ and $\mathcal{M}_{\mathrm{pred}}^o(\mathbf{U})$, representing the probabilistic forecast and the probabilistic observations, we can define the cumulative distribution functions (CDF) $F_{\mathrm{pred}}(\cdot, \kest)$ and $F^o_{\mathrm{pred}}(\cdot)$
 The Continuous ranked probability score (CRPS) measures the squared difference between the predicted CDF $F_{\mathrm{pred}}$ using a calibrated value, and the CDF of the observations $F_{\mathrm{pred}}^o$. 
@@ -810,6 +817,7 @@ The Continuous ranked probability score (CRPS) measures the squared difference b
 \label{eq:def_crps}
 \mathrm{CRPS}(\mathbf{k}) = \int_{\mathbb{R}} (F_{\mathrm{pred}}(x,\mathbf{k}) - F^o_{\mathrm{pred}}(x))^2 \,\mathrm{d}x
 \end{equation}
+
 The left plot of Figure~\ref{fig:forecast_crps} shows the CRPS averaged over time, and the right plot shows the value of the CRPS averaged over time and space. The difference between the squared forecast error and the CRPS is apparent when comparing the general trends shared by the different calibrated parameters. According to the squared error, the region around $x=4$ is not well predicted, while around $x=8$, the prediction are better. On the other hand, according to the CRPS, the region around $x=8$ provide worse forecasts than the one at $x=4$ and $x=7$. 
 
 \begin{figure}[!h]
@@ -819,7 +827,9 @@ The left plot of Figure~\ref{fig:forecast_crps} shows the CRPS averaged over tim
 \label{fig:forecast_crps}
 \end{figure}
 The numerical evaluations of the CRPS for different parameters show the same order of performances observed for the squared error.
-The calibrated parameters that present the best performances for forecasts according to those two metrics are $\kest^*(0.7)$, $\kest^*(0.65)$ which is very similar to $\kest_{\mathrm{global}}$.
+The calibrated parameters that present the best performances for forecasts according to those two metrics are $\kest^*(0.7)$, $\kest^*(0.65)$ which is very similar to $\kest_{\mathrm{global}}$, and then $\kest_1$.
+
+It may seem surprising that the calibrated values chosen according to a robust objective perform worse than the ``deterministic'' objectives $\kest^*(0.7)$, $\kest^*(0.65)$ and $\kest_{\mathrm{global}}$. 
 
 
 \clearpage

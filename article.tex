@@ -66,7 +66,7 @@
 \newcommand{\kmpe}{{\mathbf{k}}_{\mathrm{MPE}}}
 \newcommand{\hatkmpe}{\hat{\mathbf{k}}_{\mathrm{MPE}}}
 \newcommand{\kest}{\hat{\mathbf{k}}}
-
+\newcommand{\RRE}{RRE}
 \newcommand{\checkap}{{\alpha}_p}
 \newcommand{\checka}{{\alpha}}
 \newcommand{\checkk}{\mathbf{k}}
@@ -472,7 +472,8 @@ In this context, for a given $\mathbf{k}$, the set $R_{\alpha}(\mathbf{k}) \subs
 \label{eq:def_Ralpha}
 R_{\alpha}(\mathbf{k}) = \left\{ \mathbf{u} \in \Uspace \mid J(\mathbf{k},\mathbf{u}) \leq \alpha J^*(\mathbf{u}) \right\}
 \end{equation}
-In Figure~\ref{fig:relax_tuto} \victor{Mettre description}. 
+Figure~\ref{fig:relax_tuto} details the successive steps for the construction of the set $R_{\alpha}$. First, the conditional minimisers are computed, as shown on the top plots. Afterwards, for a level $\alpha=1.5$ and for all $\mathbf{u} \in \Uspace$, the acceptable $\mathbf{k}$ are identified, as shown on the bottom left plot. Finally, the region $R_{\alpha}(\mathbf{k})$ is the set of $\mathbf{u}$ for which $\mathbf{k}$ is acceptable, as represented with a vertical slice on the bottom right plot.
+
 % This notion of acceptability will be introduced later.
 % Finally, for each $\mathbf{k}$, we will measure (with respect to $\Prob_{\mathbf{U}}$) the set of $\mathbf{u}$ within this acceptable neighbourhood. 
 
@@ -480,7 +481,7 @@ In Figure~\ref{fig:relax_tuto} \victor{Mettre description}.
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=12cm]{Figures/relaxation_tuto.pdf}
-\caption{Principle of the relaxation of the constraint on $J_{\mathrm{BHswap}}$, and illustration of $R_\alpha(\mathbf{k})$. Top plots: mieux décrire}
+\caption{Principle of the relaxation of the constraint on $J_{\mathrm{BHswap}}$, and illustration of $R_\alpha(\mathbf{k})$. Top plots: Computation of the conditional minimisers $\mathbf{k}^*(\mathbf{u})$. Top right plot: the set $(\mathbf{k}^*(\mathbf{u}),\mathbf{u})$ of conditional minimisers is represented in red. On the bottom left plot, for a relaxation $\alpha=1.5$, and $\mathbf{u}=3$, the acceptable $\mathbf{k}$ are in cyan, while the non-acceptable ones are in orange, while the frontier $\{(\mathbf{k}^*(\mathbf{u}),\mathbf{u}) \mid J^*(\mathbf{u}) = J(\mathbf{k},\mathbf{u})\}$ is in yellow. On the bottom right plot, the set $R_{\alpha}(\mathbf{k})$ for $\alpha=1.5$ and $\mathbf{k}=1.5$ is in green.}
 \label{fig:relax_tuto}
 \end{figure*}
 
@@ -497,7 +498,9 @@ $J^*(\mathbf{U})$ and
 $\alpha J^*(\mathbf{U})$.
 
 
-Noting that without relaxation, \textit{i.e.} when $\alpha$ is set to $1$, $\Gamma_1$ is non-zero if the set $\{\mathbf{u}\in\Uspace \mid J(\mathbf{k},\mathbf{u}) = J^*(\mathbf{u})\}$ has non-zero measure with respect to $\Prob_{\mathbf{U}}$. It happens when the distribution of $\mathbf{K}^*$ presents atoms \victor{?}. This can be linked to the definition of the MPE from Eq.~\eqref{eq:MPE}. In the more general case, the MPE can be seen as the limiting case when $\alpha$ tends to $1$.
+Noting that without relaxation, \textit{i.e.} when $\alpha$ is set to $1$, $\Gamma_1$ is non-zero if the set $\{\mathbf{u}\in\Uspace \mid J(\mathbf{k},\mathbf{u}) = J^*(\mathbf{u})\}$ has non-zero measure with respect to $\Prob_{\mathbf{U}}$. It happens when the distribution of $\mathbf{K}^*$ presents atoms.
+
+This can be linked to the definition of the distribution of the minimisers $\mathbf{K}^*$. For instance, if $\Kspace$ has a discrete support, we can rewrite $\Gamma_1$ as $\Gamma_1(\mathbf{k})=\Prob_{\mathbf{U}}\left[J(\mathbf{k},\mathbf{u}) = J^*(\mathbf{U})\right] = \Prob_{\mathbf{U}}\left[\mathbf{k} = \mathbf{k}^*(\mathbf{U})\right]$ which is the probability mass function of $\mathbf{K}^*$.
 
 The motivation behind this relaxation is to take into account the local behaviour of the function around the conditional minimisers.
 For a given set of environmental conditions $\mathbf{u}$, if the function $\mathbf{k} \mapsto J(\mathbf{k},\mathbf{u})$ is flat around its minimum $\mathbf{k}^*(\mathbf{u})$, then choosing  $\mathbf{k}^*(\mathbf{u}) + \epsilon$ (for a small $\epsilon$) will produce a value closer to the minimum than when the function has a high curvature.
@@ -510,12 +513,14 @@ For instance, given that $J>0$, $\Gamma_{\alpha}(\mathbf{k})$ is increasing with
   \checkap &= \inf\left\{ \alpha\geq 1 \mid \exists \checkkp \in \Kspace,\, \Gamma_{\alpha}(\checkkp) \geq p \right\} \nonumber \\
    &= \inf \left\{ \alpha \geq 1 \mid \max_{\mathbf{k}\in\Kspace} \Gamma_{\alpha}(\mathbf{k}) \geq p \right\}   \label{eq:def_alpha_check}
 \end{align}
-that is the smallest $\alpha$, such that there exists a particular $\checkkp \in \Kspace$ for which $J(\checkkp,\mathbf{U}) \leq \checkap J^*(\mathbf{U})$ with probability $p$. This formulation can be linked to the quantiles and Value-at-Risk of the random variable $\max_{\mathbf{k}} \{ \frac{J(\mathbf{k},\mathbf{U})}{J^*(\mathbf{U})}\}$, that is a measure of risk usually applied in the financial sector (see~\cite{rockafellar_deviation_2002}). For different levels $p$, and thus different $\alpha_p$, Figure~\ref{fig:illu_alpha_p} shows examples of $\Gamma_{\alpha_p}$. By definition, the associated $\mathbf{k}_p$ is then the first value for which $\Gamma_{\alpha_p}$ reaches $p$. We can see that changing the level $p$ shifts the maximiser of $\Gamma_{\alpha_p}$, and that for small $\alpha$, $\Gamma_{\alpha}(\mathbf{k}_1)$ is also very small. This indicates that $\mathbf{k}_1$ is located quite far from the conditional minimisers, and arise as a compromise when the relaxation is large enough.
+that is the smallest $\alpha$, such that there exists a particular $\checkkp \in \Kspace$ for which $J(\checkkp,\mathbf{U}) \leq \checkap J^*(\mathbf{U})$ with probability $p$.
+$\{\mathbf{k}_p \text{ for } p \in [0;1] \}$ defines the relative-regret family of robust estimators (\RRE).
+This formulation can be linked to the quantiles and Value-at-Risk of the random variable $\max_{\mathbf{k}} \{ \frac{J(\mathbf{k},\mathbf{U})}{J^*(\mathbf{U})}\}$, that is a measure of risk usually applied in the financial sector (see~\cite{rockafellar_deviation_2002}). For different levels $p$, and thus different $\alpha_p$, Figure~\ref{fig:illu_alpha_p} shows examples of $\Gamma_{\alpha_p}$. By definition, the associated $\mathbf{k}_p$ is then the first value for which $\Gamma_{\alpha_p}$ reaches $p$. We can see that changing the level $p$ shifts the maximiser of $\Gamma_{\alpha_p}$, and that for small $\alpha$, $\Gamma_{\alpha}(\mathbf{k}_1)$ is also very small. This indicates that $\mathbf{k}_1$ is located quite far from the conditional minimisers, and arise as a compromise when the relaxation is large enough.
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width = 8.3cm]{Figures/illu_alpha_p.pdf}
-\caption{Illustration of the influence of different levels $p$ on $\Gamma_{\alpha_p}$ and on $\mathbf{k}_p$ \victor{Pertinence ?}}
+\caption{Illustration of the influence of different levels $p$ on $\Gamma_{\alpha_p}$ and on $\mathbf{k}_p$}
 \label{fig:illu_alpha_p}
 \end{figure}
 
@@ -544,37 +549,47 @@ it follows then that
   \checka_1 = \sup_{\mathbf{u}\in\Uspace} \frac{J(\mathbf{k}_1,\mathbf{u})}{J^*(\mathbf{u})} =  \inf_{\mathbf{k}\in\Kspace} \left\{ \sup_{\mathbf{u}\in\Uspace} \frac{J(\mathbf{k},\mathbf{u})}{J^*(\mathbf{u})} \right\} 
 \end{equation}
 
-This alternative definition of $\checka_1$ is useful to estimate it quickly whenever a grid over $\mathbb{K}\times\mathbb{U}$ has already been evaluated, thus avoiding multiple computations of $\Gamma_{\alpha}(\mathbf{k})$ until its maximum reaches $1$. From Eq.\eqref{eq:upper_bound_alpha_check}, choosing a level of confidence equal to $1$ is then equivalent to looking for the worst-case scenario of the ratio $\frac{J(\mathbf{k},\mathbf{u})}{J^*(\mathbf{u})}$. Therefore it may suffer from the same pitfall as the worst-case approach. As mentioned in the introduction, this is not suited for random variable with unbounded support as it may return over-conservative solution, 
+This alternative definition of $\checka_1$ is useful to estimate it quickly whenever a grid over $\mathbb{K}\times\mathbb{U}$ has already been evaluated, thus avoiding multiple computations of $\Gamma_{\alpha}(\mathbf{k})$ until its maximum reaches $1$. From Eq.~\eqref{eq:upper_bound_alpha_check}, choosing a level of confidence equal to $1$ is then equivalent to looking for the worst-case scenario of the ratio $\frac{J(\mathbf{k},\mathbf{u})}{J^*(\mathbf{u})}$. Therefore it may suffer from the same pitfall as the worst-case approach. As mentioned in the introduction, this is not suited for random variable with unbounded support as it may return over-conservative solution, 
 
 
-$\checkap$ can be an indicator of the robustness of $\ckeckkp$.  
+$\checkap$ can be an indicator of the robustness of $\checkkp$.  
 A high value of $\checka_1$ corresponds to a high ratio $\frac{J(\mathbf{k},\mathbf{u})}{J^*(\mathbf{u})}$ for at least one particular $\mathbf{u}$. In that sense, $J(\checkk_1,\mathbf{u})$ may be possibly very high.
 More generally, for a fixed level of confidence $p$, $\checkap$ is the slackness needed to be able to reach the probability $p$. % So, in addition to the value of the estimate $\checkkp$, we have an indicator of the robustness associated.
 We can then see that it is sensible to study jointly $p$, $\checkap$ and $\checkkp$.
 
 
-\subsection{Concurrence between $p$ and $\alpha$}%Finding a balance between $p$ and $\checkap$}%Selection of a level of confidence}
+\subsection{Choosing the relaxation coefficient}%Finding a balance between $p$ and $\checkap$}%Selection of a level of confidence}
 \label{ssec:balance}
-For a practical purpose, we suppose that we have sampled $N$ values of $\mathbf{U}$, namely $\{\mathbf{u}^i\}_{1\leq i \leq N}$.
-In order to estimate the quantities introduced above, there are two starting points: either fixing $p$ or fixing the maximal threshold $\alpha$. 
-The most trivial way is to set $\alpha$, to find the couples of points $(\mathbf{k},\mathbf{u})$ verifying $J(\mathbf{k},\mathbf{u}) \leq \alpha J^*(\mathbf{u})$, and then to estimate the probability $\Gamma_{\alpha}(\mathbf{k})$ defined in Eq.~\eqref{eq:def_Ralpha} as 
+
+In order to choose the quantities introduced above, there are three choices: either fixing $p$, either fixing the maximal threshold $\alpha$, or looking for a compromise between $p$ and $\alpha$.
+The most trivial way is to set $\alpha$, to find the couples of points $(\mathbf{k},\mathbf{u})$ verifying $J(\mathbf{k},\mathbf{u}) \leq \alpha J^*(\mathbf{u})$, and then to estimate the probability $\Gamma_{\alpha}(\mathbf{k})$ defined in Eq.~\eqref{eq:def_Ralpha}.
+For instance, when $N$ sampled values of $\mathbf{U}$: $\{\mathbf{u}^i\}_{1\leq i \leq N}$ are available, a possible estimator of $\Gamma_{\alpha}$ is
 \begin{equation}
 \hat{\Gamma}_{\alpha}(\mathbf{k}) = \frac{\# \left\{\mathbf{u}^i \mid J(\mathbf{k},\mathbf{u}^i) \leq \alpha J^*(\mathbf{u}^i)\right\}}{N}
 \end{equation}
-If $\alpha$ is chosen too small, the resulting $\hat{p}=\max_{\mathbf{k}} \hat{\Gamma}_{\alpha}(\mathbf{k})$ will be also too small, meaning that the cost function will overshoot the value $\alpha J^*(\mathbf{U})$ with high probability.
+However, this may be a risky approach. Indeed if $\alpha$ is chosen too small, the resulting $\hat{p}=\max_{\mathbf{k}} \hat{\Gamma}_{\alpha}(\mathbf{k})$ will be also small, meaning that the cost function will overshoot the value $\alpha J^*(\mathbf{U})$ with high probability.
 
-Similarly, if $p$ is fixed, the corresponding $\hat{\checka}_p$ is computed by searching for the smallest $\alpha$ such that $\max_{\mathbf{k}} \hat{\Gamma}_{\alpha}(\mathbf{k})$ is equal to the level $p$ fixed beforehand. In the end, if the value $\hat{\checka}_p$ is too large, the relaxation needed to get acceptable values with probability $p$ is very high, so the resulting estimation $\hat{\checkk}_p$ may not be relevant for the future application.
+Similarly, if $p$ is fixed, the corresponding $\hat{\checka}_p$ is computed by searching for the smallest $\alpha$ satisfying $\max_{\mathbf{k}} \hat{\Gamma}_{\alpha}(\mathbf{k})=p$. Once again, if the value $\hat{\checka}_p$ is too large, the relaxation needed to get acceptable values with probability $p$ is very high, so the resulting estimation $\hat{\checkk}_p$ may not be relevant for the future application.
 % \victor{chapeau car ici je parle de l'estimation en pratique}
 
 
-Without posing any constraints on $p$ nor on $\alpha$, a compromise between $p$ and $\alpha$ would be preferable, and a rough idea of this balance can be obtained by studying $p \mapsto \checkap$, and particularly its slope.
+Looking for a compromise between $p$ and $\alpha$ would be preferable. This could be achieved by studying $p \mapsto \checkap$, and particularly its slope.
 If this curve presents a steep increase, the multiplicative constant $\checkap$ must be increased by a large amount in order to increase the probability $p$ by a small amount. Interesting couples $(p,\checkap)$ would then be the ones located before an abrupt increase of the slope of $p \mapsto \checkap$.
 
-Another possibility is to combine directly $p$ and $\checkap$ in order to find a compromise. We opted to model this compromise by the ratio $(p/\checkap)$, as it increases with respect to $p$ and decreases with respect to $\checka_p$. The level of confidence $p_{\mathrm{ratio}}$ is then defined as the maximiser of $p\mapsto p / \checka_p$.
+Another possibility is to to model this compromise by the ratio $(p/\checkap)$, as it increases with respect to $p$ and decreases with respect to $\checka_p$. The level of confidence $p_{\mathrm{ratio}}$ is then defined as the maximiser of $p\mapsto p / \checka_p$.
 
 
 
-The different estimators introduced in this paper are summarised in Table~\ref{tab:RO_recap}.
+
+% We are now going to compute and compare those estimators on the $J_{\mathrm{BH}}$and $J_{\mathrm{BHswap}}$ function.
+
+
+
+% ----------------------------------------------------------------------------
+\subsection{Numerical Illustration}
+% Numerical application}
+\victor{Paragraphe introductif pour comparer, et renvoyer à Table1}
+In this Section, we will compare the different estimators introduced in this paper as summarised Table~\ref{tab:RO_recap}.
 
 \begin{table}[t]
   \centering
@@ -592,17 +607,11 @@ The different estimators introduced in this paper are summarised in Table~\ref{t
 \label{tab:RO_recap}
 \end{table}
 
-% We are now going to compute and compare those estimators on the $J_{\mathrm{BH}}$and $J_{\mathrm{BHswap}}$ function.
 
-
-
-% ----------------------------------------------------------------------------
-\subsection{Estimation of $\checkkp$ and $\checkap$ for the $J_{\mathrm{BH}}$ and $J_{\mathrm{BHswap}}$ functions}
-%Numerical application}
-As stated before, we chose to model the uncertainties as a random variable uniformly distributed on $\Uspace$. The bounded nature of $\Uspace$ allow us to consider the estimate introduced before up to a level of confidence $p=1$.
+As stated before, we chose to model the uncertainties as a random variable uniformly distributed on $\Uspace$. The bounded nature of $\Uspace$ allows us to consider the estimators introduced before up to a level of confidence $p=1$.
 From now on, $\hatkmpe$ is estimated using KDE with Gaussian kernels.
-The smallest relaxation $\hat{\checka}_1$ and the corresponding $\hat{\checkk}_1$ has been computed for the $J_{\mathrm{BH}}$ and $J_{\mathrm{BHswap}}$ functions, using a regular grid of $1000 \times 1000$ points on $\Kspace\times\Uspace$. The contour plots of those functions can be seen in the top plots of Figure~\ref{fig:contour_alpha}. The frontier corresponding to the couples of points $(\mathbf{k},\mathbf{u})$ verifying $\{J(\mathbf{k},\mathbf{u}) = \alpha J^*(\mathbf{u})\}$ has been drawn on top of these contour plots, for $\alpha=\hat{\checka}_1$ and an arbitrary $\alpha=1.5<\hat{\checka}_1$, to illustrate the effect of the acceptable region when the relaxation $\alpha$ increases. 
-On the bottom plots, the curves $\mathbf{k}\mapsto \hat{\Gamma}_{\alpha}(\mathbf{k})$ for $\alpha=\hat{\checka}_1$ and $\alpha=1.5$ along with the histogram of the minimisers are represented.
+The smallest relaxation $\hat{\checka}_1$ and the corresponding $\hat{\checkk}_1$ has been computed for the $J_{\mathrm{BH}}$ and $J_{\mathrm{BHswap}}$ functions, using a regular grid of $1000 \times 1000$ points on $\Kspace\times\Uspace$. The contour plots of those functions can be seen in the top plots of Figure~\ref{fig:contour_alpha}. The frontier corresponding to the couples of points $(\mathbf{k},\mathbf{u})$ verifying $\{J(\mathbf{k},\mathbf{u}) = \alpha J^*(\mathbf{u})\}$ has been drawn on top of these contour plots, for $\alpha=\hat{\checka}_1$ and an arbitrary $\alpha=1.5<\hat{\checka}_1$, to illustrate the effect of the acceptable region when the relaxation $\alpha$ changes. 
+On the bottom plots, the curves $\mathbf{k}\mapsto \hat{\Gamma}_{\alpha}(\mathbf{k})$ for $\alpha=\hat{\checka}_1$ and $\alpha=1.5$ along with the histograms of the minimisers are represented.
 
 
 One can notice that the relaxation allows us to avoid the issue brought by the accumulation of the minimisers of $\JBH$ at $3.8$, as opposed to the MPE and its dependence on the estimation procedure of the distribution.
@@ -617,56 +626,70 @@ One can notice that the relaxation allows us to avoid the issue brought by the a
 % For the $J_{\mathrm{BH}}$ function (left), the $\hat{\checka}_1$, $\hatkmean$ and $\hatkvar$ are quite close, so naturally we would expect a robust estimate to be significantly close to those values. $\hat{\checkk}_1$ supports this intuition, and appears to be very close to $\hatkmean$. 
 %Concerning the $J_{\mathrm{BHswap}}$ function (right), $\hat{\checkk}_1$ appears to be closer to $\hatkvar$ this time.
 
-In order to choose a satisfying level of confidence $p$, we are going to study $p\mapsto \hat{\checka}_p$ and $p\mapsto p/\hat{\checka}_p$, as described in~\ref{ssec:balance}.
+In order to choose a satisfying level of confidence $p$, we are going to study $p\mapsto \hat{\checka}_p$ and $p\mapsto p/\hat{\checka}_p$, as described in Section~\ref{ssec:balance}.
 
- The plot of $p\mapsto \hat{\checka}_p$ for the $J_{\mathrm{BH}}$ function on Figure~\ref{fig:ratio_BH} shows what seems to be a piecewise linear behaviour. The last change of slope, i.e.\ for $p\approx 0.9$ corresponds to a local maximum of the ratio, while the first change of slope corresponds to the global maximum of the ratio.
+ The plot of $p\mapsto \hat{\checka}_p$ for $J_{\mathrm{BH}}$ on Figure~\ref{fig:ratio_BH} shows what seems to be a piecewise linear behaviour. The last change of slope, \textit{i.e.} for $p\approx 0.9$ corresponds to a local maximum of the ratio, while the first change of slope at $\hat{p}_{\mathrm{ratio}}=0.654$ corresponds to the global maximum of the ratio. The \RRE{} will then be evaluated for both these values, as well as $1$ for reference.
  
  \begin{figure}[!ht]
    \centering
 \includegraphics[width=10cm]{Figures/alpha_p_BH.pdf}
-\caption{Evolution of the couples $(p,\checkap)$ and corresponding ratio $p/\checkap$ for the $J_{\mathrm{BH}}$ function. The dashed line indicates the level $p$ associated with the highest ratio}
+\caption{Evolution of the couples $(p,\checkap)$ and corresponding ratio $p/\checkap$ for $J_{\mathrm{BH}}$. The dashed line indicates the level $p$ associated with the highest ratio \victor{Mettre p=0.9}}
 \label{fig:ratio_BH}
 \end{figure}
+
+
+ For $J_{\mathrm{BH}}$, the numerical values of the robust estimators can be found in Table~\ref{tab:recap_estimates_branin}. For this particular problem, different estimates are close to each other.
  
- For the $J_{\mathrm{BH}}$ function, the numerical values can be found in Table~\ref{tab:recap_estimates_branin}. For this particular problem, the different estimates are close to each other.
- 
-\begin{table*}[!ht]
-\centering
+% \begin{table*}[!ht]
+% \centering
+% \caption{Estimation performed for $J_{\mathrm{BH}}$, sorted by value}
+% \label{tab:recap_estimates_branin}
+% \begin{tabular}{lr}
+% \toprule
+% Estimate & Value \\ \midrule
+% $\hatkvar$ & 1.371 \\ 
+% $\kest_p,~p=1$ & 1.557 \\ 
+% $\hatkmean$ & 1.587 \\ 
+%   $\hatkmpe$ & 1.628 \\
+%   $\kest_{\mathrm{ratio}},~\hat{p}_{\mathrm{ratio}}=0.654$ & 1.637 \\
+% $\kest_p,~p=0.95$ & 1.672 \\ \bottomrule
+% \end{tabular}
+% \end{table*}
+\begin{table*}[!h]
+  \centering
 \caption{Estimation performed for $J_{\mathrm{BH}}$, sorted by value}
-\label{tab:recap_estimates_branin}
 \begin{tabular}{lr}
-\toprule
-Estimate & Value \\ \midrule
+  \toprule
+Estimator & Value \\ \midrule
 $\hatkvar$ & 1.371 \\ 
-$\kest_p,~p=1$ & 1.557 \\ 
+$\kest_{p},~p=1$ & 1.557 \\ 
 $\hatkmean$ & 1.587 \\ 
-  $\hatkmpe$ & 1.628 \\
-  $\kest_{\mathrm{ratio}},~\hat{p}_{\mathrm{ratio}}=0.654$ & 1.637 \\
-$\kest_p,~p=0.95$ & 1.672 \\ \bottomrule
+$\kest_{\mathrm{MPE}}$ & 1.628 \\ 
+$\kest_{\mathrm{ratio}},~\hat{p}_{\mathrm{ratio}}=0.654$ & 1.637 \\ 
+$\kest_p,~p=0.90$ & 1.797 \\  \bottomrule
 \end{tabular}
+\label{tab:recap_estimates_branin}
 \end{table*}
+Practically speaking, in order to compare the effective values taken by the objective function given an estimate $\kest$ we are going to consider the functions $\mathbf{u} \mapsto J(\kest,\mathbf{u})$, that we will call ``profile of $\kest$''. Those profiles are well suited for the representation of the cost function for an estimate $\kest$ fixed as the uncertain variable is modelled with a 1D uniform random variable.
 
-Practically speaking, in order to compare the effective values taken by the objective function given an estimate $\kest$ we are going to consider the functions of the form $\mathbf{u} \mapsto J(\kest,\mathbf{u})$, that we will call ``profile of $\kest$''. Those profiles are well suited for the representation of the cost function for an estimate $\kest$ fixed as the uncertain variable is modelled with a 1D uniform random variable.
-
-For the $J_{\mathrm{BH}}$ function, the curves are plotted in Figure~\ref{fig:profiles_branin}. Based on its definition, the profile of $\hat{\checkk}_1$ is always within the shaded region, corresponding to $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$. The profile of $\hatkmean$ in contrast, exceeds $\hat{\checka}_1 J^*(\mathbf{u})$ for $\mathbf{u}$ close to $5$, while the profile of $\hatkvar$ does for $\mathbf{u}$ close to $0$.
-As the different $\kest$ are very close for every criteria introduced in this paper, the profiles are almost undistinguishable.
+For $J_{\mathrm{BH}}$, the curves are plotted in Figure~\ref{fig:profiles_branin}. By construction, the profile of $\hat{\checkk}_1$ is always within the shaded region, corresponding to $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$. The profile of $\hatkmean$ in contrast, exceeds $\hat{\checka}_1 J^*(\mathbf{u})$ for $\mathbf{u}$ close to $5$, while the profile of $\hatkvar$ does it for $\mathbf{u}$ close to $0$. Except for $\hatkvar$, the different estimators give somewhat comparable results.
 
 \begin{figure*}[!h]
   \centering
-\includegraphics[width=10cm]{Figures/profile_BH_all_estimates_noku.pdf}
-\caption{Profiles of the different estimates for the $J_{\mathrm{BH}}$ function, corresponding to the vertical cross sections of the contour. The shaded region corresponds to the interval $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$. The red dashed line, corresponding to the values taken by the cost function when the control variable is set to $\mathbf{k}_1$, is always between $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$ per design.}
+\includegraphics[width=10cm]{Figures/profile_BH.pdf}
+\caption{Profiles of the different estimates for $J_{\mathrm{BH}}$, corresponding to the vertical cross sections of the contour. The shaded region corresponds to the interval $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$. The profiles of $\kest_{\mathrm{MPE}}$ and $\kest_{\mathrm{ratio}}$ coincide in this case}
 \label{fig:profiles_branin}
 \end{figure*}
+By contrast, $\JBHS$ will show a different behaviour as Figure~\ref{fig:ratio_BHs} provides the plots of $p\mapsto \hat{\checka}_p$ and $p\mapsto p/\hat{\checka}_p$.
 
-We are now going to shift our focus on the $J_{\mathrm{BHswap}}$ function, as Figure~\ref{fig:ratio_BHs} provides the plots of $p\mapsto \hat{\checka}_p$ and $p\mapsto p/\hat{\checka}_p$.
 \begin{figure}[ht]
   \centering
 \includegraphics[width=10cm]{Figures/alpha_p_BHs.pdf}
-\caption{Evolution of the couples $(p,\checkap)$ and corresponding ratio $p/\checkap$ for the $J_{\mathrm{BHswap}}$ function. The dashed line indicates the level $p$ associated with the highest ratio}
+\caption{Evolution of the couples $(p,\checkap)$ and corresponding ratio $p/\checkap$ for $J_{\mathrm{BHswap}}$. The dashed line indicates the level $p$ associated with the highest ratio}
 \label{fig:ratio_BHs}
 \end{figure}
 
-Compared to the plots for $J_{\mathrm{BH}}$ in Figure~\ref{fig:ratio_BH}, $\hat{\checka}_p$ exhibits a smoother behaviour for the $J_{\mathrm{BHswap}}$ function as no change of slope is easily discernable. The computation of the ratio advocates for a level of confidence $p_{\mathrm{ratio}}$ close to $0.75$. The numerical values of the estimations $\kest$ presented in Table~\ref{tab:recap_estimates_BHs} show that contrary to the $J_{\mathrm{BH}}$ function, the calibrated values are more spread on $\Kspace$.
+Compared to the similar plots for $J_{\mathrm{BH}}$ in Figure~\ref{fig:ratio_BH}, $\hat{\checka}_p$ exhibits a smoother behaviour for $\JBHS$ as no abrupt change of slope is easily discernable and the ratio presents a unique maximum for $\hat{p}_{\mathrm{ratio}}=0.766$. The numerical values of the estimations $\kest$ presented in Table~\ref{tab:recap_estimates_BHs} show that contrary to $J_{\mathrm{BH}}$, the calibrated values are more spread over $\Kspace$.
 
 \begin{table*}[!h]
 \centering
@@ -677,15 +700,13 @@ Estimate & Value \\ \midrule
 $\kest_{\mathrm{MPE}}$ & 0.606 \\ 
 $\kest_{\mathrm{ratio}},~ \hat{p}_{\mathrm{ratio}}=0.766$ & 1.537 \\ 
 $\hatkmean$ & 1.752 \\ 
-$\kest_p,~p=0.90$ & 2.112 \\ 
-$\kest_p,~p=0.95$ & 2.457 \\ 
 $\hatkvar$ & 2.638 \\ 
 $\kest_1,~p=1$ & 2.798   \\ \bottomrule
 \end{tabular}
 \end{table*}
 
 
-In a similar fashion, the profiles of the different estimates for the $J_{\mathrm{BHswap}}$ function are shown in Figure~\ref{fig:profiles_branin_switch}.
+Profiles of the different estimates of $J_{\mathrm{BHswap}}$ are shown in Figure~\ref{fig:profiles_branin_switch}.
 
 In this case, $\hatkmpe$, $\hatkmean$ and $\hat{\checkk}_{\mathrm{ratio}}$ present a similar behaviour. They perform very well for $\mathbf{u}>2$, especially for $\hatkmpe$ which is very close to the minimal value; However for $\mathbf{u}<2$, they produce high values of the function.
 
@@ -694,13 +715,13 @@ The performances of $\hat{\checkk}_1$ are closer to the performances of $\hatkva
 
 \begin{figure*}[!h]
   \centering
-\includegraphics[width=10cm]{Figures/profile_BHs_all_estimates_noku.pdf}
-\caption{Profiles of the different estimates for the $J_{\mathrm{BHswap}}$ function. Those profiles are the vertical cross sections of the contours above. The shaded region corresponds to the interval $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$. The red dashed line, corresponding to the values taken by the cost function when the control variable is set to $\mathbf{k}_1$, is always between $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$ per design.}
+\includegraphics[width=10cm]{Figures/profile_BHs.pdf}
+\caption{Profiles of the different estimates for $J_{\mathrm{BHswap}}$. Those profiles are the vertical cross sections of the contours above. The shaded region corresponds to the interval $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$}
 \label{fig:profiles_branin_switch}
 \end{figure*}
 
 
-
+\victor{Rajouter cas U loi normale}
 
 
 % ----------------------------------------------------------------------------

@@ -162,7 +162,7 @@ Numerical models are widely used to study or forecast natural phenomenon and imp
 %
 %Various sources of uncertainties can corrupt the model quality, such as the discretisation of the domain, or presence of  small scale phenomena that can not be fully represented. 
 Moreover, such uncertainties may be of different nature. 
-~\cite{walker_defining_2003} proposes to consider two categories of uncertainties. On the one hand aleatoric uncertainties,  coming from the inherent variability of a phenomenon, e.g.\ intrinsic randomness of some environmental variables. On the other hand, epistemic uncertainties coming from a lack of knowledge about the properties and conditions of the phenomena underlying the behaviour of the system under study.
+\cite{walker_defining_2003} proposes to consider two categories of uncertainties. On the one hand aleatoric uncertainties,  coming from the inherent variability of a phenomenon, e.g.\ intrinsic randomness of some environmental variables. On the other hand, epistemic uncertainties coming from a lack of knowledge about the properties and conditions of the phenomena underlying the behaviour of the system under study.
 The latter can be accounted for through the introduction of ad-hoc correcting terms in the numerical model, that need to be properly estimated. Thus, reducing the epistemic uncertainty can be done through parameters estimation approaches. 
 %when one is having observations of the reality. 
 This is usually done using optimal control techniques, leading to an optimisation of a well chosen cost function which is typically built as a comparison with reference observations.
@@ -720,8 +720,11 @@ The performances of $\hat{\checkk}_1$ are closer to the performances of $\hatkva
 \label{fig:profiles_branin_switch}
 \end{figure*}
 
-
-\victor{Rajouter cas U loi normale}
+Let us consider the following simple problem:
+\begin{equation}
+  \label{eq:Jinfinite}
+  J(\mathbf{k},\mathbf{u}) = u(\mathbf{k}-\mathbf{u})^2 + 1
+\end{equation}
 
 
 % ----------------------------------------------------------------------------
@@ -734,20 +737,21 @@ The performances of $\hat{\checkk}_1$ are closer to the performances of $\hatkva
 % ----------------------------------------------------------------------------
 
 \subsection{Calibration of a toy numerical model}
- We will follow \citeauthor{kennedy_bayesian_2001}'s approach in order to establish the function $\mathcal{G}$ described in the first section in Eq.~\eqref{eq:def_cost_fun}, and the resulting cost function $J$.
+ We will follow the approach described in~\cite{kennedy_bayesian_2001} in order to establish the function $\mathcal{G}$ described in the first section in Eq.~\eqref{eq:def_cost_fun}, and the resulting cost function $J$.
  
- Calibration of a numerical model is usually based on the comparison between the numerical model and some observations in a fixed time interval $[0, T]$ called assimilation window.
-The physical system at stake is based on an input $\mathbf{u} \in \Uspace$, that represents some operating conditions. This system can then be seen as a map from $\Uspace$ to $\mathcal{Y}$, denoted as $\mathcal{M}^o : \mathbf{u}\mapsto \mathcal{M}^o(\mathbf{u})$. 
+ The calibration of a numerical model is usually based on the comparison between the numerical model and some observations, during a fixed time interval $[0, T]$ called assimilation window.
+ The physical system modelled can be seen as a map from $\Uspace$ to $\mathcal{Y}$, denoted as $\mathcal{M}^o : \mathbf{u}\mapsto \mathcal{M}^o(\mathbf{u})$, where $\mathbf{u}\in\Uspace$ is an input representing some environmental conditions. The observation mentioned above is the output of the physical system during the time-window, and is denoted by $\mathcal{M}^o(\mathbf{u}^{\mathrm{true}}) \in \mathcal{Y}$, where $\mathbf{u}^{\mathrm{true}} \in \Uspace$ is unknown.
 
-In addition to the operating conditions $\mathbf{u}$, the numerical model is also dependent on some other input $\mathbf{k}\in\Kspace$. This additional parametrization comes usually from the successive simplifications needed to implement a numerical model of the physical system observed, and from some unobserved physical parameters. These parameters need to be calibrated accordingly, so that the numerical model can be used to predict the behaviour of the physical system under different operating conditions.
+ 
+The numerical model is dependent on some other input $\mathbf{k}\in\Kspace$, in addition to $\mathbf{u}$. This additional parametrization comes usually from the successive simplifications and parametrizations needed to implement a numerical model of the physical system observed. These parameters need to be calibrated accordingly, so that the numerical model can be used to predict the behaviour of the physical system under different operating conditions.
 
-The true value taken by the physical system during this window is denoted by $\mathcal{M}^o(\mathbf{u}^{\mathrm{true}}) \in \mathcal{Y}$, where $\mathbf{u}^{\mathrm{true}} \in \Uspace$ is unknown. The misfit $\mathcal{G}$ and the cost function $J$ defined Eq.\eqref{eq:def_cost_fun} can then be defined as
+The misfit $\mathcal{G}$ is defined as the difference between the numerical model and the observation. Choosing a squared norm, the cost function $J$ defined in Eq.~\eqref{eq:def_cost_fun} is
 \begin{equation}
 J(\mathbf{k},\mathbf{u}) = \frac12 \| \mathcal{G}(\mathbf{k},\mathbf{u}) \|^2 = \frac12 \|\mathcal{M}(\mathbf{k},\mathbf{u}) - \mathcal{M}^{o}(\mathbf{u}^{\mathrm{true}}) \|^2
 \end{equation}
 \subsection{The Shallow Water equations}
 
-The model we wish to calibrate is based on the Shallow Water equations, described Eq.~\eqref{eq:SWE_equations}. $h$ is the height of the water column, $q$ is the discharge, and $z$ is the bathymetry, while $g$ is the usual gravitation constant. The parameter to calibrate, $\mathbf{k}$, is the quadratic friction term, proportional to the square of the inverse of Manning-Strickler coefficient. The environmental parameter $\mathbf{u}$ is the amplitude of a sine wave of period $1/\omega_0$. The domain of those two parameters are $\Kspace = [0.0, 1.3]$ and $\Uspace = [0.5, 0.7]$.
+The model to calibrate is an implementation of the Shallow Water equations, described Eq.~\eqref{eq:SWE_equations}, where $h$ is the height of the water column, $q$ is the discharge, and $z$ is the bathymetry, while $g$ is the usual gravitation constant. The parameter to calibrate, $\mathbf{k}$, is the quadratic friction term, proportional to the square of the inverse of Manning-Strickler coefficient. The environmental parameter $\mathbf{u}$ is the amplitude of a sine wave of period $1/\omega_0$. The domain of those two parameters are $\Kspace = [0.0, 1.3]$ and $\Uspace = [0.5, 0.7]$.
 
 
 \begin{align}
@@ -763,17 +767,22 @@ The model we wish to calibrate is based on the Shallow Water equations, describe
 \end{align}
 These equations are integrated using a finite-volume scheme on a discretized domain $[0, L]$, up to a time $T$. The output of the computer code is the sea surface height $h$, on the center of all the volumes and at all the time-steps, that will be denoted $\mathcal{M}(\mathbf{k},\mathbf{u};\, \omega_0=1.0)$.
 In this setting, the variable input is uniformly distributed on $\Uspace$.
-To generate the observations, we choose $\mathbf{u}^{\mathrm{true}}=2/3$, and define $\mathcal{M}^o$ based on the computer model $\mathcal{M}$, such that $\mathcal{M}^o(\mathbf{u}^{\mathrm{true}}) = \mathcal{M}(\mathbf{k}^{\mathrm{true}}, \mathbf{u}^{\mathrm{true}}; \, \omega_0 = 0.999)$. $\omega_0$  
-represents here the uncontrollable error between the observations and the numerical model and will now be omitted systematically in the notation. The true value of the bottom friction $\mathbf{k}^{\mathrm{true}} = (k_1^{\mathrm{true}}, k_2^{\mathrm{true}},\dots, k_{N_\mathrm{vol}}^{\mathrm{true}})$ is not constant over the whole domain, and is defined as
+
+To generate the observation, we choose $\mathbf{u}^{\mathrm{true}}=2/3$, and define $\mathcal{M}^o$ based on the computer model $\mathcal{M}$, such that $\mathcal{M}^o(\mathbf{u}^{\mathrm{true}}) = \mathcal{M}(\mathbf{k}^{\mathrm{true}}, \mathbf{u}^{\mathrm{true}}; \, \omega_0 = 0.999)$. $\omega_0$  
+represents here the uncontrollable error between the observations and the numerical model and will now be omitted systematically in the notation.
+
+The true value of the bottom friction $\mathbf{k}^{\mathrm{true}} = (k_1^{\mathrm{true}}, k_2^{\mathrm{true}},\dots, k_{N_\mathrm{vol}}^{\mathrm{true}})$ is not constant over the whole domain, and is defined as
 \begin{equation*}
 {k}^{\mathrm{true}}_i = 0.2\cdot \left(1 + \sin\left(\frac{2 \pi x_i}{L}\right)\right)
 \end{equation*}
-where $x_i$ is the center of the $i$-th volume. The two sources of representativity errors are $\omega_0$, and the fact that we are looking to estimate $\mathbf{k}$ in a 1-dimensional space $\Kspace$. 
-\subsection{Estimation}
-Given that the numerical model is expensive to evaluate, it has first been evaluated on a relatively small regular grid. A metamodel based on Gaussian process is constructed and the PEI criterion~\citep{ginsbourger_bayesian_2014,bossek_learning_2015} allow us to add point to evaluate and to better capture the locus of the conditional minimisers $\{(\mathbf{k}^*(\mathbf{u}), \mathbf{u}) \mid \mathbf{u} \in \Uspace \}$. A bigger regular grid is evaluated by the metamodel once the design space has been sufficiently explored. The different steps of the estimation are illustrated Figure~\ref{fig:estimation_swe}. We can see that the estimation for this problem seems less problematic than the analytical examples shown above, as all derived quantites are unimodal.
+where $x_i$ is the center of the $i$-th volume. The two sources of systematic errors are the one-dimensionality of $\Kspace$, and $\omega_0$..
+Given this setting, there exists no couple $(\mathbf{k},\mathbf{u})\in\Kspace \times \Uspace$ reproducing exactly the observations, thus the cost function will always be strictly positive.
+\subsection{Computation of the robust estimates}
+As the numerical model is expensive to evaluate, it has first been evaluated on a relatively small regular grid. A metamodel based on Gaussian process is constructed used the initial evaluations and the PEI criterion~\citep{ginsbourger_bayesian_2014,bossek_learning_2015} allows us to add points to the design, in order to better capture the locus of the conditional minimisers $\{(\mathbf{k}^*(\mathbf{u}), \mathbf{u}) \mid \mathbf{u} \in \Uspace \}$. A bigger regular grid is evaluated by the metamodel once the design space has been sufficiently explored. The different steps of the estimation are illustrated Figure~\ref{fig:estimation_swe}: where the top plot shows the contour plot of $J$, with the conditional minimisers and the \RRE{} of level $p$. On the middle plot is shown the conditional moments, $\hatkmean$ and $\hatkvar$ and the estimated density of the minimisers. At the bottom of the Figure, $\hat{\Gamma}_{\alpha_p}$ are represented for different levels $p$.
+
+We can see that the estimation for this problem seems less problematic than the analytical examples shown above, as all derived quantites are unimodal.
 The different estimates however take a wide range of values, as seen on Table~\ref{tab:recap_estimates_metaSWE}. As a basis for comparison, the global minimiser of $J$ over $\Kspace \times \Uspace$ has been computed, and $\kest_{\mathrm{global}}$ is then obtained by discarding the $\mathbf{u}$ value.
 
-As discussed earlier, the estimation of the MPE is dependent on the method used, and then its estimation using KDE in the middle plot of Figure~\ref{fig:estimation_swe} is here only for illustrative purposes.
 
 \begin{figure}[!h]
 \centering
@@ -869,21 +878,21 @@ It may seem surprising that the calibrated values chosen according to a robust o
 \clearpage
 
 \section*{Conclusion}  
-\victor{À faire à la fin}
-This paper deals with the problem of robust calibration of a computer code in the presence of uncertain inputs. 
+% \victor{À faire à la fin}
+% This paper deals with the problem of robust calibration of a computer code in the presence of uncertain inputs. 
 
-Our contribution consists in introducing a new criterion of robustness, based on the distribution of the minimisers. More specifically, this estimate is bounding the ratio between the cost function and its conditional minimum.
-Experimental results show that this new estimate is able to make a compromise between the minimum of the expected value and the minimum of the variance, will also giving the range of the ratio evoked above.
+% Our contribution consists in introducing a new criterion of robustness, based on the distribution of the minimisers. More specifically, this estimate is bounding the ratio between the cost function and its conditional minimum.
+% Experimental results show that this new estimate is able to make a compromise between the minimum of the expected value and the minimum of the variance, will also giving the range of the ratio evoked above.
 
-From a practical perspective, this estimation is very expensive: each evaluation of $\mathbf{k}^*$ requires an optimisation procedure. The distribution of the conditional minimisers is then very complicated to compute.
-In addition to that, in order to relax the constraint, the cost function must also be evaluated in the vicinity of the conditional minimisers. Computing precisely this estimate is then intractable if each run of the underlying model is expensive (longer than a couple of seconds).
+% From a practical perspective, this estimation is very expensive: each evaluation of $\mathbf{k}^*$ requires an optimisation procedure. The distribution of the conditional minimisers is then very complicated to compute.
+% In addition to that, in order to relax the constraint, the cost function must also be evaluated in the vicinity of the conditional minimisers. Computing precisely this estimate is then intractable if each run of the underlying model is expensive (longer than a couple of seconds).
 
 
-A solution to explore is the use of surrogate models. Based on an initial design of experiment, the (expensive) cost function is replaced by a function, that is cheap to evaluate.
-For instance,~\cite{ginsbourger_bayesian_2014}
-uses Gaussian Process regression and sequential methods to explore the conditional minimisers.
+% A solution to explore is the use of surrogate models. Based on an initial design of experiment, the (expensive) cost function is replaced by a function, that is cheap to evaluate.
+% For instance,~\cite{ginsbourger_bayesian_2014}
+% uses Gaussian Process regression and sequential methods to explore the conditional minimisers.
 
-Finally, the adaptibility of this method has to be studied in a higher dimensional setting. High-dimensional density estimation is a challenge in itself, but is necessary in order to tackle more realistic applications.
+% Finally, the adaptibility of this method has to be studied in a higher dimensional setting. High-dimensional density estimation is a challenge in itself, but is necessary in order to tackle more realistic applications.
 % \appendix
 % \section{}    %% Appendix A
 

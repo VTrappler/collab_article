@@ -221,7 +221,7 @@ Another strategy, that consists in minimising $J$ over the joint space $\Kspace\
 The worst-case approach \citep{marzat_worst-case_2013} is another popular method, and is based on the minimisation with respect to $\mathbf{k}$ of the maximum of the cost function for $\mathbf{u}\in\Uspace$: $\min_{\mathbf{k}} \max_{\mathbf{u}} J(\mathbf{k}, \mathbf{U} = \mathbf{u})$. This approach may yield over-conservative solutions, and does not take into account the random nature of $\mathbf{U}$.% when the support of $\mathbf{U}$ is unbounded.
 
 Accounting for the probabilistic nature of  $\mathbf{U}$ leads to study the distribution of the random variable $J(\mathbf{k},\mathbf{U})$, or the distribution of its minimisers ${\mathbf{k}}_{\mathbf{U}}$. The latter is referred as 
-the distribution of the conditional minimisers, notion that appeared notably in~\cite{villemonteix_informational_2006} and in~\cite{hennig_entropy_2011} for a global optimisation purpose. Both approaches and related robust estimates are described in Section~\ref{robust formulations}. Section~\ref{sec:relax_constraint} introduces a new class of estimators, by relaxing the constraint of optimality and defining regions of acceptability, similarly as~\cite{buhmann_robust_2013} in discrete combinatorial problems.  The intention is that a robust estimate provides values of the cost function close enough to the attainable minimum for each configuration induced by $\mathbf{u}\in\Uspace$. Illustration of the various discribed methods are given on a numerical exemple in Section~\ref{sec:SWE_application}.
+the distribution of the conditional minimisers, notion that appeared notably in~\cite{villemonteix_informational_2006} and in~\cite{hennig_entropy_2011} for a global optimisation purpose. Both approaches and related robust estimates are described in Section~\ref{robust formulations}. Section~\ref{sec:relax_constraint} introduces a new class of estimators, by relaxing the constraint of optimality and defining regions of acceptability, similarly as~\cite{buhmann_robust_2013} in discrete combinatorial problems.  The intention is that a robust estimate provides values of the cost function close enough to the attainable minimum for each configuration induced by $\mathbf{u}\in\Uspace$. Illustration of the various described methods are given on a numerical exemple in Section~\ref{sec:SWE_application}.
 
 % ----------------------------------------------------------------------------
 
@@ -740,10 +740,10 @@ Let us consider the following simple problem:
  We will follow the approach described in~\cite{kennedy_bayesian_2001} in order to establish the function $\mathcal{G}$ described in the first section in Eq.~\eqref{eq:def_cost_fun}, and the resulting cost function $J$.
  
  The calibration of a numerical model is usually based on the comparison between the numerical model and some observations, during a fixed time interval $[0, T]$ called assimilation window.
- The physical system modelled can be seen as a map from $\Uspace$ to $\mathcal{Y}$, denoted as $\mathcal{M}^o : \mathbf{u}\mapsto \mathcal{M}^o(\mathbf{u})$, where $\mathbf{u}\in\Uspace$ is an input representing some environmental conditions. The observation mentioned above is the output of the physical system during the time-window, and is denoted by $\mathcal{M}^o(\mathbf{u}^{\mathrm{true}}) \in \mathcal{Y}$, where $\mathbf{u}^{\mathrm{true}} \in \Uspace$ is unknown.
+ The physical system modelled can be seen as a map from $\Uspace$ to $\mathbb{Y}$, the space of observations, denoted as $\mathcal{M}^o : \mathbf{u}\mapsto \mathcal{M}^o(\mathbf{u})$, where $\mathbf{u}\in\Uspace$ is an input representing some environmental conditions. The observation mentioned above is the output of the physical system during the time-window, and is denoted by $\mathcal{M}^o(\mathbf{u}^{\mathrm{true}}) \in \mathbb{Y}$, where $\mathbf{u}^{\mathrm{true}} \in \Uspace$ is unknown.
 
  
-The numerical model is dependent on some other input $\mathbf{k}\in\Kspace$, in addition to $\mathbf{u}$. This additional parametrization comes usually from the successive simplifications and parametrizations needed to implement a numerical model of the physical system observed. These parameters need to be calibrated accordingly, so that the numerical model can be used to predict the behaviour of the physical system under different operating conditions.
+The numerical model $\mathcal{M}$ is dependent, in addition to $\mathbf{u}$ on some other input $\mathbf{k}\in\Kspace$. This additional parametrization comes usually from the successive simplifications and parametrizations needed to implement a numerical model of the physical system observed. These parameters need to be calibrated accordingly, so that the numerical model can be used to predict the behaviour of the physical system under different operating conditions.
 
 The misfit $\mathcal{G}$ is defined as the difference between the numerical model and the observation. Choosing a squared norm, the cost function $J$ defined in Eq.~\eqref{eq:def_cost_fun} is
 \begin{equation}
@@ -751,7 +751,7 @@ J(\mathbf{k},\mathbf{u}) = \frac12 \| \mathcal{G}(\mathbf{k},\mathbf{u}) \|^2 = 
 \end{equation}
 \subsection{The Shallow Water equations}
 
-The model to calibrate is an implementation of the Shallow Water equations, described Eq.~\eqref{eq:SWE_equations}, where $h$ is the height of the water column, $q$ is the discharge, and $z$ is the bathymetry, while $g$ is the usual gravitation constant. The parameter to calibrate, $\mathbf{k}$, is the quadratic friction term, proportional to the square of the inverse of Manning-Strickler coefficient. The environmental parameter $\mathbf{u}$ is the amplitude of a sine wave of period $1/\omega_0$. The domain of those two parameters are $\Kspace = [0.0, 1.3]$ and $\Uspace = [0.5, 0.7]$.
+The model to calibrate is an implementation of the Shallow Water equations, described in Eq.~\eqref{eq:SWE_equations}, where $h$ is the height of the water column, $q$ is the discharge, and $z$ is the bathymetry, while $g$ is the usual gravitation constant. The parameter to calibrate, $\mathbf{k}$, is the quadratic friction term, proportional to the square of the inverse of Manning-Strickler coefficient. The environmental parameter $\mathbf{u}$ is the amplitude of a sine wave of period $1/\omega_0$. The domain of those two parameters are $\Kspace = [0.0, 1.3]$ and $\Uspace = [0.5, 0.7]$.
 
 
 \begin{align}
@@ -775,14 +775,10 @@ The true value of the bottom friction $\mathbf{k}^{\mathrm{true}} = (k_1^{\mathr
 \begin{equation*}
 {k}^{\mathrm{true}}_i = 0.2\cdot \left(1 + \sin\left(\frac{2 \pi x_i}{L}\right)\right)
 \end{equation*}
-where $x_i$ is the center of the $i$-th volume. The two sources of systematic errors are the one-dimensionality of $\Kspace$, and $\omega_0$..
+where $x_i$ is the center of the $i$-th volume. The two sources of systematic errors are the one-dimensionality of $\Kspace$, and $\omega_0$.
 Given this setting, there exists no couple $(\mathbf{k},\mathbf{u})\in\Kspace \times \Uspace$ reproducing exactly the observations, thus the cost function will always be strictly positive.
 \subsection{Computation of the robust estimates}
-As the numerical model is expensive to evaluate, it has first been evaluated on a relatively small regular grid. A metamodel based on Gaussian process is constructed used the initial evaluations and the PEI criterion~\citep{ginsbourger_bayesian_2014,bossek_learning_2015} allows us to add points to the design, in order to better capture the locus of the conditional minimisers $\{(\mathbf{k}^*(\mathbf{u}), \mathbf{u}) \mid \mathbf{u} \in \Uspace \}$. A bigger regular grid is evaluated by the metamodel once the design space has been sufficiently explored. The different steps of the estimation are illustrated Figure~\ref{fig:estimation_swe}: where the top plot shows the contour plot of $J$, with the conditional minimisers and the \RRE{} of level $p$. On the middle plot is shown the conditional moments, $\hatkmean$ and $\hatkvar$ and the estimated density of the minimisers. At the bottom of the Figure, $\hat{\Gamma}_{\alpha_p}$ are represented for different levels $p$.
-
-We can see that the estimation for this problem seems less problematic than the analytical examples shown above, as all derived quantites are unimodal.
-The different estimates however take a wide range of values, as seen on Table~\ref{tab:recap_estimates_metaSWE}. As a basis for comparison, the global minimiser of $J$ over $\Kspace \times \Uspace$ has been computed, and $\kest_{\mathrm{global}}$ is then obtained by discarding the $\mathbf{u}$ value.
-
+As the numerical model is expensive to evaluate, it has first been evaluated on a relatively small regular grid. A metamodel based on Gaussian processes is constructed using the initial evaluations and in order to better capture the locus of the conditional minimisers $\{(\mathbf{k}^*(\mathbf{u}), \mathbf{u}) \mid \mathbf{u} \in \Uspace \}$, the PEI criterion~\citep{ginsbourger_bayesian_2014,bossek_learning_2015} allows us to add points to the design. Afterwards, a bigger regular grid is evaluated by the metamodel once the design space has been sufficiently explored. The different steps of the estimation are illustrated Figure~\ref{fig:estimation_swe}, where the top plot shows the contour plot of $J$, with the conditional minimisers and the \RRE{} of level $p$. On the middle plot is shown the conditional moments, $\hatkmean$ and $\hatkvar$ and the estimated density of the minimisers. At the bottom of the Figure, $\hat{\Gamma}_{\alpha_p}$ are represented for different levels $p$.
 
 \begin{figure}[!h]
 \centering
@@ -790,6 +786,21 @@ The different estimates however take a wide range of values, as seen on Table~\r
 \caption{Procedure of robust calibration for the shallow water problem. Top: contours of $J$, conditional minimisers and $\{(\mathbf{k},\mathbf{u}) | J(\mathbf{k},\mathbf{u}) = \hat{\alpha}_1 J^*(\mathbf{u})\}$. Middle: Conditional moments and histogram and KDE of the conditional minimisers. Bottom: $\hat{\Gamma}_{\alpha_p}$ for different levels $p$}
 \label{fig:estimation_swe}
 \end{figure}
+
+We can see that the estimation for this problem seems less problematic than the analytical examples shown above. Looking at $p\mapsto \alpha_p$ and $p\mapsto p/\alpha_p$ on Figure~\ref{fig:alpha_p_SWE}, we can see that $\alpha_p$ evolves almost linearly for $p>0.5$, and that the ratio $p/\alpha_p$ is monotonically increasing, so that the maximal ratio is found for $p=1$.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[scale=0.5]{Figures/alpha_SWE}
+  \caption{Evolution of $\alpha_p$ for different levels $p$, and ratio}
+\label{fig:alpha_p_SWE}
+\end{figure}
+
+The different estimates take a wide range of values, as seen on Table~\ref{tab:recap_estimates_metaSWE}, from $0.249$ to almost $1.0$, when $k_i^{\mathrm{true}} \in [0, 0.4]$ for $1\leq i \leq N_{\mathrm{vol}}$.
+As a basis for comparison, the global minimiser of $J$ over $\Kspace \times \Uspace$ has been computed, and $\kest_{\mathrm{global}}$ is then obtained by discarding the $\mathbf{u}$ value.
+
+
+
 \begin{table*}[!h]
 \centering
 \caption{Calibrated values of $\mathbf{k}$ according to different criteria}
@@ -813,10 +824,11 @@ Similarly as for $\JBH$ and $\JBHS$, the profiles are depicted Figure~\ref{fig:p
   \caption{Profiles for the calibration problem}
 \label{fig:profiles_swe}
 \end{figure}
-We can see that the performances of $\kest_1$ and $\hatkmean$ are very similar, but $\kest_1$ has better performances when $\mathbf{u} > 0.6$. When comparing with the global optimiser $\kest_{\mathrm{global}}$, $\kest_1$ performs better when $\mathbf{u}<0.625$. As $\mathbf{U}$ is uniformly distributed on $\Uspace=[0.5,0.7]$, we can graphically estimate that the probability that $\kest_1$ outperforms $\kest_{\mathrm{global}}$ is greater than $0.5$, that is that $\Prob_\mathbf{U}\left[J(\kest_1,\mathbf{U})<J(\kest_{\mathrm{global}},\mathbf{U})\right] > 0.5$.
+We can see that the performances of $\kest_1$ and $\hatkmean$ are very similar, but $\kest_1$ has better performances when $\mathbf{u} > 0.6$. When comparing with the global optimiser $\kest_{\mathrm{global}}$, $\kest_1$ performs better when $\mathbf{u}<0.625$, so more than half of the time. % As $\mathbf{U}$ is uniformly distributed on $\Uspace=[0.5,0.7]$, we can graphically estimate that the probability that $\kest_1$ outperforms $\kest_{\mathrm{global}}$ is greater than $0.5$, that is that $\Prob_\mathbf{U}\left[J(\kest_1,\mathbf{U})<J(\kest_{\mathrm{global}},\mathbf{U})\right] > 0.5$.
 
 
-The calibration of this numerical model is done in order to get a calibrated value $\kest$, that will be used for forecasts, using the same numerical model. We are now going to compare how well three of those values compare in a forecast context: $\kest_1$, $\hatkmean$ and $\kest_{\mathrm{global}}$, as the first two refer quite naturally to the notion of robustness, and the latter is an example of an estimate that does not take into account the uncertainties.
+% The calibration of this numerical model is done in order to get a calibrated value $\kest$, that will be used for forecasts, using the same numerical model.
+We are now going to compare how well three of those values compare in a forecast context: $\kest_1$, $\hatkmean$ and $\kest_{\mathrm{global}}$, as the first two refer quite naturally to the notion of robustness, and the latter is an example of an estimate that does not take into account the uncertainties.
 
 \subsection{Assessing the quality of the forecast of the calibrated model}
 The calibration of the model has been performed using by integrating the model on a time-period $[0, T]$, called assimilation window. 
@@ -847,7 +859,11 @@ Averaging $S(\mathbf{\kest})$ over the time steps between $T$ and $T_{\mathrm{pr
 \caption{Squared forecast error, depending on the calibrated parameter. The left figures show the metric averaged over time, while the right figure show the mean forecast error, averaged over time and space}
 \label{fig:forecast_squared_error}
 \end{figure*}
-We can see that the mean forecast error squared, on the right side, averaged over time and space is the smallest for the conditional minimisers $\kest^*(0.7)$ and $\kest^*(0.65)$, then $\kest_{\mathrm{global}}$, while $\kest_{1.0}$ performs slightly better $\hatkmean$. The range of those performance metrics carry also information on the limited impact of the choice of $\mathbf{k}$ in the calibration.
+We can see that the mean forecast error squared, on the right side, averaged over time and space is the smallest for the conditional minimisers $\kest^*(0.7)$ and $\kest^*(0.65)$, then $\kest_{\mathrm{global}}$, while $\kest_{1.0}$ performs slightly better $\hatkmean$.
+
+It may seem surprising that some values calibrated without a robustness aspect perform better than $\kest_1$ and $\hatkmean$, but in fact, not all of those give better results.
+Choosing an arbitrary $\mathbf{u}$ and then taking the associated conditional minimiser can lead to good forecast (for $\mathbf{u}$ close to $0.7$), but also to bad ones (for $\mathbf{u}$ close to $0.5$).
+
 
 One issue with the squared forecast error is that it will penalize strongly the forecasts that present high variability with respect to the environmental conditions.
 
@@ -871,9 +887,7 @@ The left plot of Figure~\ref{fig:forecast_crps} shows the CRPS averaged over tim
 \end{figure}
 The numerical evaluations of the CRPS for different parameters show the same order of performances observed for the squared error.
 The calibrated parameters that present the best performances for forecasts according to those two metrics are $\kest^*(0.7)$, $\kest^*(0.65)$ which is very similar to $\kest_{\mathrm{global}}$, and then $\kest_1$.
-
-It may seem surprising that the calibrated values chosen according to a robust objective perform worse than the ``deterministic'' objectives $\kest^*(0.7)$, $\kest^*(0.65)$ and $\kest_{\mathrm{global}}$. 
-
+We can draw the same conclusions on the forecast performances of those calibrated values based on the CRPS than on the squared norm: taking an arbitrary $\mathbf{u}$ and using the conditional minimiser has some flaws.
 
 \clearpage
 
@@ -904,6 +918,7 @@ It may seem surprising that the calibrated values chosen according to a robust o
 
 %% else use the following coding to input the bibitems directly in the
 %% TeX file.
+
 \bibliographystyle{elsarticle-num-names} 
 \bibliography{bibzotero}
 

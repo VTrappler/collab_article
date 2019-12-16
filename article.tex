@@ -571,12 +571,21 @@ However, this may be a risky approach. Indeed if $\alpha$ is chosen too small, t
 
 Similarly, if $p$ is fixed, the corresponding $\hat{\checka}_p$ is computed by searching for the smallest $\alpha$ satisfying $\max_{\mathbf{k}} \hat{\Gamma}_{\alpha}(\mathbf{k})=p$. Once again, if the value $\hat{\checka}_p$ is too large, the relaxation needed to get acceptable values with probability $p$ is very high, so the resulting estimation $\hat{\checkk}_p$ may not be relevant for the future application.
 % \victor{chapeau car ici je parle de l'estimation en pratique}
+Also, choosing $p=1$ is possible only if the sample space of $\mathbf{U}$ is bounded: let us consider the following simple problem
+\begin{align}
+  \label{eq:Jinfinite}
+  \Kspace &= \Uspace = [0,\,+\infty[ \\
+  J(\mathbf{k},\mathbf{u}) &= \mathbf{u}(\mathbf{k}-\mathbf{u})^2 + 1 \\
+  \mathbf{k}^*(\mathbf{u}) &= \mathbf{u} \\
+  J^*(\mathbf{u}) &= 1
+\end{align}
+In this case, for each $\mathbf{k}\in \Kspace$, $\lim_{\mathbf{u} \rightarrow + \infty} \frac{J(\mathbf{k},\mathbf{u})}{J^*(\mathbf{u})} = + \infty$, so there is no $\mathbf{k}$ such that the ratio $J/J *$ can be bounded, hence $\alpha_1$ does not exist in this case.
 
 
 Looking for a compromise between $p$ and $\alpha$ would be preferable. This could be achieved by studying $p \mapsto \checkap$, and particularly its slope.
 If this curve presents a steep increase, the multiplicative constant $\checkap$ must be increased by a large amount in order to increase the probability $p$ by a small amount. Interesting couples $(p,\checkap)$ would then be the ones located before an abrupt increase of the slope of $p \mapsto \checkap$.
 
-Another possibility is to to model this compromise by the ratio $(p/\checkap)$, as it increases with respect to $p$ and decreases with respect to $\checka_p$. The level of confidence $p_{\mathrm{ratio}}$ is then defined as the maximiser of $p\mapsto p / \checka_p$.
+Another possibility is to model this compromise by the ratio $(p/\checkap)$, as it increases with respect to $p$ and decreases with respect to $\checka_p$. The level of confidence $p_{\mathrm{ratio}}$ is then defined as the maximiser of $p\mapsto p / \checka_p$.
 
 
 
@@ -633,12 +642,12 @@ In order to choose a satisfying level of confidence $p$, we are going to study $
  \begin{figure}[!ht]
    \centering
 \includegraphics[width=10cm]{Figures/alpha_p_BH.pdf}
-\caption{Evolution of the couples $(p,\checkap)$ and corresponding ratio $p/\checkap$ for $J_{\mathrm{BH}}$. The dashed line indicates the level $p$ associated with the highest ratio \victor{Mettre p=0.9}}
+\caption{Evolution of the couples $(p,\checkap)$ and corresponding ratio $p/\checkap$ for $J_{\mathrm{BH}}$. The dashed line indicates the level $p$ associated with the highest ratio}
 \label{fig:ratio_BH}
 \end{figure}
 
 
- For $J_{\mathrm{BH}}$, the numerical values of the robust estimators can be found in Table~\ref{tab:recap_estimates_branin}. For this particular problem, different estimates are close to each other.
+ For $J_{\mathrm{BH}}$, the numerical values of the robust estimators can be found in Table~\ref{tab:recap_estimates_branin}. For this particular problem, the different estimates are close to each other.
  
 % \begin{table*}[!ht]
 % \centering
@@ -720,14 +729,8 @@ The performances of $\hat{\checkk}_1$ are closer to the performances of $\hatkva
 \label{fig:profiles_branin_switch}
 \end{figure*}
 
-Let us consider the following simple problem:
-\begin{equation}
-  \label{eq:Jinfinite}
-  J(\mathbf{k},\mathbf{u}) = u(\mathbf{k}-\mathbf{u})^2 + 1
-\end{equation}
-
-
-% ----------------------------------------------------------------------------
+We have seen how some classical robust estimators and the \RRE{} behave on two different analytical problems. Apart from the usual levels of confidence: 95\%, 99\% \dots, one can also settle for a ad-hoc compromise, where $p$ maximizes the ratio $p/\alpha_p$. When the sample space of $\mathbf{U}$ is bounded, a conservative solution is to set $p=1$.
+We are now going to see how can robust minimisation is applied on the calibration of a numerical model.
 % ----------------------------------------------------------------------------
 \clearpage
 
@@ -777,8 +780,9 @@ The true value of the bottom friction $\mathbf{k}^{\mathrm{true}} = (k_1^{\mathr
 \end{equation*}
 where $x_i$ is the center of the $i$-th volume. The two sources of systematic errors are the one-dimensionality of $\Kspace$, and $\omega_0$.
 Given this setting, there exists no couple $(\mathbf{k},\mathbf{u})\in\Kspace \times \Uspace$ reproducing exactly the observations, thus the cost function will always be strictly positive.
+
 \subsection{Computation of the robust estimates}
-As the numerical model is expensive to evaluate, it has first been evaluated on a relatively small regular grid. A metamodel based on Gaussian processes is constructed using the initial evaluations and in order to better capture the locus of the conditional minimisers $\{(\mathbf{k}^*(\mathbf{u}), \mathbf{u}) \mid \mathbf{u} \in \Uspace \}$, the PEI criterion~\citep{ginsbourger_bayesian_2014,bossek_learning_2015} allows us to add points to the design. Afterwards, a bigger regular grid is evaluated by the metamodel once the design space has been sufficiently explored. The different steps of the estimation are illustrated Figure~\ref{fig:estimation_swe}, where the top plot shows the contour plot of $J$, with the conditional minimisers and the \RRE{} of level $p$. On the middle plot is shown the conditional moments, $\hatkmean$ and $\hatkvar$ and the estimated density of the minimisers. At the bottom of the Figure, $\hat{\Gamma}_{\alpha_p}$ are represented for different levels $p$.
+As the numerical model is expensive to evaluate, it has first been evaluated on a relatively small regular grid. A metamodel based on Gaussian processes is constructed using the initial evaluations and in order to better capture the locus of the conditional minimisers $\{(\mathbf{k}^*(\mathbf{u}), \mathbf{u}) \mid \mathbf{u} \in \Uspace \}$, the PEI criterion~\citep{ginsbourger_bayesian_2014,bossek_learning_2015} allows us to add points to the design. Afterwards, a bigger regular grid is evaluated by the metamodel once the design space has been sufficiently explored. The different steps of the estimation are illustrated Figure~\ref{fig:estimation_swe}, where the top plot shows the contour plot of $J$, with the conditional minimisers and the \RRE{} of level $p$. On the middle plot is shown the conditional moments, $\hatkmean$ and $\hatkvar$ and the estimated density of the minimisers. At the bottom of the Figure, $\hat{\Gamma}_{\alpha_p}$ are represented for different levels $p$. As $\Uspace$ is bounded, $p=1$ is attainable, and $\kest_1$ is evaluated.
 
 \begin{figure}[!h]
 \centering
@@ -787,7 +791,7 @@ As the numerical model is expensive to evaluate, it has first been evaluated on 
 \label{fig:estimation_swe}
 \end{figure}
 
-We can see that the estimation for this problem seems less problematic than the analytical examples shown above. Looking at $p\mapsto \alpha_p$ and $p\mapsto p/\alpha_p$ on Figure~\ref{fig:alpha_p_SWE}, we can see that $\alpha_p$ evolves almost linearly for $p>0.5$, and that the ratio $p/\alpha_p$ is monotonically increasing, so that the maximal ratio is found for $p=1$.
+We can see that the estimation for this problem seems less problematic than the analytical examples shown above. Looking at $p\mapsto \alpha_p$ and $p\mapsto p/\alpha_p$ on Figure~\ref{fig:alpha_p_SWE}, we can see that $\alpha_p$ evolves almost linearly for $p>0.5$, and that the ratio $p/\alpha_p$ is monotonically increasing, so that the maximal ratio is found for $p=1$.  
 
 \begin{figure}[!h]
   \centering
@@ -828,8 +832,7 @@ We can see that the performances of $\kest_1$ and $\hatkmean$ are very similar, 
 
 
 % The calibration of this numerical model is done in order to get a calibrated value $\kest$, that will be used for forecasts, using the same numerical model.
-We are now going to compare how well three of those values compare in a forecast context: $\kest_1$, $\hatkmean$ and $\kest_{\mathrm{global}}$, as the first two refer quite naturally to the notion of robustness, and the latter is an example of an estimate that does not take into account the uncertainties.
-
+We are now going to compare how well some of those calibrated values compare in a forecast context.
 \subsection{Assessing the quality of the forecast of the calibrated model}
 The calibration of the model has been performed using by integrating the model on a time-period $[0, T]$, called assimilation window. 
 We now want to compare the quality of the different forecasts, from different calibrated bottom friction.
@@ -851,22 +854,19 @@ Averaging over both $\mathbf{u}$ and $\mathbf{u}'$ defines the mean squared fore
   \label{eq:squared_forecast_error_averaged}
   S(\mathbf{k}) = \frac{1}{N_{\mathbf{u}}^2 }\sum_{i=1}^{N_{\mathbf{u}}}\sum_{j=1}^{N_{\mathbf{u}}} S_{\mathrm{pred}}(\mathbf{k},\mathbf{u}^i,\mathbf{u}^j) = \frac{1}{N_{\mathbf{u}}^2 }\sum_{i=1}^{N_{\mathbf{u}}}\sum_{j=1}^{N_{\mathbf{u}}}  \left(\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{u}^i) - \mathcal{M}^{o}_{\mathrm{pred}}(\mathbf{u}^j)\right)^2
 \end{equation}
-The mean squared forecast error averaged over the whole space and over all the time-steps gives an indication on the overall prediction quality of the prediction given this metric, and are represented on the right plot of Figure~\ref{fig:forecast_squared_error}. We can see that $\kest_{\mathrm{global}}$ performs slightly better than $\kest_1$, itself performing slightly better than $\hatkmean$.
-Averaging $S(\mathbf{\kest})$ over the time steps between $T$ and $T_{\mathrm{pred}}$, we have an indication on the quality of the forecast in the squared sense depending on the spatial position, as seen on the left plot of Figure~\ref{fig:forecast_squared_error}.
+The mean squared forecast error averaged over the whole space and over all the time-steps gives an indication on the overall prediction quality of the prediction given this metric, and are represented on the right of Figure~\ref{fig:forecast_squared_error}. We can see that $\kest_{\mathrm{global}}$ performs slightly better than $\kest_1$, itself performing slightly better than $\hatkmean$.
+Averaging $S(\mathbf{\kest})$ over the time steps between $T$ and $T_{\mathrm{pred}}$, we have an indication on the quality of the forecast in the squared sense depending on the spatial position, as seen on the left of Figure~\ref{fig:forecast_squared_error}.
 \begin{figure*}[!h]
 \centering
-\includegraphics[width=.9\textwidth]{Figures/L2_full.pdf}
-\caption{Squared forecast error, depending on the calibrated parameter. The left figures show the metric averaged over time, while the right figure show the mean forecast error, averaged over time and space}
+\includegraphics[width=.9\textwidth]{Figures/L2_full_rel.pdf}
+\caption{Squared forecast error, depending on the calibrated parameter. The left figure shows the squared error averaged over time, while the right figure shows the mean forecast error, averaged over time and space}
 \label{fig:forecast_squared_error}
 \end{figure*}
-We can see that the mean forecast error squared, on the right side, averaged over time and space is the smallest for the conditional minimisers $\kest^*(0.7)$ and $\kest^*(0.65)$, then $\kest_{\mathrm{global}}$, while $\kest_{1.0}$ performs slightly better $\hatkmean$.
-
-It may seem surprising that some values calibrated without a robustness aspect perform better than $\kest_1$ and $\hatkmean$, but in fact, not all of those give better results.
-Choosing an arbitrary $\mathbf{u}$ and then taking the associated conditional minimiser can lead to good forecast (for $\mathbf{u}$ close to $0.7$), but also to bad ones (for $\mathbf{u}$ close to $0.5$).
+We can see that the mean forecast error squared, on the right side, averaged over time and space is the smallest for the conditional minimisers $\kest^*(0.7)$ and $\kest^*(0.65)$, then $\kest_{\mathrm{global}}$, while $\kest_{1.0}$ performs slightly better than $\hatkmean$.
 
 
+It may seem surprising that some parameters calibrated without a robustness aspect, so the conditional minimisers, perform better than $\kest_1$ and $\hatkmean$, but their performances are largely dependent on the choice of $\mathbf{u}$ and their associated conditional minimisers. This is shown for $\mathbf{u}=0.5$, that leads to bad forecasts.
 One issue with the squared forecast error is that it will penalize strongly the forecasts that present high variability with respect to the environmental conditions.
-
 A way to deal with this is to use another metric, that takes the probabilistic nature of the forecasts into account.
 
 \subsubsection{Continuous Ranked Probability Score}
@@ -877,21 +877,27 @@ The Continuous ranked probability score (CRPS) measures the squared difference b
 \mathrm{CRPS}(\mathbf{k}) = \int_{\mathbb{R}} (F_{\mathrm{pred}}(x,\mathbf{k}) - F^o_{\mathrm{pred}}(x))^2 \,\mathrm{d}x
 \end{equation}
 
-The left plot of Figure~\ref{fig:forecast_crps} shows the CRPS averaged over time, and the right plot shows the value of the CRPS averaged over time and space. The difference between the squared forecast error and the CRPS is apparent when comparing the general trends shared by the different calibrated parameters. According to the squared error, the region around $x=4$ is not well predicted, while around $x=8$, the prediction are better. On the other hand, according to the CRPS, the region around $x=8$ provide worse forecasts than the one at $x=4$ and $x=7$. 
-
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=.9\textwidth]{Figures/CRPS_full}
-  \caption{CRPS computed for different calibrated parameters}
+  \includegraphics[width=.9\textwidth]{Figures/CRPS_full_rel}
+  \caption{CRPS computed for different calibrated parameters. The left figure show the CRPS averaged over time, and the right figure shows the CRPS, averaged over time and space}
 \label{fig:forecast_crps}
 \end{figure}
-The numerical evaluations of the CRPS for different parameters show the same order of performances observed for the squared error.
-The calibrated parameters that present the best performances for forecasts according to those two metrics are $\kest^*(0.7)$, $\kest^*(0.65)$ which is very similar to $\kest_{\mathrm{global}}$, and then $\kest_1$.
-We can draw the same conclusions on the forecast performances of those calibrated values based on the CRPS than on the squared norm: taking an arbitrary $\mathbf{u}$ and using the conditional minimiser has some flaws.
 
-\clearpage
+The left plot of Figure~\ref{fig:forecast_crps} shows the CRPS averaged over time, and the right plot shows the value of the CRPS averaged over time and space. The difference between the squared forecast error and the CRPS is apparent when comparing the general trends shared by the different calibrated parameters. According to the squared error, the region around $x=4$ is not well predicted, while around $x=8$, the predictions are better. On the other hand, according to the CRPS, the region around $x=8$ provide worse forecasts than the one at $x=4$ and $x=7$. Given the properties of the two metrics,  we can conclude that the region around $x=4$ presents a lot of variability with respect to $\mathbf{u}$, for both the true model and the numerical one. However, for $x \approx 8$, there is a lot less variability, as the low squared error indicates, but probably a higher bias, due to the systematic errors between the truth and the numerical model.
 
-\section*{Conclusion}  
+
+The numerical evaluations of the CRPS for different parameters show the same order of performances observed for the squared error: the calibrated parameters that present the best performances for forecasts according to those two metrics are $\kest^*(0.7)$, $\kest^*(0.65)$ which is very similar to $\kest_{\mathrm{global}}$, and then $\kest_1$, and $\hatkmean$.
+This presupposes to know which $\mathbf{u}$ to choose for the conditional minimisation, thus having a strong insight on the value of the parameters.
+
+
+\section*{Conclusion}
+In this paper, we dealt with a problem of robust calibration, or in other terms, the robust minimisation of a cost function. To adress this issue, we proposed a new set of robust estimators: the family of the \RRE{} (Relative-regret estimators), and compared it in a forecast context to some other robust estimators, for the calibration of the bottom friction of a shallow water model.
+Our approach is based on the will to be as close as possible to the conditional minimiser, with high probability. At a level $p$, in addition to the estimation, we have the relaxation coefficient $\alpha_p$ that bounds with probability $p$ the relative error of the cost function, that helps us assess the conservativeness of the proposed estimation.
+
+Except for simple analytical example, the exact evaluation of a member of the \RRE{} is very expensive computer-wise, not to say impossible. Some bottlenecks appear: the computations of the conditional minimisers $\mathbf{K}^*$, and the minimum $J^*$, that require very local exploration, and the computations of the probability of 
+
+We have to rely on approximations for those estimations. Possible leads are
 % \victor{À faire à la fin}
 % This paper deals with the problem of robust calibration of a computer code in the presence of uncertain inputs. 
 

@@ -133,7 +133,7 @@ In this paper, we are going to present how to take into account those uncertaint
 
 \begin{keyword}
 %% keywords here, in the form: keyword \sep keyword
-
+Calibration \sep Robust optimisation \sep Relative-regret \sep shallow-water equations
 %% PACS codes here, in the form: \PACS code \sep code
 
 %% MSC codes here, in the form: \MSC code \sep code
@@ -896,18 +896,21 @@ The left plot of Figure~\ref{fig:forecast_crps} shows the CRPS averaged over tim
 The numerical evaluations of the CRPS for different parameters show the same order of performances observed for the squared error: the calibrated parameters that present the best performances for forecasts according to those two metrics are $\kest^*(0.7)$, $\kest^*(0.65)$ which is very similar to $\kest_{\mathrm{global}}$, and then $\kest_1$, and $\hatkmean$.
 This presupposes to know which $\mathbf{u}$ to choose for the conditional minimisation, thus having a strong insight on the value of the parameters in the first place.
 
-
+% ----------------------------------------------------------------------
 \section*{Conclusion}
+
 In this paper, we dealt with a problem of robust calibration, or in other terms, the robust minimisation of an objective function. To adress this issue, we proposed a new set of robust estimators: the family of the \RRE{} (Relative-regret estimators), and compared it in a forecast context to some other robust estimators, for the calibration of the bottom friction of a shallow water model.
 
 Our approach is based on the will to be as close as possible to the conditional minimiser, with high probability. At a level $p$, in addition to the estimation, we have the relaxation coefficient $\alpha_p$ that bounds with probability $p$ the relative error of the cost function, that helps us assess the conservativeness of the proposed estimation.  
 
 Except for simple analytical examples, the exact evaluation of a member of the \RRE{} is very expensive computer-wise, not to say impossible. Some bottlenecks appear: the computations of the conditional minimisers $\mathbf{k}^*(\mathbf{u})$ and the minimum $J^*(\mathbf{u})$, that require very local exploration of $\Kspace$ for every $\mathbf{u}$; and the computations of the probability of overshooting a given bound that depends on $J^*(\mathbf{u})$ (analogous to a probability of failure), task that requires an efficient exploration of the whole sample space $\Uspace$.
 
-For the calibration of the shallow water model presented in Section~\ref{sec:SWE_application}, we chose to construct a response surface based on Gaussian processes, which is going to be used for the extensive computations. This construction is first based on an initial design, that is enriched to better capture the locus of the conditional minimisers using the PEI criterion introduced in~\cite{ginsbourger_bayesian_2014}. One lead that appears naturally to diminish the amount of computation is to find a sequential criterion that makes the balance between the minimisation of a probability of failure, and 
+For the calibration of the shallow water model presented in Section~\ref{sec:SWE_application}, we chose to construct a response surface based on Gaussian processes, which is going to be used for the extensive computations. This construction is first based on an initial design, that is enriched to better capture the locus of the conditional minimisers using the PEI criterion introduced in~\cite{ginsbourger_bayesian_2014}. 
 
-Comparing the performances of the different estimates, one can see that for the two metrics introduced in Section~\ref{sec:SWE_application}, $\kest_1$ performs better than $\hatkmean$, but is sometimes outperformed by ``non-robust'' solutions.
+Comparing the performances of the different estimates in a forecast context, one can see that for the two metrics introduced in Section~\ref{sec:SWE_application}, $\kest_1$ performs better than $\hatkmean$, but is sometimes outperformed by ``non-robust'' solutions. Those require some additional knowledge about the environmental conditions, and did not present some robust properties during the calibration phase.
 
+Practically speaking, the estimation of those quantities is very crude, so the computational cost may be very expensive. As perspective, specific strategies have to be created, based for instance on sequential design of computer experiments using Gaussian processes, to diminish the amount of runs needed of the numerical model.. Ideally, one would want to develop a acquisition criterion, that makes the balance between the minimisation of a well-chosen probability of failure, and the exploration around the conditional minimisers.
+Finally, the models upon which this calibration procedure have been applied are very simplistic. We plan in the future to apply this to the robust calibration of the bottom friction of a realistic model of the ocean.
 % \victor{À faire à la fin}
 % This paper deals with the problem of robust calibration of a computer code in the presence of uncertain inputs. 
 

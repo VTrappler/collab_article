@@ -147,7 +147,7 @@ Calibration \sep Robust optimisation \sep Relative-regret \sep shallow-water equ
 
 %% main text
 \section*{Introduction}
-\label{}
+\label{sec:intro}
 
 %----------------------------------------------------------------------------
 % \listoftodos{}
@@ -222,7 +222,7 @@ Another strategy, that consists in minimising $J$ over the joint space $\Kspace\
 The worst-case approach \citep{marzat_worst-case_2013} is another popular method, and is based on the minimisation with respect to $\mathbf{k}$ of the maximum of the cost function for $\mathbf{u}\in\Uspace$: $\min_{\mathbf{k}} \max_{\mathbf{u}} J(\mathbf{k}, \mathbf{U} = \mathbf{u})$. This approach may yield over-conservative solutions, and does not take into account the random nature of $\mathbf{U}$.% when the support of $\mathbf{U}$ is unbounded.
 
 Accounting for the probabilistic nature of  $\mathbf{U}$ leads to study the distribution of the random variable $J(\mathbf{k},\mathbf{U})$, or the distribution of its minimisers ${\mathbf{k}}_{\mathbf{U}}$. The latter is referred as 
-the distribution of the conditional minimisers, notion that appeared notably in~\cite{villemonteix_informational_2006} and in~\cite{hennig_entropy_2011} for a global optimisation purpose. Both approaches and related robust estimates are described in Section~\ref{robust formulations}. Section~\ref{sec:relax_constraint} introduces a new class of estimators, by relaxing the constraint of optimality and defining regions of acceptability, similarly as~\cite{buhmann_robust_2013} in discrete combinatorial problems.  The intention is that a robust estimate provides values of the cost function close enough to the attainable minimum for each configuration induced by $\mathbf{u}\in\Uspace$. Illustration of the various described methods are given on a numerical exemple in Section~\ref{sec:SWE_application}.
+the distribution of the conditional minimisers, notion that appeared notably in~\cite{villemonteix_informational_2006} and in~\cite{hennig_entropy_2011} for a global optimisation purpose. Both approaches and related robust estimates are described in Section~\ref{robust formulations}. Section~\ref{sec:relax_constraint} introduces a new class of estimators, by relaxing the constraint of optimality and defining regions of acceptability, similarly as~\cite{buhmann_robust_2013} in discrete combinatorial problems, or~\cite{kouvelis_algorithms_1992,snyder_stochastic_2004} in operation research. The intention is that a robust estimate provides values of the cost function close enough to the attainable minimum for each configuration induced by $\mathbf{u}\in\Uspace$. Illustration of the various described methods are given on a numerical exemple in Section~\ref{sec:SWE_application}.
 
 % ----------------------------------------------------------------------------
 
@@ -342,12 +342,13 @@ The mode of this density is called the Most Probable Estimate (MPE) and is noted
   \kmpe = \argmax_{\mathbf{k} \in\Kspace} p_{\mathbf{K}^*}(\mathbf{k}) 
 \end{equation}
 To give some intuition on this estimate, let us imagine that the distribution of minimisers is a dirac centered on $\kmpe$. Then it would mean that this estimate is the minimiser of the cost function whatever the realisation of the uncertain variable, therefore optimal in all conditions. 
-If the distribution $p_{\mathbf{K}^*}$ is heavily dominated by a single value, the MPE may be a good candidate for robust control. This is not so obvious in case of a multimodal distribution.
+If the distribution $p_{\mathbf{K}^*}$ is heavily dominated by a single value, the MPE may be a good candidate for robust control. This is not so obvious in the case of a multimodal distribution.
 
 
 In general, an analytical form of $p_{\mathbf{K}^*}$ is usually impossible to obtain, so an estimation $\hat{p}_{\mathbf{K}^*}$ must be used, and its maximum computed to get the MPE.
+In the rest of the paper, the hat notation will indicate an estimation using numerical values of the underlying theoretical quantity.
 Once again, a set of samples  $\{\mathbf{u}^i\}_{i=1\dots N}$ can be used to compute the set $\{\mathbf{k}_{\mathbf{u}^i}\}_{i=1\dots N}$, from which one can 
-approximate  $p_{\mathbf{K}^*}$. The resulting approximation and therefore its mode, is sensitive to the density estimation method. Main methods are KDE  (Kernel Density Estimation)~\cite{elise}, and  EM (Expectation-Maximisation)~\citep{dempster_maximum_1977}.
+approximate  $p_{\mathbf{K}^*}$. The resulting approximation and therefore its mode, is sensitive to the density estimation method. Main methods are KDE  (Kernel Density Estimation)~\cite{elise}, and EM (Expectation-Maximisation)~\citep{dempster_maximum_1977}.
 
 %Two widely used methods to estimate the density are the KDE (Kernel Density Estimation), and the EM~\citep{dempster_maximum_1977} algorithm to fit a mixture of Gaussian random variable to the observations.
 
@@ -901,7 +902,7 @@ This presupposes to know which $\mathbf{u}$ to choose for the conditional minimi
 
 In this paper, we dealt with a problem of robust calibration, or in other terms, the robust minimisation of an objective function. To adress this issue, we proposed a new set of robust estimators: the family of the \RRE{} (Relative-regret estimators), and compared it in a forecast context to some other robust estimators, for the calibration of the bottom friction of a shallow water model.
 
-Our approach is based on the will to be as close as possible to the conditional minimiser, with high probability. At a level $p$, in addition to the estimation, we have the relaxation coefficient $\alpha_p$ that bounds with probability $p$ the relative error of the cost function, that helps us assess the conservativeness of the proposed estimation.  
+Our approach is based on the will to be as close as possible to the conditional minimisers with high probability. At a level $p$, in addition to the estimation, we have the relaxation coefficient $\alpha_p$ that bounds with probability $p$ the relative error of the cost function, that helps us assess the conservativeness of the proposed estimation.  
 
 Except for simple analytical examples, the exact evaluation of a member of the \RRE{} is very expensive computer-wise, not to say impossible. Some bottlenecks appear: the computations of the conditional minimisers $\mathbf{k}^*(\mathbf{u})$ and the minimum $J^*(\mathbf{u})$, that require very local exploration of $\Kspace$ for every $\mathbf{u}$; and the computations of the probability of overshooting a given bound that depends on $J^*(\mathbf{u})$ (analogous to a probability of failure), task that requires an efficient exploration of the whole sample space $\Uspace$.
 
@@ -909,7 +910,7 @@ For the calibration of the shallow water model presented in Section~\ref{sec:SWE
 
 Comparing the performances of the different estimates in a forecast context, one can see that for the two metrics introduced in Section~\ref{sec:SWE_application}, $\kest_1$ performs better than $\hatkmean$, but is sometimes outperformed by ``non-robust'' solutions. Those require some additional knowledge about the environmental conditions, and did not present some robust properties during the calibration phase.
 
-Practically speaking, the estimation of those quantities is very crude, so the computational cost may be very expensive. As perspective, specific strategies have to be created, based for instance on sequential design of computer experiments using Gaussian processes, to diminish the amount of runs needed of the numerical model.. Ideally, one would want to develop a acquisition criterion, that makes the balance between the minimisation of a well-chosen probability of failure, and the exploration around the conditional minimisers.
+Practically speaking, the estimation of those quantities is very crude, so the computational cost may be very expensive. As perspective, specific strategies have to be created, based for instance on sequential design of computer experiments using Gaussian processes, to diminish the amount of runs needed of the numerical model. Ideally, one would want to develop a acquisition criterion, that makes the balance between the minimisation of a well-chosen probability of failure, and the exploration around the conditional minimisers.
 Finally, the models upon which this calibration procedure have been applied are very simplistic. We plan in the future to apply this to the robust calibration of the bottom friction of a realistic model of the ocean.
 % \victor{À faire à la fin}
 % This paper deals with the problem of robust calibration of a computer code in the presence of uncertain inputs. 
@@ -939,7 +940,7 @@ Finally, the models upon which this calibration procedure have been applied are 
 %% TeX file.
 
 \bibliographystyle{elsarticle-num-names} 
-\bibliography{bibzotero}
+\bibliography{biblio_file}
 
 \end{document}
 

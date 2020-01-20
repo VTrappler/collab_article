@@ -34,7 +34,8 @@
 %% For including figures, graphicx.sty has been loaded in
 %% elsarticle.cls. If you prefer to use the old commands
 %% please give \usepackage{epsfig}
-
+\usepackage{jcomp}
+\usepackage{framed,multirow}
 %% The amssymb package provides various useful mathematical symbols
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -47,7 +48,6 @@
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
 %% for the whole article with \linenumbers.
 %% \usepackage{lineno}
-\usepackage{easy-todo}
 \usepackage{graphicx}
 \usepackage{booktabs}
 % À changer
@@ -80,12 +80,14 @@
 \newcommand{\arthur}[1]{{\itshape\color{cyan} ({#1})}}
 \newcommand{\elise}[1]{{\itshape\color{red} ({#1})}}
 \newcommand{\victor}[1]{{\itshape\color{green} ({#1})}}
+\usepackage{url}
+\usepackage{xcolor}
+\definecolor{newcolor}{rgb}{.8,.349,.1}
 
 \journal{Journal of Computational Physics}
 
 \begin{document}
 
-\begin{frontmatter}
 
 %% Title, authors and addresses
 
@@ -98,20 +100,50 @@
 %% use the ead command for the email address,
 %% and the form \ead[url] for the home page:
 
-\title{Robust calibration of numerical models based on relative regret}
+% \title{Robust calibration of numerical models based on relative regret}
 
-%% use optional labels to link authors explicitly to addresses:
-%% \author[label1,label2]{}
-%% \address[label1]{}
-%% \address[label2]{}
+% %% use optional labels to link authors explicitly to addresses:
+% %% \author[label1,label2]{}
+% %% \address[label1]{}
+% %% \address[label2]{}
 
-\author[vt]{Victor Trappler}
+% \author[vt]{Victor Trappler}
+% \ead{victor.trappler@univ-grenoble-alpes.fr}
+% \author[ea]{Élise Arnaud}
+% \author[av]{Arthur Vidard}
+% \author[ld]{Laurent Debreu}
+
+% \address[vt]{Univ. Grenoble Alpes, CNRS, Inria, Grenoble INP*, LJK, 38000 Grenoble, France}
+
+
+\verso{Victor Trappler \textit{etal}}
+
+\begin{frontmatter}
+
+\title{Robust calibration of numerical models based on relative regret}%
+
+\author[1]{Victor \snm{Trappler}\corref{cor1}}
+\cortext[cor1]{Corresponding author% : 
+  % Tel.: +0-000-000-0000;  
+  % fax: +0-000-000-0000
+  % ;
+}
 \ead{victor.trappler@univ-grenoble-alpes.fr}
-\author[ea]{Élise Arnaud}
-\author[av]{Arthur Vidard}
-\author[ld]{Laurent Debreu}
+\author[1]{Élise \snm{Arnaud}}
+% \fntext[fn1]{This is author footnote for second author.}  
+\author[2]{Arthur \snm{Vidard}}
+%% Third author's email
+% \ead{author3@author.com}
+\author[2]{Laurent \snm{Debreu}}
 
-\address[vt]{Univ. Grenoble Alpes, CNRS, Inria, Grenoble INP*, LJK, 38000 Grenoble, France}
+\address[1]{Univ. Grenoble Alpes, CNRS, Inria, Grenoble INP\fnref{fn1}, LJK, 38000 Grenoble, France}
+\fntext[fn1]{Institute of Engineering Univ. Grenoble Alpes}
+\address[2]{Univ. Grenoble Alpes, Inria, CNRS, Grenoble INP\fnref{fn1}, LJK, 38000 Grenoble, France}
+\received{}
+\finalform{}
+\accepted{}
+\availableonline{}
+\communicated{}
 
 \begin{abstract}
 %% Text of abstract
@@ -131,32 +163,25 @@ In this paper, we are going to present how to take into account those uncertaint
 % \item Research highlight 2
 % \end{highlights}
 
-\begin{keyword}
-%% keywords here, in the form: keyword \sep keyword
-Calibration \sep Robust optimisation \sep Relative-regret \sep shallow-water equations
-%% PACS codes here, in the form: \PACS code \sep code
+% \begin{keyword}
+% %% keywords here, in the form: keyword \sep keyword
+% Calibration \sep Robust optimisation \sep Relative-regret \sep shallow-water equations
+% %% PACS codes here, in the form: \PACS code \sep code
 
-%% MSC codes here, in the form: \MSC code \sep code
-%% or \MSC[2008] code \sep code (2000 is the default)
+% %% MSC codes here, in the form: \MSC code \sep code
+% %% or \MSC[2008] code \sep code (2000 is the default)
 
-\end{keyword}
+% \end{keyword}
 
 \end{frontmatter}
 
 %% \linenumbers
 
 %% main text
-\section*{Introduction}
+\section{Introduction}
 \label{sec:intro}
 
 %----------------------------------------------------------------------------
-% \listoftodos{}
-
-%\arthur{Revoir les notations ($\hat{\bf k}$, ${\bf k}^*$ c'est la meme chose ou pas ? les u, U je ne suis pas sûr que c'est bon non plus)}
-%\victor{Pour moi, ce qui est en majuscule, c'est des v.a., et tous les inputs sont en gras (mais on peut laisser tomber le gras)}
-%% \introduction[modified heading if necessary]
-%\subsection{Motivation}
-
 Numerical models are widely used to study or forecast natural phenomena and improve industrial processes. However, by essence models only partially represent reality and sources of uncertainties are ubiquitous (discretisation errors, missing physical processes, poorly known boundary conditions).
 %Many physical phenomena are modelled numerically in order to better understand and/or to predict their behaviour. Because of the complexity and or ignorance of the underlying physics, numerical models are imperfect representations of the reality. 
 %
@@ -231,35 +256,8 @@ the distribution of the conditional minimisers, notion that appeared notably in~
 \label{robust formulations}
 
 As mentioned before, robustness can be understood as satisfactory for a broad range of $\mathbf{u}$, and/or as insensitive as possible to uncertainties encompassed in $\mathbf{U}$. Under this definition, one may design robust estimators, either by using the moments of the cost function; or by exploiting the distribution of its minimisers.
-
-
-%
-%When robustness is defined as the ability of $\kest$ to perform reasonably well under different operating conditions (i.e.\ different $\mathbf{u}$), two classical  approaches can be used to define robust estimators:
-%\begin{itemize} 
-%\item Optimisation of the statistical moments of the random variable $J(\mathbf{k}, \mathbf{U})$: usually minimisation of the expected value, of the variance or a combination of them
-%\item Estimate based on the distribution of the minimisers $\mathbf{k}_{\mathbf{u}}$, assuming the inverse problem is well-posed to ensure the existence and the unicity of the minimiser for each $\mathbf{u}$. 
-%\end{itemize}
-
-
-
-
-%\subsection{simple/classical estimators \arthur{TITRE \`A REVOIR}}
-
-%Broadly speaking, two different aspects can be used to define robust estimators:
-%\begin{itemize} 
-%\item Optimisation of the statistical moments of the random variable: usually minimisation of the expected value, of the variance or a combination of them
-%\item Estimate based on the distribution of the minimisers, assuming the inverse problem is well-posed to ensure the existence and the unicity of the minimiser for each $\mathbf{u}$. 
-%\end{itemize}
-
-
-
-
 % ----------------------------------------------------------------------------
 \subsection{Optimisation of the moments}
-
-%Statistical moments, especially  expectation and variance, are common tools used to describe and summarise a random variable. %A case in point are the Gaussian random variables, that are uniquely defined by their expected value and their variance. 
-%It then makes sense that the statistical moments have a central role in robust optimisation. In practice, such ideas relies on the expected value as seen in \cite{shapiro_lectures_2009}, while looking at the same time mean and variance is the basis of Markowitz's portfolio selection theory in \cite{markowitz_portfolio_1952}. 
-%
 
 Let us define $\mu(\mathbf{k})$ and $\sigma^2(\mathbf{k})$, the expected value and the variance of the cost variable  for a given $\mathbf{k}$ as 
 \begin{align}
@@ -348,7 +346,7 @@ If the distribution $p_{\mathbf{K}^*}$ is heavily dominated by a single value, t
 In general, an analytical form of $p_{\mathbf{K}^*}$ is usually impossible to obtain, so an estimation $\hat{p}_{\mathbf{K}^*}$ must be used, and its maximum computed to get the MPE.
 In the rest of the paper, the hat notation will indicate an estimation using numerical values of the underlying theoretical quantity.
 Once again, a set of samples  $\{\mathbf{u}^i\}_{i=1\dots N}$ can be used to compute the set $\{\mathbf{k}_{\mathbf{u}^i}\}_{i=1\dots N}$, from which one can 
-approximate  $p_{\mathbf{K}^*}$. The resulting approximation and therefore its mode, is sensitive to the density estimation method. Main methods are KDE  (Kernel Density Estimation)~\cite{elise}, and EM (Expectation-Maximisation)~\citep{dempster_maximum_1977}.
+approximate  $p_{\mathbf{K}^*}$. The resulting approximation and therefore its mode, is sensitive to the density estimation method. Main methods are KDE (Kernel Density Estimation)~\citep{silverman_density_2018}, and EM (Expectation-Maximisation)~\citep{dempster_maximum_1977}.
 
 %Two widely used methods to estimate the density are the KDE (Kernel Density Estimation), and the EM~\citep{dempster_maximum_1977} algorithm to fit a mixture of Gaussian random variable to the observations.
 
@@ -406,7 +404,7 @@ Even though the functions are quite similar, the asymmetric roles of $\mathbf{k}
 
 \begin{figure*}[!ht]
   \centering
-  \includegraphics[width=10cm]{Figures/branin_side_moments_noscale.pdf}
+  \includegraphics[width=12cm]{Figures/branin_side_moments_noscale.pdf}
   \caption{The left column concerns $\JBH$, while the right one deals with $\JBHS$. Contours of both functions are plotted on the top, and curves of  $\mu(\mathbf{k})$ and $\sigma(\mathbf{k})$ are shown on the bottom (respective scales are not displayed). Estimates $\hatkmean$ and $\hatkvar$ are plotted with the dashed line.}
 \label{fig:branin_moments}
 \end{figure*}
@@ -425,11 +423,11 @@ On this figure, we can observe that $\hatkmean$ and $\hatkvar$ are close for $\J
 %\clearpage
 
 
-Similarly, estimations of $\hatkmpe$ are depicted on Figure~\ref{fig:contours}.The top row shows the contours of both functions as well as the set of conditional minimisers $\{\mathbf{k}_{\mathbf{u}^i}\}_{1\leq i \leq N}$ in red, as defined in Eq.~\eqref{eq:conditional_minimiser}.
+Similarly, estimations of $\hatkmpe$ are depicted on Figure~\ref{fig:contours}. The top row shows the contours of both functions as well as the set of conditional minimisers $\{\mathbf{k}_{\mathbf{u}^i}\}_{1\leq i \leq N}$ in red, as defined in Eq.~\eqref{eq:conditional_minimiser}.
 The bottom row presents three approximations of the density of minimisers: the histogram in grey (bin size selected using Freedman-Diaconis from~\cite{freedman_histogram_1981}), the result of a kernel density estimation (KDE) with Gaussian kernels in red (using Scott's rule from~\cite{scott_optimal_1979} for bandwidth selection), and the estimation by a Gaussian mixture, calculated with the EM algorithm. The number of Gaussians has been fixed to 3, a guess based on the general shape of the histogram. Respective estimations of $\hatkmpe$ are also depicted using dashed lines. 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=10cm]{Figures/branin_side_66.pdf}
+  \includegraphics[width=12cm]{Figures/branin_side_66.pdf}
   \caption{Top Left:  $\JBH$ along with conditional minimisers in red. Bottom left: Estimated densities using KDE and EM algorithm and the histogram. The dashed lines indicate the MPE found using those methods. Right: Same quantities with $\JBHS$.}
 \label{fig:contours}
 \end{figure}
@@ -451,16 +449,16 @@ Instead of just considering the optimal minimisers, we introduce a bit of leeway
 \section{Relative regret-based family of estimators}%A new family of robust estimators \elise{titre a revoir}}
 \label{sec:relax_constraint}
 \subsection{Relaxing the optimality constraint}
-The density of minimisers has been estimated by optimising $\mathbf{k}\mapsto J(\mathbf{k},\mathbf{u})$ over $\Kspace$ for different realisations of $\mathbf{u}$. Instead of focusing on optimal values, we propose to consider their {\it acceptable} neighbourhood in terms of performance of the cost function as well.
-To do so, for each $\mathbf{u}$, $\mathbf{k}$ is deemed acceptable when  $J(\mathbf{k},\mathbf{u}) \leq \alpha J^*(\mathbf{u})$, with $\alpha > 1$. 
-
-
-In this context, for a given $\mathbf{k}$, the set $R_{\alpha}(\mathbf{k}) \subset \Uspace$ is defined as the set of $\mathbf{u}$, for which $\mathbf{k}$ is acceptable:
+The density of minimisers has been estimated by optimising $\mathbf{k}\mapsto J(\mathbf{k},\mathbf{U}=\mathbf{u})$ over $\Kspace$ for different realisations of $\mathbf{u}$. Instead of focusing on optimal values, we propose to consider their {\it acceptable} neighbourhood in terms of performance of the cost function as well.
+To do so, for each $\mathbf{u}$, $\mathbf{k}$ is deemed acceptable when  $J(\mathbf{k},\mathbf{U}=\mathbf{u}) \leq \alpha J^*(\mathbf{u})$, with $\alpha > 1$. 
+%
+%
+In this context, for a given $\mathbf{k}$, the set $R_{\alpha}(\mathbf{k}) \subseteq \Uspace$ is defined as the set of $\mathbf{u}$, for which $\mathbf{k}$ is acceptable:
 \begin{equation}
 \label{eq:def_Ralpha}
-R_{\alpha}(\mathbf{k}) = \left\{ \mathbf{u} \in \Uspace \mid J(\mathbf{k},\mathbf{u}) \leq \alpha J^*(\mathbf{u}) \right\}
+R_{\alpha}(\mathbf{k}) = \left\{ \mathbf{u} \in \Uspace \mid J(\mathbf{k},\mathbf{U}=\mathbf{u}) \leq \alpha J^*(\mathbf{u}) \right\}
 \end{equation}
-Figure~\ref{fig:relax_tuto} details the successive steps for the construction of the set $R_{\alpha}$. First, the conditional minimisers are computed, as shown on the top plots. Afterwards, for a given level $\alpha=1.5$ and for all $\mathbf{u} \in \Uspace$, the acceptable $\mathbf{k}$ are identified, as shown on the bottom left plot. Finally, the region $R_{\alpha}(\mathbf{k})$ is the set of $\mathbf{u}$ for which $\mathbf{k}$ is acceptable, as represented with a vertical slice on the bottom right plot.
+Figure~\ref{fig:relax_tuto} details the successive steps for the construction of the set $R_{\alpha}$. First, the conditional minimisers are computed, as shown on the top plots. Afterwards, for a given level $\alpha=1.5$, the set of acceptable $\mathbf{k}$ can be identified for each $\mathbf{u} \in \Uspace$, as shown on the bottom left plot. Finally, the region $R_{\alpha}(\mathbf{k})$ is the subset of $\Uspace$ for which $\mathbf{k}$ is acceptable, as represented with a vertical slice on the bottom right plot.
 
 % This notion of acceptability will be introduced later.
 % Finally, for each $\mathbf{k}$, we will measure (with respect to $\Prob_{\mathbf{U}}$) the set of $\mathbf{u}$ within this acceptable neighbourhood. 
@@ -468,8 +466,8 @@ Figure~\ref{fig:relax_tuto} details the successive steps for the construction of
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=10cm]{Figures/relaxation_tuto.pdf}
-\caption{Principle of the relaxation of the constraint on $\JBH$, and illustration of $R_\alpha(\mathbf{k})$. Top plots: Computation of the conditional minimisers $\mathbf{k}^*(\mathbf{u})$. Top right plot: the set $(\mathbf{k}^*(\mathbf{u}),\mathbf{u})$ of conditional minimisers is represented in red. On the bottom left plot, for a relaxation $\alpha=1.5$, and $\mathbf{u}=3$, the acceptable $\mathbf{k}$ are in cyan, while the non-acceptable ones are in orange, while the frontier $\{(\mathbf{k}^*(\mathbf{u}),\mathbf{u}) \mid J^*(\mathbf{u}) = J(\mathbf{k},\mathbf{u})\}$ is in yellow. On the bottom right plot, the set $R_{\alpha}(\mathbf{k})$ for $\alpha=1.5$ and $\mathbf{k}=1.5$ is in green.}
+\includegraphics[width=12cm]{Figures/relaxation_tuto.pdf}
+\caption{Principle of the relaxation of the constraint on $\JBH$, and illustration of $R_\alpha(\mathbf{k})$. Top plots: Computation of the conditional minimisers $\mathbf{k}^*(\mathbf{u})$. Top right plot: the set $(\mathbf{k}^*(\mathbf{u}),\mathbf{u})$ of conditional minimisers is represented in red. On the bottom left plot, for a relaxation $\alpha=1.5$, and $\mathbf{u}=3$, the acceptable $\mathbf{k}$ are in cyan, while the non-acceptable ones are in orange, while the frontier $\{(\mathbf{k}^*(\mathbf{u}),\mathbf{u}) \mid J^*(\mathbf{u}) = J(\mathbf{k},\mathbf{U}=\mathbf{u})\}$ is in yellow. On the bottom right plot, the set $R_{\alpha}(\mathbf{k})$ for $\alpha=1.5$ and $\mathbf{k}=1.5$ is in green.}
 \label{fig:relax_tuto}
 \end{figure*}
 
@@ -486,12 +484,12 @@ $J^*(\mathbf{U})$ and
 $\alpha J^*(\mathbf{U})$.
 
 
-Noting that without relaxation, \textit{i.e.} when $\alpha$ is set to $1$, $\Gamma_1$ is non-zero if the set $\{\mathbf{u}\in\Uspace \mid J(\mathbf{k},\mathbf{u}) = J^*(\mathbf{u})\}$ has non-zero measure with respect to $\Prob_{\mathbf{U}}$. It happens when the distribution of $\mathbf{K}^*$ presents atoms.
+Noting that without relaxation, \textit{i.e.} when $\alpha$ is set to $1$, $\Gamma_1$ is non-zero if the set $\{\mathbf{u}\in\Uspace \mid J(\mathbf{k},\mathbf{U}=\mathbf{u}) = J^*(\mathbf{u})\}$ has non-zero measure with respect to $\Prob_{\mathbf{U}}$. It happens when the distribution of $\mathbf{K}^*$ presents atoms.
 
-This can be linked to the definition of the distribution of the minimisers $\mathbf{K}^*$. For instance, if $\Kspace$ is a discrete set, we can rewrite $\Gamma_1$ as $\Gamma_1(\mathbf{k})=\Prob_{\mathbf{U}}\left[J(\mathbf{k},\mathbf{u}) = J^*(\mathbf{U})\right] = \Prob_{\mathbf{U}}\left[\mathbf{k} = \mathbf{k}^*(\mathbf{U})\right]$ which is the probability mass function of $\mathbf{K}^*$.
+This can be linked to the definition of the distribution of the minimisers $\mathbf{K}^*$. For instance, if $\Kspace$ is a discrete set, we can rewrite $\Gamma_1$ as $\Gamma_1(\mathbf{k})=\Prob_{\mathbf{U}}\left[J(\mathbf{k},\mathbf{U}=\mathbf{u}) = J^*(\mathbf{U})\right] = \Prob_{\mathbf{U}}\left[\mathbf{k} = \mathbf{k}^*(\mathbf{U})\right]$ which is the probability mass function of $\mathbf{K}^*$.
 
 The motivation behind this relaxation is to take into account the local behaviour of the function around the conditional minimisers.
-For a given set of environmental conditions $\mathbf{u}$, if the function $\mathbf{k} \mapsto J(\mathbf{k},\mathbf{u})$ is flat around its minimum $\mathbf{k}^*(\mathbf{u})$, then choosing  $\mathbf{k}^*(\mathbf{u}) + \epsilon$ (for a small $\epsilon$) will produce a value closer to the minimum than when the function has a high curvature.
+For a given set of environmental conditions $\mathbf{u}$, if the function $\mathbf{k} \mapsto J(\mathbf{k},\mathbf{U}=\mathbf{u})$ is flat around its minimum $\mathbf{k}^*(\mathbf{u})$, then choosing  $\mathbf{k}^*(\mathbf{u}) + \epsilon$ (for a small $\epsilon$) will produce a value closer to the minimum than when the function has a high curvature.
 In addition to that, relaxing the constraint using a multiplicative constant puts more weight on the values of $\mathbf{k}^*(\mathbf{u})$ when $J^*(\mathbf{u})$ is small.
 
 
@@ -503,12 +501,12 @@ For instance, given that $J>0$, $\Gamma_{\alpha}(\mathbf{k})$ is increasing with
 \end{align}
 that is the smallest $\alpha$, such that there exists a particular $\checkkp \in \Kspace$ for which $J(\checkkp,\mathbf{U}) \leq \checkap J^*(\mathbf{U})$ with probability $p$.
 $\{\mathbf{k}_p \text{ for } p \in [0;1] \}$ defines the relative-regret family of robust estimators (\RRE).
-This formulation can be linked to the quantiles and Value-at-Risk of the random variable $\max_{\mathbf{k}} \{ \frac{J(\mathbf{k},\mathbf{U})}{J^*(\mathbf{U})}\}$, that is a measure of risk usually applied in the financial sector (see~\cite{rockafellar_deviation_2002}). For different levels $p$, and thus different $\alpha_p$, Figure~\ref{fig:illu_alpha_p} shows examples of $\Gamma_{\alpha_p}$. By definition, the associated $\mathbf{k}_p$ is then the first value for which $\Gamma_{\alpha_p}$ reaches $p$. We can see that changing the level $p$ shifts the maximiser of $\Gamma_{\alpha_p}$, and that for small $\alpha$, $\Gamma_{\alpha}(\mathbf{k}_1)$ is also very small. This indicates that $\mathbf{k}_1$ is located quite far from the conditional minimisers, and arise as a compromise when the relaxation is large enough.
+This formulation can be linked to the quantiles and Value-at-Risk of the random variable $\max_{\mathbf{k}} \{ \frac{J(\mathbf{k},\mathbf{U})}{J^*(\mathbf{U})}\}$, that is a measure of risk usually applied in the financial sector (see~\cite{rockafellar_deviation_2002}). For different levels $p$, and thus different $\alpha_p$, Figure~\ref{fig:illu_alpha_p} shows examples of $\Gamma_{\alpha_p}$ for $\JBHS$. By definition, the associated $\mathbf{k}_p$ is then the first value for which $\Gamma_{\alpha_p}$ reaches $p$. We can see that changing the level $p$ shifts the maximiser of $\Gamma_{\alpha_p}$, and that for small $\alpha$, $\Gamma_{\alpha}(\mathbf{k}_1)$ is also very small. This indicates that $\mathbf{k}_1$ is located quite far from the conditional minimisers, and arise as a compromise when the relaxation is large enough.
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width = 0.6\textwidth]{Figures/illu_alpha_p.pdf}
-\caption{Illustration of the influence of different levels $p$ on $\Gamma_{\alpha_p}$ and on $\mathbf{k}_p$}
+\includegraphics[width = 0.7\textwidth]{Figures/illu_alpha_p.pdf}
+\caption{Illustration of the influence of different levels $p$ on $\Gamma_{\alpha_p}$ and on $\mathbf{k}_p$ for $\JBHS$}
 \label{fig:illu_alpha_p}
 \end{figure}
 
@@ -534,14 +532,14 @@ By considering the particular case where $p=1$, a relation between $\checkk_1$ a
 it follows then that 
 \begin{equation}
   \label{eq:upper_bound_alpha_check}
-  \checka_1 = \sup_{\mathbf{u}\in\Uspace} \frac{J(\mathbf{k}_1,\mathbf{u})}{J^*(\mathbf{u})} =  \inf_{\mathbf{k}\in\Kspace} \left\{ \sup_{\mathbf{u}\in\Uspace} \frac{J(\mathbf{k},\mathbf{u})}{J^*(\mathbf{u})} \right\} 
+  \checka_1 = \sup_{\mathbf{u}\in\Uspace} \frac{J(\mathbf{k}_1,\mathbf{U}=\mathbf{u})}{J^*(\mathbf{u})} =  \inf_{\mathbf{k}\in\Kspace} \left\{ \sup_{\mathbf{u}\in\Uspace} \frac{J(\mathbf{k},\mathbf{U}=\mathbf{u})}{J^*(\mathbf{u})} \right\} 
 \end{equation}
 
-This alternative definition of $\checka_1$ is useful to estimate it quickly whenever a grid over $\mathbb{K}\times\mathbb{U}$ has already been evaluated, thus avoiding multiple computations of $\Gamma_{\alpha}(\mathbf{k})$ until its maximum reaches $1$. From Eq.~\eqref{eq:upper_bound_alpha_check}, choosing a level of confidence equal to $1$ is then equivalent to looking for the worst-case scenario of the ratio $\frac{J(\mathbf{k},\mathbf{u})}{J^*(\mathbf{u})}$. Therefore it may suffer from the same pitfall as the worst-case approach. As mentioned in the introduction, this is not suited for random variable with unbounded support as it may return over-conservative solution, provided that a solution exists in the first place.
+This alternative definition of $\checka_1$ is useful to estimate it quickly whenever a grid over $\mathbb{K}\times\mathbb{U}$ has already been evaluated, thus avoiding multiple computations of $\Gamma_{\alpha}(\mathbf{k})$ until its maximum reaches $1$. From Eq.~\eqref{eq:upper_bound_alpha_check}, choosing a level of confidence equal to $1$ is then equivalent to looking for the worst-case scenario of the ratio $\frac{J(\mathbf{k},\mathbf{U}=\mathbf{u})}{J^*(\mathbf{u})}$. Therefore it may suffer from the same pitfall as the worst-case approach. As mentioned in the introduction, this is not suited for random variable with unbounded support as it may return over-conservative solution, provided that a solution exists in the first place.
 
 
 $\checkap$ can be an indicator of the robustness of $\checkkp$.  
-A high value of $\checka_1$ corresponds to a high ratio $\frac{J(\mathbf{k},\mathbf{u})}{J^*(\mathbf{u})}$ for at least one particular $\mathbf{u}$. In that sense, $J(\checkk_1,\mathbf{u})$ may be possibly very high.
+A high value of $\checka_1$ corresponds to a high ratio $\frac{J(\mathbf{k},\mathbf{U}=\mathbf{u})}{J^*(\mathbf{u})}$ for at least one particular $\mathbf{u}$. In that sense, $J(\checkk_1,\mathbf{U}=\mathbf{u})$ may be possibly very high.
 More generally, for a fixed level of confidence $p$, $\checkap$ is the slackness needed to be able to reach the probability $p$. % So, in addition to the value of the estimate $\checkkp$, we have an indicator of the robustness associated.
 We can then see that it is sensible to study jointly $p$, $\checkap$ and $\checkkp$.
 
@@ -550,12 +548,12 @@ We can then see that it is sensible to study jointly $p$, $\checkap$ and $\check
 \label{ssec:balance}
 
 In order to choose the quantities introduced above, there are three choices: either fixing $p$, either fixing the maximal threshold $\alpha$, or looking for a compromise between $p$ and $\alpha$.
-The most trivial way is to set $\alpha$, to find the couples of points $(\mathbf{k},\mathbf{u})$ verifying $J(\mathbf{k},\mathbf{u}) \leq \alpha J^*(\mathbf{u})$, and then to estimate the probability $\Gamma_{\alpha}(\mathbf{k})$ defined in Eq.~\eqref{eq:def_Ralpha}.
+The most trivial way is to set $\alpha$, to find the couples of points $(\mathbf{k},\mathbf{u})$ verifying $J(\mathbf{k},\mathbf{U}=\mathbf{u}) \leq \alpha J^*(\mathbf{u})$, and then to estimate the probability $\Gamma_{\alpha}(\mathbf{k})$ defined in Eq.~\eqref{eq:def_Ralpha}.
 For instance, when $N$ sampled values of $\mathbf{U}$: $\{\mathbf{u}^i\}_{1\leq i \leq N}$ are available, a possible estimator of $\Gamma_{\alpha}$ is
 \begin{equation}
-\hat{\Gamma}_{\alpha}(\mathbf{k}) = \frac{\# \left\{\mathbf{u}^i \mid J(\mathbf{k},\mathbf{u}^i) \leq \alpha J^*(\mathbf{u}^i)\right\}}{N}
+\hat{\Gamma}_{\alpha}(\mathbf{k}) = \frac{\mathrm{Card} \left\{\mathbf{u}^i \mid J(\mathbf{k},\mathbf{U}=\mathbf{u}^i) \leq \alpha J^*(\mathbf{u}^i)\right\}}{N}
 \end{equation}
-However, this may be a risky approach. Indeed if $\alpha$ is chosen too small, the resulting $\hat{p}=\max_{\mathbf{k}} \hat{\Gamma}_{\alpha}(\mathbf{k})$ will be also small, meaning that the cost function will overshoot the value $\alpha J^*(\mathbf{U})$ with high probability.
+However, this may be a risky approach. Indeed if $\alpha$ is chosen too small, the resulting $\hat{p}=\max_{\mathbf{k}} \hat{\Gamma}_{\alpha}(\mathbf{k})$ will be also small, meaning that the cost function will have non acceptable values with high probability.
 
 Similarly, if $p$ is fixed, the corresponding $\hat{\checka}_p$ is computed by searching for the smallest $\alpha$ satisfying $\max_{\mathbf{k}} \hat{\Gamma}_{\alpha}(\mathbf{k})=p$. Once again, if $\hat{\checka}_p$ is too large, the relaxation needed to get acceptable values with probability $p$ is very high, so the resulting estimation $\hat{\checkk}_p$ may not be relevant for the future application.
 
@@ -564,11 +562,11 @@ Also, choosing $p=1$ is possible only if the sample space of $\mathbf{U}$ is bou
 \begin{align*}
   \label{eq:Jinfinite}
   \Kspace &= \Uspace = [0,\,+\infty[ \\
-  J(\mathbf{k},\mathbf{u}) &= \mathbf{u}(\mathbf{k}-\mathbf{u})^2 + 1 \\
+  J(\mathbf{k},\mathbf{U}=\mathbf{u}) &= \mathbf{u}(\mathbf{k}-\mathbf{u})^2 + 1 \\
   \mathbf{k}^*(\mathbf{u}) &= \mathbf{u} \\
   J^*(\mathbf{u}) &= 1
 \end{align*}
-In this case, for each $\mathbf{k}\in \Kspace$, $\lim_{\mathbf{u} \rightarrow + \infty} \frac{J(\mathbf{k},\mathbf{u})}{J^*(\mathbf{u})} = + \infty$, so there is no $\mathbf{k}$ such that the ratio $J/J *$ can be bounded, hence $\alpha_1$ does not exist in this case.
+In this case, for each $\mathbf{k}\in \Kspace$, $\lim_{\mathbf{u} \rightarrow + \infty} \frac{J(\mathbf{k},\mathbf{U}=\mathbf{u})}{J^*(\mathbf{u})} = + \infty$, so there is no $\mathbf{k}$ such that the ratio $J/J *$ can be bounded, hence $\alpha_1$ does not exist in this case.
 
 
 Looking for a compromise between $p$ and $\alpha$ would be preferable. This could be achieved by studying $p \mapsto \checkap$, and particularly its slope.
@@ -611,7 +609,7 @@ As stated before, we chose to model the uncertainties as a random variable unifo
 From now on, $\hatkmpe$ is estimated using KDE with Gaussian kernels.
 
 
-The smallest estimated relaxation $\hat{\checka}_1$ and the corresponding $\hat{\checkk}_1$ has been computed for $\JBH$ and $\JBHS$, using a regular grid of $1000 \times 1000$ points on $\Kspace\times\Uspace$. The contour plots of those functions can be seen in the top plots of Figure~\ref{fig:contour_alpha}. The frontier corresponding to the couples of points $(\mathbf{k},\mathbf{u})$ verifying $\{J(\mathbf{k},\mathbf{u}) = \alpha J^*(\mathbf{u})\}$ has been drawn on top of these contour plots, for $\alpha=\hat{\checka}_1$ and an arbitrary $\alpha=1.5<\hat{\checka}_1$ to illustrate the effect of the acceptable region when the relaxation $\alpha$ changes. 
+The smallest estimated relaxation $\hat{\checka}_1$ and the corresponding $\hat{\checkk}_1$ has been computed for $\JBH$ and $\JBHS$, using a regular grid of $1000 \times 1000$ points on $\Kspace\times\Uspace$. The contour plots of those functions can be seen in the top plots of Figure~\ref{fig:contour_alpha}. The frontier corresponding to the couples of points $(\mathbf{k},\mathbf{u})$ verifying $\{J(\mathbf{k},\mathbf{U}=\mathbf{u}) = \alpha J^*(\mathbf{u})\}$ has been drawn on top of these contour plots, for $\alpha=\hat{\checka}_1$ and an arbitrary $\alpha=1.5<\hat{\checka}_1$ to illustrate the effect of the acceptable region when the relaxation $\alpha$ changes. 
 On the bottom plots, the curves $\mathbf{k}\mapsto \hat{\Gamma}_{\alpha}(\mathbf{k})$ for $\alpha=\hat{\checka}_1$ and $\alpha=1.5$ along with the histograms of the minimisers are represented.
 
 
@@ -619,7 +617,7 @@ One can notice that the relaxation allows us to avoid the issue brought by the a
 
 \begin{figure*}[!ht]
   \centering
-\includegraphics[width=10cm]{Figures/branin_side_66_relax_gamma_both.pdf}
+\includegraphics[width=12cm]{Figures/branin_side_66_relax_gamma_both.pdf}
 \caption{Top: $\JBH$ and $\JBHS$ contours. The thick yellow lines are the boundaries of the acceptable region defined for $\hat{\checka}_1$, the thick orange are for $\alpha=1.5$. The red dashed line is the estimation $\hat{\checkk}_1$. Bottom: $\hat{\Gamma}_{\alpha}$ for $\alpha = 1.5$ and $\alpha=\hat{\checka}_1$, and estimated density of the minimisers.}
 \label{fig:contour_alpha}
 \end{figure*}
@@ -629,7 +627,7 @@ One can notice that the relaxation allows us to avoid the issue brought by the a
 
 In order to choose a satisfying level of confidence $p$, we are going to study $p\mapsto \hat{\checka}_p$ and $p\mapsto p/\hat{\checka}_p$, as described in Section~\ref{ssec:balance}.
 
- The plot of $p\mapsto \hat{\checka}_p$ for $\JBH$ on Figure~\ref{fig:ratio_BH} shows what seems to be a piecewise linear behaviour. The last change of slope, \textit{i.e.} for $p\approx 0.9$ corresponds to a local maximum of the ratio, while the first change of slope at $\hat{p}_{\mathrm{ratio}}=0.654$ corresponds to the global maximum of the ratio. The \RRE{} will then be evaluated for both of these values, as well as $1$ for reference.
+ The plot of $p\mapsto \hat{\checka}_p$ for $\JBH$ on Figure~\ref{fig:ratio_BH} shows what seems to be a piecewise linear behaviour. The last change of slope, \textit{i.e.} for $p\approx 0.9$ corresponds to a local maximum of the ratio, while the first change of slope at $\hat{p}_{\mathrm{ratio}}=0.654$ corresponds to the global maximum of the ratio. The \RRE{} will then be evaluated for both of these values, as well as $p=1$ for reference.
  
  \begin{figure}[!ht]
    \centering
@@ -671,7 +669,7 @@ $\kest_p,~p=0.90$ & 1.797 \\  \bottomrule
 \end{tabular}
 \label{tab:recap_estimates_branin}
 \end{table*}
-Practically speaking, in order to compare the effective values taken by the objective function given an estimate $\kest$ we are going to consider the functions $\mathbf{u} \mapsto J(\kest,\mathbf{u})$, that we will call ``profile of $\kest$''. Those profiles are well suited for the representation of the cost function for an estimate $\kest$ fixed as the uncertain variable is modelled with a 1D uniform random variable.
+Practically speaking, in order to compare the effective values taken by the objective function given an estimate $\kest$ we are going to consider the functions $\mathbf{u} \mapsto J(\kest,\mathbf{U}=\mathbf{u})$, that we will call ``profiles of $\kest$''. Those profiles are well suited for the representation of the cost function for an estimate $\kest$ fixed as the uncertain variable is modelled with a 1D uniform random variable.
 
 For $\JBH$, the curves are plotted in Figure~\ref{fig:profiles_branin}.
 
@@ -726,7 +724,7 @@ The performances of $\hat{\checkk}_1$ are closer to the performances of $\hatkva
 
 
 
-We have seen how some classical robust estimators and the \RRE{} behave on two different analytical problems. In addition to the usual levels of confidence such as 90\% and 95\%, one can also settle for a ad-hoc compromise, where $p$ maximizes the ratio $p/\alpha_p$. When the sample space of $\mathbf{U}$ is bounded, a conservative solution is to set $p=1$.
+We have seen how some classical robust estimators and the \RRE{} behave on two different analytical problems. In addition to the usual levels of confidence such as 90\% and 95\%, one can also settle for an ad-hoc compromise, where $p$ maximizes the ratio $p/\alpha_p$. When the sample space of $\mathbf{U}$ is bounded, a conservative solution is to set $p=1$.
 We are now going to see how can robust minimisation is applied on the calibration of a numerical model.
 % ----------------------------------------------------------------------------
 
@@ -739,18 +737,18 @@ We are now going to see how can robust minimisation is applied on the calibratio
  We will follow the approach described in~\cite{kennedy_bayesian_2001} in order to establish the function $\mathcal{G}$ described in the first section in Eq.~\eqref{eq:def_cost_fun}, and the resulting cost function $J$.
  
  The calibration of a numerical model is usually based on the comparison between the numerical model and some observations, during a fixed time interval $[0, T]$ called assimilation window.
- The physical system modelled can be seen as a map from $\Uspace$ to $\mathbb{Y}$, the space of observations, denoted as $\mathcal{M}^o : \mathbf{u}\mapsto \mathcal{M}^o(\mathbf{u})$, where $\mathbf{u}\in\Uspace$ is an input representing some environmental conditions. The observation mentioned above is the output of the physical system during the time-window, and is denoted by $\mathcal{M}^o(\mathbf{u}^{\mathrm{true}}) \in \mathbb{Y}$, where $\mathbf{u}^{\mathrm{true}} \in \Uspace$ is unknown.
+ The modelled physical system can be seen as a map from $\Uspace$ to $\mathbb{Y}$, the space of observations, denoted as $\mathcal{M}^o : \mathbf{u}\mapsto \mathcal{M}^o(\mathbf{u})$, where $\mathbf{u}\in\Uspace$ is an input representing some environmental conditions. The observation mentioned above is the output of the physical system during the time-window, and is denoted by $\mathcal{M}^o(\mathbf{u}^{\mathrm{true}}) \in \mathbb{Y}$, where $\mathbf{u}^{\mathrm{true}} \in \Uspace$ is unknown.
 
  
-In addition of $\mathbf{u}$, the numerical model $\mathcal{M}$ is dependent on some other input $\mathbf{k}\in\Kspace$. This additional parametrization comes usually from the successive simplifications needed to implement a numerical model of the physical system observed. These parameters need to be calibrated accordingly, so that the numerical model can be used to predict the behaviour of the physical system under different operating conditions.
+In addition of $\mathbf{u}$, the numerical model $\mathcal{M}$ depends on some other input $\mathbf{k}\in\Kspace$. This additional parametrization comes usually from the successive simplifications needed to implement a numerical model of the observed physical system. $\mathbf{k}$ needs to be calibrated accordingly, so that the numerical model can be used to predict the behaviour of the physical system under different operating conditions.
 
 The misfit $\mathcal{G}$ is defined as the difference between the numerical model and the observation. Choosing a squared norm, the cost function $J$ defined in Eq.~\eqref{eq:def_cost_fun} is
 \begin{equation}
-J(\mathbf{k},\mathbf{u}) = \frac12 \| \mathcal{G}(\mathbf{k},\mathbf{u}) \|^2 = \frac12 \|\mathcal{M}(\mathbf{k},\mathbf{u}) - \mathcal{M}^{o}(\mathbf{u}^{\mathrm{true}}) \|^2
+J(\mathbf{k},\mathbf{U}=\mathbf{u}) = \frac12 \| \mathcal{G}(\mathbf{k},\mathbf{u}) \|^2 = \frac12 \|\mathcal{M}(\mathbf{k},\mathbf{u}) - \mathcal{M}^{o}(\mathbf{u}^{\mathrm{true}}) \|^2
 \end{equation}
 \subsection{The Shallow Water equations}
 
-The model to calibrate is an implementation of the 1D Shallow Water equations, described in Eq.~\eqref{eq:SWE_equations}, where $h$ is the height of the water column, $q$ is the discharge, and $z$ is the bathymetry, while $g$ is the usual gravitation constant. The parameter to calibrate $\mathbf{k}$ is the quadratic friction term, proportional to the square of the inverse of Manning-Strickler coefficient. The environmental parameter $\mathbf{u}$ is the amplitude of a sine wave of period $1/\omega_0$. The domain of those two parameters are $\Kspace = [0.0, 1.3]$ and $\Uspace = [0.5, 0.7]$.
+The model to calibrate is an implementation of the 1D Shallow Water equations, described in Eq.~\eqref{eq:SWE_equations}, where $h$ is the height of the water column, $q$ the discharge, and $z$ the bathymetry, while $g$ is the usual gravitation constant. The parameter to calibrate $\mathbf{k}$ is the quadratic friction term, proportional to the square of the inverse of Manning-Strickler coefficient. The environmental parameter $\mathbf{u}$ is the amplitude of a sine wave of period $1/\omega_0$. The domain of those two parameters are $\Kspace = [0.0, 1.3]$ and $\Uspace = [0.5, 0.7]$.
 
 
 \begin{align}
@@ -786,8 +784,8 @@ The different steps of the estimation are illustrated Figure~\ref{fig:estimation
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=.7\textwidth]{Figures/RobustSWEmis_plots.pdf}
-\caption{Procedure of robust calibration for the shallow water problem. Top: contours of $J$, conditional minimisers and $\{(\mathbf{k},\mathbf{u}) | J(\mathbf{k},\mathbf{u}) = \hat{\alpha}_1 J^*(\mathbf{u})\}$. Middle: Conditional moments and histogram and KDE of the conditional minimisers. Bottom: $\hat{\Gamma}_{\alpha_p}$ for different levels $p$}
+\includegraphics[width=.9\textwidth]{Figures/RobustSWEmis_plots.pdf}
+\caption{Procedure of robust calibration for the shallow water problem. Top: contours of $J$, conditional minimisers and $\{(\mathbf{k},\mathbf{U}=\mathbf{u}) | J(\mathbf{k},\mathbf{u}) = \hat{\alpha}_1 J^*(\mathbf{u})\}$. Middle: Conditional moments and histogram and KDE of the conditional minimisers. Bottom: $\hat{\Gamma}_{\alpha_p}$ for different levels $p$}
 \label{fig:estimation_swe}
 \end{figure}
 
@@ -797,8 +795,8 @@ Looking at $p\mapsto \alpha_p$ and $p\mapsto p/\alpha_p$ on Figure~\ref{fig:alph
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.8\textwidth]{Figures/alpha_SWE}
-  \caption{Evolution of $\alpha_p$ for different levels $p$, and ratio}
+  \includegraphics[width=0.9\textwidth]{Figures/alpha_SWE}
+  \caption{Evolution of $\alpha_p$ for different levels $p$, and ratio, for the shallow water problem}
 \label{fig:alpha_p_SWE}
 \end{figure}
 
@@ -809,7 +807,7 @@ As a basis for comparison, the global minimiser of $J$ over $\Kspace \times \Usp
 
 \begin{table*}[!h]
 \centering
-\caption{Calibrated values of $\mathbf{k}$ according to different criteria}
+\caption{Calibrated values of $\mathbf{k}$ according to different criteria, for the shallow water problem}
 \begin{tabular}{lr} \toprule
 Estimate & Value \\ \midrule
 $\hatkmpe$ & 0.249 \\
@@ -826,8 +824,8 @@ $\hatkvar$ & 0.990\\ \bottomrule
 Similarly as for $\JBH$ and $\JBHS$, the profiles are depicted Figure~\ref{fig:profiles_swe}.
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=.75\textwidth]{Figures/profile_swe}
-  \caption{Profiles for the calibration problem}
+  \includegraphics[width=.8\textwidth]{Figures/profile_swe}
+  \caption{Profiles for the calibration problem, for the shallow water case}
 \label{fig:profiles_swe}
 \end{figure}
 We can see that the performances of $\kest_1$ and $\hatkmean$ are very similar, but $\kest_1$ has better performances when $\mathbf{u} > 0.6$. When comparing with the global optimiser $\kest_{\mathrm{global}}$, $\kest_1$ performs better when $\mathbf{u}<0.625$, so more than half of the time. % As $\mathbf{U}$ is uniformly distributed on $\Uspace=[0.5,0.7]$, we can graphically estimate that the probability that $\kest_1$ outperforms $\kest_{\mathrm{global}}$ is greater than $0.5$, that is that $\Prob_\mathbf{U}\left[J(\kest_1,\mathbf{U})<J(\kest_{\mathrm{global}},\mathbf{U})\right] > 0.5$.
@@ -842,29 +840,33 @@ Those forecasts result from the integration of the numerical model between the t
 
 Given the probabilistic nature of the environmental conditions $\mathbf{U}$, the forecasts will also be probabilistic. We will then compare $\mathcal{M}_{\mathrm{pred}}^o(\mathbf{U})$ and $\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{U})$, that are the observation, and the numerical model on the forecast window for a calibrated $\mathbf{k}$.
 
-Two metrics will be computed: the squared forecast error, and the Continuous Ranked Probability Score (CRPS). The parameters satisfying a robust criterion that are compared are the minimiser of the expectation $\hatkmean$, the minimiser of the variance $\hatkvar$ and the relative regret of level $p=1$, $\kest_1$ as described in the previous section.
+Two metrics will be computed: the squared forecast error, and the Continuous Ranked Probability Score (CRPS)~\citep{gneiting_probabilistic_2014}. The parameters satisfying a robust criterion that are compared are the minimiser of the expectation $\hatkmean$, the minimiser of the variance $\hatkvar$ and the relative regret of level $p=1$, $\kest_1$ as described in the previous section.
 We will also feature the global minimiser $\kest_{\mathrm{global}}$, and the conditional minimisers $\kest^*(\mathbf{u}^i)$ where the chosen environmental variables are $\{\mathbf{u}^i\}_{1\leq i \leq 4} = \{0.5, 0.55, 0.65, 0.7\}$. Those values, even though they do not meet a robustness criterion, are introduced in order to have a more precise idea on the possible performances of a deterministic version of the calibration problem.
 The conditional minimiser $\kest^*(0.6)$ has been omitted as it results in a value very similar to the minimum of the expectation.
 
 \subsubsection{Squared forecast error}
 A first simple approach to measure the forecast quality is to take the squared difference between the numerical model and the observation for two samples of $\mathbf{U}$.
 Given two environmental conditions $\mathbf{u}$ and $\mathbf{u}'\in \Uspace$, the former used to run the computer simulation and the latter to generate the observations, the squared forecast error for the parameter $\mathbf{k}$ is
+
 \begin{equation}
 \label{eq:squared_forecast_error}
 S_{\mathrm{pred}}(\mathbf{k},\mathbf{u},\mathbf{u}') = \left(\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{u}) - \mathcal{M}^{o}_{\mathrm{pred}}(\mathbf{u}')\right)^2
 \end{equation}
-Averaging over both $\mathbf{u}$ and $\mathbf{u}'$ defines the mean squared forecast error, defined on every point of the spatial domain, and at every time-steps. This can be done using a Monte-Carlo approximation. As $\mathbf{u}$ and $\mathbf{u}'$ are iid, assuming that we have a set of samples $\{\mathbf{u}^i\}_{1\leq i \leq N_{\mathbf{u}}}$, the squared forecast error can then be approximated:
+
+Averaging over both $\mathbf{u}$ and $\mathbf{u}'$ defines the mean squared forecast error, defined on every point of the spatial domain, and at every time-steps. This can be done using a Monte-Carlo approximation. As $\mathbf{u}$ and $\mathbf{u}'$ are i.i.d., assuming that we have a set of samples $\{\mathbf{u}^i\}_{1\leq i \leq N_{\mathbf{u}}}$, the squared forecast error can then be approximated:
+
 \begin{equation}
   \label{eq:squared_forecast_error_averaged}
   S(\mathbf{k}) = \frac{1}{N_{\mathbf{u}}^2 }\sum_{i=1}^{N_{\mathbf{u}}}\sum_{j=1}^{N_{\mathbf{u}}} S_{\mathrm{pred}}(\mathbf{k},\mathbf{u}^i,\mathbf{u}^j) = \frac{1}{N_{\mathbf{u}}^2 }\sum_{i=1}^{N_{\mathbf{u}}}\sum_{j=1}^{N_{\mathbf{u}}}  \left(\mathcal{M}_{\mathrm{pred}}(\mathbf{k},\mathbf{u}^i) - \mathcal{M}^{o}_{\mathrm{pred}}(\mathbf{u}^j)\right)^2
 \end{equation}
+
 The mean squared forecast error averaged over the whole space and over all the time-steps gives an indication on the overall prediction quality of the prediction given this metric, and are represented on the right of Figure~\ref{fig:forecast_squared_error}. We can see that $\kest_{\mathrm{global}}$ performs slightly better than $\kest_1$, itself performing slightly better than $\hatkmean$.
-Averaging $S(\mathbf{\kest})$ over the time steps between $T$ and $T_{\mathrm{pred}}$, we have an indication on the quality of the forecast in the squared sense depending on the spatial position, as seen on the left of Figure~\ref{fig:forecast_squared_error}.
+Averaging $S(\mathbf{\kest})$ over the time steps between $T$ and $T_{\mathrm{pred}}$, we have an indication on the quality of the forecast in the squared sense depending on the spatial coordinate $x$, as seen on the left of Figure~\ref{fig:forecast_squared_error}.
 
 \begin{figure*}[!h]
 \centering
-\includegraphics[width=.8\textwidth]{Figures/L2_full_rel.pdf}
-\caption{Squared forecast error, depending on the calibrated parameter. The left figure shows the squared error averaged over time, while the right barplot shows the relative change of the mean forecast error, averaged over time and space, taken w.r.t.\ to the best attained performance for $\mathbf{k}^*(0.7)$}
+\includegraphics[width=.9\textwidth]{Figures/L2_full_rel.pdf}
+\caption{Squared forecast error for the shallow water case, depending on the calibrated parameter. The left figure shows the squared error time-averaged as a function of the spatial coordinate $x$, while the right barplot shows the relative change of the mean forecast error, averaged over time and space, taken w.r.t.\ to the best attained performance for $\mathbf{k}^*(0.7)$}
 \label{fig:forecast_squared_error}
 \end{figure*}
 
@@ -881,17 +883,17 @@ Given the random variables $\mathcal{M}_{\mathrm{pred}}(\kest, \mathbf{U})$ and 
 The Continuous ranked probability score (CRPS) measures the squared difference between the predicted CDF $F_{\mathrm{pred}}$ using a calibrated value, and the CDF of the observations $F_{\mathrm{pred}}^o$. 
 \begin{equation}
 \label{eq:def_crps}
-\mathrm{CRPS}(\mathbf{k}) = \int_{\mathbb{R}} (F_{\mathrm{pred}}(x,\mathbf{k}) - F^o_{\mathrm{pred}}(x))^2 \,\mathrm{d}x
+\mathrm{CRPS}(\mathbf{k}) = \int_{\mathbb{R}} (F_{\mathrm{pred}}(\xi,\mathbf{k}) - F^o_{\mathrm{pred}}(x))^2 \,\mathrm{d}\xi
 \end{equation}
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=.8\textwidth]{Figures/CRPS_full_rel}
-  \caption{CRPS computed for different calibrated parameters. The left figure show the CRPS averaged over time, and the right figure shows the relative change of the CRPS averaged over time and space, taken with respect to the best attained CRPS for $\mathbf{k}^*(0.7)$}
+  \includegraphics[width=.9\textwidth]{Figures/CRPS_full_rel}
+  \caption{CRPS computed for different calibrated parameters for the shallow water case. The left figure shows the CRPS time-averaged as a function of the spatial coordinate $x$, and the right figure shows the relative change of the CRPS averaged over time and space, taken with respect to the best attained CRPS for $\mathbf{k}^*(0.7)$}
 \label{fig:forecast_crps}
 \end{figure}
 
-The left plot of Figure~\ref{fig:forecast_crps} shows the CRPS averaged over time, and the right plot shows the value of the CRPS averaged over time and space. The difference between the squared forecast error and the CRPS is apparent when comparing the general trends shared by the different calibrated parameters. According to the squared error, the region around $x=4$ is not well predicted, while around $x=8$, the predictions are better. On the other hand, according to the CRPS, the region around $x=8$ provide worse forecasts than when $x=4$ and $x=7$. Given the properties of the two metrics,  we can conclude that the region around $x=4$ presents a lot of variability with respect to $\mathbf{u}$, for both the true model and the numerical one. However, for $x \approx 8$, there is a lot less variability, as the low squared error indicates, but probably a higher bias, due to the systematic errors between the truth and the numerical model.
+The left plot of Figure~\ref{fig:forecast_crps} shows the CRPS averaged over time, where $x$ denotes the spatial coordinate and the right plot shows the value of the CRPS averaged over time and space. The difference between the squared forecast error and the CRPS is apparent when comparing the general trends shared by the different calibrated parameters. According to the squared error, the sea water height of the physical region $x=4$ is not well predicted, while around $x=8$, the predictions are better. On the other hand, according to the CRPS, the region around $x=8$ provide worse forecasts than when $x=4$ and $x=7$. Given the properties of the two metrics,  we can conclude that the region around $x=4$ presents a lot of variability with respect to $\mathbf{u}$, for both the true model and the numerical one. However, for $x \approx 8$, there is a lot less variability, as the low squared error indicates, but probably a higher bias, due to the systematic errors between the truth and the numerical model.
 
 
 The numerical evaluations of the CRPS for different parameters show the same order of performances observed for the squared error: the calibrated parameters that present the best performances for forecasts according to those two metrics are $\kest^*(0.7)$, $\kest^*(0.65)$ which is very similar to $\kest_{\mathrm{global}}$, and then $\kest_1$, and $\hatkmean$.
@@ -902,15 +904,15 @@ This presupposes to know which $\mathbf{u}$ to choose for the conditional minimi
 
 In this paper, we dealt with a problem of robust calibration, or in other terms, the robust minimisation of an objective function. To adress this issue, we proposed a new set of robust estimators: the family of the \RRE{} (Relative-regret estimators), and compared it in a forecast context to some other robust estimators, for the calibration of the bottom friction of a shallow water model.
 
-Our approach is based on the will to be as close as possible to the conditional minimisers with high probability. At a level $p$, in addition to the estimation, we have the relaxation coefficient $\alpha_p$ that bounds with probability $p$ the relative error of the cost function, that helps us assess the conservativeness of the proposed estimation.  
+Our approach is based on the will to be as close as possible to the conditional minimisers with high probability. At a level $p$, in addition to the estimation, we have the relaxation coefficient $\alpha_p$ that bounds with probability $p$ the relative error of the cost function. This helps us to assess the robustness properties of the proposed estimation.  
 
 Except for simple analytical examples, the exact evaluation of a member of the \RRE{} is very expensive computer-wise, not to say impossible. Some bottlenecks appear: the computations of the conditional minimisers $\mathbf{k}^*(\mathbf{u})$ and the minimum $J^*(\mathbf{u})$, that require very local exploration of $\Kspace$ for every $\mathbf{u}$; and the computations of the probability of overshooting a given bound that depends on $J^*(\mathbf{u})$ (analogous to a probability of failure), task that requires an efficient exploration of the whole sample space $\Uspace$.
 
-For the calibration of the shallow water model presented in Section~\ref{sec:SWE_application}, we chose to construct a response surface based on Gaussian processes, which is going to be used for the extensive computations. This construction is first based on an initial design, that is enriched to better capture the locus of the conditional minimisers using the PEI criterion introduced in~\cite{ginsbourger_bayesian_2014}. 
+For the calibration of the shallow water model presented in Section~\ref{sec:SWE_application}, we chose to construct a response surface based on Gaussian processes, which is then used for the extensive computations. This construction is first based on an initial design, that is enriched to better capture the locus of the conditional minimisers using the PEI criterion introduced in~\cite{ginsbourger_bayesian_2014}. 
 
 Comparing the performances of the different estimates in a forecast context, one can see that for the two metrics introduced in Section~\ref{sec:SWE_application}, $\kest_1$ performs better than $\hatkmean$, but is sometimes outperformed by ``non-robust'' solutions. Those require some additional knowledge about the environmental conditions, and did not present some robust properties during the calibration phase.
 
-Practically speaking, the estimation of those quantities is very crude, so the computational cost may be very expensive. As perspective, specific strategies have to be created, based for instance on sequential design of computer experiments using Gaussian processes, to diminish the amount of runs needed of the numerical model. Ideally, one would want to develop a acquisition criterion, that makes the balance between the minimisation of a well-chosen probability of failure, and the exploration around the conditional minimisers.
+Practically speaking, the estimation of those quantities is very crude, so the computational cost may be very expensive. As perspective, specific strategies have to be created, based for instance on sequential design of computer experiments using Gaussian processes, to diminish the amount of runs needed of the numerical model. Ideally, one would want to develop an acquisition criterion, that makes the balance between the minimisation of a well-chosen probability of failure, and the exploration around the conditional minimisers.
 Finally, the models upon which this calibration procedure have been applied are very simplistic. We plan in the future to apply this to the robust calibration of the bottom friction of a realistic model of the ocean.
 % \victor{À faire à la fin}
 % This paper deals with the problem of robust calibration of a computer code in the presence of uncertain inputs. 
@@ -939,7 +941,7 @@ Finally, the models upon which this calibration procedure have been applied are 
 %% else use the following coding to input the bibitems directly in the
 %% TeX file.
 
-\bibliographystyle{elsarticle-num-names} 
+\bibliographystyle{model1-num-names} 
 \bibliography{biblio_file}
 
 \end{document}

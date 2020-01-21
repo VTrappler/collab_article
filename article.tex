@@ -414,7 +414,7 @@ Even though the functions are quite similar, the asymmetric roles of $\mathbf{k}
 
 \begin{figure*}[!ht]
   \centering
-  \includegraphics[width=\singlecolumnsize]{Figures/branin_side_moments_noscale.pdf}
+  \includegraphics[width=\singlecolumnsize]{Figures/FIG01.pdf}
   \caption{The left column concerns $\JBH$, while the right one deals with $\JBHS$. Contours of both functions are plotted on the top, and curves of  $\mu(\mathbf{k})$ and $\sigma(\mathbf{k})$ are shown on the bottom (respective scales are not displayed). Estimates $\hatkmean$ and $\hatkvar$ are plotted with the dashed line.}
 \label{fig:branin_moments}
 \end{figure*}
@@ -437,7 +437,7 @@ Similarly, estimations of $\hatkmpe$ are depicted on Figure~\ref{fig:contours}. 
 The bottom row presents three approximations of the density of minimisers: the histogram in grey (bin size selected using Freedman-Diaconis from~\cite{freedman_histogram_1981}), the result of a kernel density estimation (KDE) with Gaussian kernels in red (using Scott's rule from~\cite{scott_optimal_1979} for bandwidth selection), and the estimation by a Gaussian mixture, calculated with the EM algorithm. The number of Gaussians has been fixed to 3, a guess based on the general shape of the histogram. Respective estimations of $\hatkmpe$ are also depicted using dashed lines. 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=\singlecolumnsize]{Figures/branin_side_66.pdf}
+  \includegraphics[width=\singlecolumnsize]{Figures/FIG02.pdf}
   \caption{Top Left:  $\JBH$ along with conditional minimisers in red. Bottom left: Estimated densities using KDE and EM algorithm and the histogram. The dashed lines indicate the MPE found using those methods. Right: Same quantities with $\JBHS$.}
 \label{fig:contours}
 \end{figure}
@@ -476,7 +476,7 @@ Figure~\ref{fig:relax_tuto} details the successive steps for the construction of
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=\onehalfcolumn]{Figures/relaxation_tuto.pdf}
+\includegraphics[width=\onehalfcolumn]{Figures/FIG03.pdf}
 \caption{Principle of the relaxation of the constraint on $\JBH$, and illustration of $R_\alpha(\mathbf{k})$. Top plots: Computation of the conditional minimisers $\mathbf{k}^*(\mathbf{u})$. Top right plot: the set $(\mathbf{k}^*(\mathbf{u}),\mathbf{u})$ of conditional minimisers is represented in red. On the bottom left plot, for a relaxation $\alpha=1.5$, and $\mathbf{u}=3$, the acceptable $\mathbf{k}$ are in cyan, while the non-acceptable ones are in orange, while the frontier $\{(\mathbf{k}^*(\mathbf{u}),\mathbf{u}) \mid J^*(\mathbf{u}) = J(\mathbf{k},\mathbf{U}=\mathbf{u})\}$ is in yellow. On the bottom right plot, the set $R_{\alpha}(\mathbf{k})$ for $\alpha=1.5$ and $\mathbf{k}=1.5$ is in green.}
 \label{fig:relax_tuto}
 \end{figure*}
@@ -515,7 +515,7 @@ This formulation can be linked to the quantiles and Value-at-Risk of the random 
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width = \singlecolumnsize]{Figures/illu_alpha_p.pdf}
+\includegraphics[width = \singlecolumnsize]{Figures/FIG04.pdf}
 \caption{Illustration of the influence of different levels $p$ on $\Gamma_{\alpha_p}$ and on $\mathbf{k}_p$ for $\JBHS$}
 \label{fig:illu_alpha_p}
 \end{figure}
@@ -627,7 +627,7 @@ One can notice that the relaxation allows us to avoid the issue brought by the a
 
 \begin{figure*}[!ht]
   \centering
-\includegraphics[width=\onehalfcolumn]{Figures/branin_side_66_relax_gamma_both.pdf}
+  \includegraphics[width=\onehalfcolumn]{Figures/FIG05.pdf}
 \caption{Top: $\JBH$ and $\JBHS$ contours. The thick yellow lines are the boundaries of the acceptable region defined for $\hat{\checka}_1$, the thick orange are for $\alpha=1.5$. The red dashed line is the estimation $\hat{\checkk}_1$. Bottom: $\hat{\Gamma}_{\alpha}$ for $\alpha = 1.5$ and $\alpha=\hat{\checka}_1$, and estimated density of the minimisers.}
 \label{fig:contour_alpha}
 \end{figure*}
@@ -641,7 +641,7 @@ In order to choose a satisfying level of confidence $p$, we are going to study $
  
  \begin{figure}[!ht]
    \centering
-\includegraphics[width=\onehalfcolumn]{Figures/alpha_p_BH.pdf}
+\includegraphics[width=\onehalfcolumn]{Figures/FIG06.pdf}
 \caption{Evolution of the couples $(p,\checkap)$ and corresponding ratio $p/\checkap$ for $\JBH$. The dashed line indicates the level $p$ associated with the highest ratio}
 \label{fig:ratio_BH}
 \end{figure}
@@ -685,7 +685,7 @@ For $\JBH$, the curves are plotted in Figure~\ref{fig:profiles_branin}.
 
 \begin{figure*}[!h]
   \centering
-\includegraphics[width=\onehalfcolumn]{Figures/profile_BH.pdf}
+\includegraphics[width=\onehalfcolumn]{Figures/FIG07.pdf}
 \caption{Profiles of the different estimates for $\JBH$, corresponding to the vertical cross sections of the contour. The shaded region corresponds to the interval $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$. The profiles of $\kest_{\mathrm{MPE}}$ and $\kest_{\mathrm{ratio}}$ coincide in this case}
 \label{fig:profiles_branin}
 \end{figure*}
@@ -697,7 +697,7 @@ By contrast, $\JBHS$ will show a different behaviour as Figure~\ref{fig:ratio_BH
 
 \begin{figure}[!h]
   \centering
-\includegraphics[width=\onehalfcolumn]{Figures/alpha_p_BHs.pdf}
+\includegraphics[width=\onehalfcolumn]{Figures/FIG08.pdf}
 \caption{Evolution of the couples $(p,\checkap)$ and corresponding ratio $p/\checkap$ for $\JBHS$. The dashed line indicates the level $p$ associated with the highest ratio}
 \label{fig:ratio_BHs}
 \end{figure}
@@ -723,7 +723,7 @@ Profiles of the different estimates of $\JBHS$ are shown in Figure~\ref{fig:prof
 
 \begin{figure*}[!h]
   \centering
-\includegraphics[width=\onehalfcolumn]{Figures/profile_BHs.pdf}
+\includegraphics[width=\onehalfcolumn]{Figures/FIG09.pdf}
 \caption{Profiles of the different estimates for $\JBHS$. Those profiles are the vertical cross sections of the contours above. The shaded region corresponds to the interval $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$}
 \label{fig:profiles_branin_switch}
 \end{figure*}
@@ -794,7 +794,7 @@ The different steps of the estimation are illustrated Figure~\ref{fig:estimation
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\singlecolumnsize]{Figures/RobustSWEmis_plots.pdf}
+\includegraphics[width=\singlecolumnsize]{Figures/FIG10.pdf}
 \caption{Procedure of robust calibration for the shallow water problem. Top: contours of $J$, conditional minimisers and $\{(\mathbf{k},\mathbf{U}=\mathbf{u}) | J(\mathbf{k},\mathbf{u}) = \hat{\alpha}_1 J^*(\mathbf{u})\}$. Middle: Conditional moments and histogram and KDE of the conditional minimisers. Bottom: $\hat{\Gamma}_{\alpha_p}$ for different levels $p$}
 \label{fig:estimation_swe}
 \end{figure}
@@ -805,7 +805,7 @@ Looking at $p\mapsto \alpha_p$ and $p\mapsto p/\alpha_p$ on Figure~\ref{fig:alph
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=\onehalfcolumn]{Figures/alpha_SWE}
+  \includegraphics[width=\onehalfcolumn]{Figures/FIG11}
   \caption{Evolution of $\alpha_p$ for different levels $p$, and ratio, for the shallow water problem}
 \label{fig:alpha_p_SWE}
 \end{figure}
@@ -835,7 +835,7 @@ $\hatkvar$ & 0.990\\ \bottomrule
 Similarly as for $\JBH$ and $\JBHS$, the profiles are depicted Figure~\ref{fig:profiles_swe}.
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=\onehalfcolumn]{Figures/profile_swe}
+  \includegraphics[width=\onehalfcolumn]{Figures/FIG12}
   \caption{Profiles for the calibration problem, for the shallow water case}
 \label{fig:profiles_swe}
 \end{figure}
@@ -877,7 +877,7 @@ Averaging $S(\mathbf{\kest})$ over the time steps between $T$ and $T_{\mathrm{pr
 
 \begin{figure*}[!h]
 \centering
-\includegraphics[width=\onehalfcolumn]{Figures/L2_full_rel.pdf}
+\includegraphics[width=\onehalfcolumn]{Figures/FIG13.pdf}
 \caption{Squared forecast error for the shallow water case, depending on the calibrated parameter. The left figure shows the squared error time-averaged as a function of the spatial coordinate $x$, while the right barplot shows the relative change of the mean forecast error, averaged over time and space, taken w.r.t.\ to the best attained performance for $\mathbf{k}^*(0.7)$}
 \label{fig:forecast_squared_error}
 \end{figure*}
@@ -901,7 +901,7 @@ The Continuous ranked probability score (CRPS) measures the squared difference b
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=\onehalfcolumn]{Figures/CRPS_full_rel}
+  \includegraphics[width=\onehalfcolumn]{Figures/FIG14}
   \caption{CRPS computed for different calibrated parameters for the shallow water case. The left figure shows the CRPS time-averaged as a function of the spatial coordinate $x$, and the right figure shows the relative change of the CRPS averaged over time and space, taken with respect to the best attained CRPS for $\mathbf{k}^*(0.7)$}
 \label{fig:forecast_crps}
 \end{figure}

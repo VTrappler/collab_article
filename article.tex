@@ -84,6 +84,16 @@
 \usepackage{xcolor}
 \definecolor{newcolor}{rgb}{.8,.349,.1}
 
+\newlength{\minisize}
+\setlength{\minisize}{3cm}
+\newlength{\singlecolumnsize}
+\setlength{\singlecolumnsize}{9cm}
+\newlength{\onehalfcolumn}
+\setlength{\onehalfcolumn}{14cm}
+\newlength{\fullwidth}
+\setlength{\fullwidth}{19cm}
+
+
 \journal{Journal of Computational Physics}
 
 \begin{document}
@@ -404,7 +414,7 @@ Even though the functions are quite similar, the asymmetric roles of $\mathbf{k}
 
 \begin{figure*}[!ht]
   \centering
-  \includegraphics[width=12cm]{Figures/branin_side_moments_noscale.pdf}
+  \includegraphics[width=\singlecolumnsize]{Figures/branin_side_moments_noscale.pdf}
   \caption{The left column concerns $\JBH$, while the right one deals with $\JBHS$. Contours of both functions are plotted on the top, and curves of  $\mu(\mathbf{k})$ and $\sigma(\mathbf{k})$ are shown on the bottom (respective scales are not displayed). Estimates $\hatkmean$ and $\hatkvar$ are plotted with the dashed line.}
 \label{fig:branin_moments}
 \end{figure*}
@@ -427,7 +437,7 @@ Similarly, estimations of $\hatkmpe$ are depicted on Figure~\ref{fig:contours}. 
 The bottom row presents three approximations of the density of minimisers: the histogram in grey (bin size selected using Freedman-Diaconis from~\cite{freedman_histogram_1981}), the result of a kernel density estimation (KDE) with Gaussian kernels in red (using Scott's rule from~\cite{scott_optimal_1979} for bandwidth selection), and the estimation by a Gaussian mixture, calculated with the EM algorithm. The number of Gaussians has been fixed to 3, a guess based on the general shape of the histogram. Respective estimations of $\hatkmpe$ are also depicted using dashed lines. 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=12cm]{Figures/branin_side_66.pdf}
+  \includegraphics[width=\singlecolumnsize]{Figures/branin_side_66.pdf}
   \caption{Top Left:  $\JBH$ along with conditional minimisers in red. Bottom left: Estimated densities using KDE and EM algorithm and the histogram. The dashed lines indicate the MPE found using those methods. Right: Same quantities with $\JBHS$.}
 \label{fig:contours}
 \end{figure}
@@ -466,7 +476,7 @@ Figure~\ref{fig:relax_tuto} details the successive steps for the construction of
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=12cm]{Figures/relaxation_tuto.pdf}
+\includegraphics[width=\onehalfcolumn]{Figures/relaxation_tuto.pdf}
 \caption{Principle of the relaxation of the constraint on $\JBH$, and illustration of $R_\alpha(\mathbf{k})$. Top plots: Computation of the conditional minimisers $\mathbf{k}^*(\mathbf{u})$. Top right plot: the set $(\mathbf{k}^*(\mathbf{u}),\mathbf{u})$ of conditional minimisers is represented in red. On the bottom left plot, for a relaxation $\alpha=1.5$, and $\mathbf{u}=3$, the acceptable $\mathbf{k}$ are in cyan, while the non-acceptable ones are in orange, while the frontier $\{(\mathbf{k}^*(\mathbf{u}),\mathbf{u}) \mid J^*(\mathbf{u}) = J(\mathbf{k},\mathbf{U}=\mathbf{u})\}$ is in yellow. On the bottom right plot, the set $R_{\alpha}(\mathbf{k})$ for $\alpha=1.5$ and $\mathbf{k}=1.5$ is in green.}
 \label{fig:relax_tuto}
 \end{figure*}
@@ -501,11 +511,11 @@ For instance, given that $J>0$, $\Gamma_{\alpha}(\mathbf{k})$ is increasing with
 \end{align}
 that is the smallest $\alpha$, such that there exists a particular $\checkkp \in \Kspace$ for which $J(\checkkp,\mathbf{U}) \leq \checkap J^*(\mathbf{U})$ with probability $p$.
 $\{\mathbf{k}_p \text{ for } p \in [0;1] \}$ defines the relative-regret family of robust estimators (\RRE).
-This formulation can be linked to the quantiles and Value-at-Risk of the random variable $\max_{\mathbf{k}} \{ \frac{J(\mathbf{k},\mathbf{U})}{J^*(\mathbf{U})}\}$, that is a measure of risk usually applied in the financial sector (see~\cite{rockafellar_deviation_2002}). For different levels $p$, and thus different $\alpha_p$, Figure~\ref{fig:illu_alpha_p} shows examples of $\Gamma_{\alpha_p}$ for $\JBHS$. By definition, the associated $\mathbf{k}_p$ is then the first value for which $\Gamma_{\alpha_p}$ reaches $p$. We can see that changing the level $p$ shifts the maximiser of $\Gamma_{\alpha_p}$, and that for small $\alpha$, $\Gamma_{\alpha}(\mathbf{k}_1)$ is also very small. This indicates that $\mathbf{k}_1$ is located quite far from the conditional minimisers, and arise as a compromise when the relaxation is large enough.
+This formulation can be linked to the quantiles and Value-at-Risk of the random variable $\max_{\mathbf{k}} \{ J(\mathbf{k},\mathbf{U}) / J^*(\mathbf{U})\}$, that is a measure of risk usually applied in the financial sector (see~\cite{rockafellar_deviation_2002}). For different levels $p$, and thus different $\alpha_p$, Figure~\ref{fig:illu_alpha_p} shows examples of $\Gamma_{\alpha_p}$ for $\JBHS$. By definition, the associated $\mathbf{k}_p$ is then the first value for which $\Gamma_{\alpha_p}$ reaches $p$. We can see that changing the level $p$ shifts the maximiser of $\Gamma_{\alpha_p}$, and that for small $\alpha$, $\Gamma_{\alpha}(\mathbf{k}_1)$ is also very small. This indicates that $\mathbf{k}_1$ is located quite far from the conditional minimisers, and arise as a compromise when the relaxation is large enough.
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width = 0.7\textwidth]{Figures/illu_alpha_p.pdf}
+\includegraphics[width = \singlecolumnsize]{Figures/illu_alpha_p.pdf}
 \caption{Illustration of the influence of different levels $p$ on $\Gamma_{\alpha_p}$ and on $\mathbf{k}_p$ for $\JBHS$}
 \label{fig:illu_alpha_p}
 \end{figure}
@@ -535,11 +545,11 @@ it follows then that
   \checka_1 = \sup_{\mathbf{u}\in\Uspace} \frac{J(\mathbf{k}_1,\mathbf{U}=\mathbf{u})}{J^*(\mathbf{u})} =  \inf_{\mathbf{k}\in\Kspace} \left\{ \sup_{\mathbf{u}\in\Uspace} \frac{J(\mathbf{k},\mathbf{U}=\mathbf{u})}{J^*(\mathbf{u})} \right\} 
 \end{equation}
 
-This alternative definition of $\checka_1$ is useful to estimate it quickly whenever a grid over $\mathbb{K}\times\mathbb{U}$ has already been evaluated, thus avoiding multiple computations of $\Gamma_{\alpha}(\mathbf{k})$ until its maximum reaches $1$. From Eq.~\eqref{eq:upper_bound_alpha_check}, choosing a level of confidence equal to $1$ is then equivalent to looking for the worst-case scenario of the ratio $\frac{J(\mathbf{k},\mathbf{U}=\mathbf{u})}{J^*(\mathbf{u})}$. Therefore it may suffer from the same pitfall as the worst-case approach. As mentioned in the introduction, this is not suited for random variable with unbounded support as it may return over-conservative solution, provided that a solution exists in the first place.
+This alternative definition of $\checka_1$ is useful to estimate it quickly whenever a grid over $\mathbb{K}\times\mathbb{U}$ has already been evaluated, thus avoiding multiple computations of $\Gamma_{\alpha}(\mathbf{k})$ until its maximum reaches $1$. From Eq.~\eqref{eq:upper_bound_alpha_check}, choosing a level of confidence equal to $1$ is then equivalent to looking for the worst-case scenario of the ratio ${J(\mathbf{k},\mathbf{U}=\mathbf{u})/J^*(\mathbf{u})}$. Therefore it may suffer from the same pitfall as the worst-case approach. As mentioned in the introduction, this is not suited for random variable with unbounded support as it may return over-conservative solution, provided that a solution exists in the first place.
 
 
 $\checkap$ can be an indicator of the robustness of $\checkkp$.  
-A high value of $\checka_1$ corresponds to a high ratio $\frac{J(\mathbf{k},\mathbf{U}=\mathbf{u})}{J^*(\mathbf{u})}$ for at least one particular $\mathbf{u}$. In that sense, $J(\checkk_1,\mathbf{U}=\mathbf{u})$ may be possibly very high.
+A high value of $\checka_1$ corresponds to a high ratio ${J(\mathbf{k},\mathbf{U}=\mathbf{u})/J^*(\mathbf{u})}$ for at least one particular $\mathbf{u}$. In that sense, $J(\checkk_1,\mathbf{U}=\mathbf{u})$ may be possibly very high.
 More generally, for a fixed level of confidence $p$, $\checkap$ is the slackness needed to be able to reach the probability $p$. % So, in addition to the value of the estimate $\checkkp$, we have an indicator of the robustness associated.
 We can then see that it is sensible to study jointly $p$, $\checkap$ and $\checkkp$.
 
@@ -566,7 +576,7 @@ Also, choosing $p=1$ is possible only if the sample space of $\mathbf{U}$ is bou
   \mathbf{k}^*(\mathbf{u}) &= \mathbf{u} \\
   J^*(\mathbf{u}) &= 1
 \end{align*}
-In this case, for each $\mathbf{k}\in \Kspace$, $\lim_{\mathbf{u} \rightarrow + \infty} \frac{J(\mathbf{k},\mathbf{U}=\mathbf{u})}{J^*(\mathbf{u})} = + \infty$, so there is no $\mathbf{k}$ such that the ratio $J/J *$ can be bounded, hence $\alpha_1$ does not exist in this case.
+In this case, for each $\mathbf{k}\in \Kspace$, $\lim_{\mathbf{u} \rightarrow + \infty} {J(\mathbf{k},\mathbf{U}=\mathbf{u})/J^*(\mathbf{u})} = + \infty$, so there is no $\mathbf{k}$ such that the ratio $J/J *$ can be bounded, hence $\alpha_1$ does not exist in this case.
 
 
 Looking for a compromise between $p$ and $\alpha$ would be preferable. This could be achieved by studying $p \mapsto \checkap$, and particularly its slope.
@@ -617,7 +627,7 @@ One can notice that the relaxation allows us to avoid the issue brought by the a
 
 \begin{figure*}[!ht]
   \centering
-\includegraphics[width=12cm]{Figures/branin_side_66_relax_gamma_both.pdf}
+\includegraphics[width=\onehalfcolumn]{Figures/branin_side_66_relax_gamma_both.pdf}
 \caption{Top: $\JBH$ and $\JBHS$ contours. The thick yellow lines are the boundaries of the acceptable region defined for $\hat{\checka}_1$, the thick orange are for $\alpha=1.5$. The red dashed line is the estimation $\hat{\checkk}_1$. Bottom: $\hat{\Gamma}_{\alpha}$ for $\alpha = 1.5$ and $\alpha=\hat{\checka}_1$, and estimated density of the minimisers.}
 \label{fig:contour_alpha}
 \end{figure*}
@@ -631,7 +641,7 @@ In order to choose a satisfying level of confidence $p$, we are going to study $
  
  \begin{figure}[!ht]
    \centering
-\includegraphics[width=0.8\textwidth]{Figures/alpha_p_BH.pdf}
+\includegraphics[width=\onehalfcolumn]{Figures/alpha_p_BH.pdf}
 \caption{Evolution of the couples $(p,\checkap)$ and corresponding ratio $p/\checkap$ for $\JBH$. The dashed line indicates the level $p$ associated with the highest ratio}
 \label{fig:ratio_BH}
 \end{figure}
@@ -654,7 +664,7 @@ In order to choose a satisfying level of confidence $p$, we are going to study $
 % $\kest_p,~p=0.95$ & 1.672 \\ \bottomrule
 % \end{tabular}
 % \end{table*}
-\begin{table*}[!h]
+\begin{table}[!h]
   \centering
 \caption{Estimation performed for $\JBH$, sorted by value}
 \begin{tabular}{lr}
@@ -668,14 +678,14 @@ $\kest_{\mathrm{ratio}},~\hat{p}_{\mathrm{ratio}}=0.654$ & 1.637 \\
 $\kest_p,~p=0.90$ & 1.797 \\  \bottomrule
 \end{tabular}
 \label{tab:recap_estimates_branin}
-\end{table*}
+\end{table}
 Practically speaking, in order to compare the effective values taken by the objective function given an estimate $\kest$ we are going to consider the functions $\mathbf{u} \mapsto J(\kest,\mathbf{U}=\mathbf{u})$, that we will call ``profiles of $\kest$''. Those profiles are well suited for the representation of the cost function for an estimate $\kest$ fixed as the uncertain variable is modelled with a 1D uniform random variable.
 
 For $\JBH$, the curves are plotted in Figure~\ref{fig:profiles_branin}.
 
 \begin{figure*}[!h]
   \centering
-\includegraphics[width=.8\textwidth]{Figures/profile_BH.pdf}
+\includegraphics[width=\onehalfcolumn]{Figures/profile_BH.pdf}
 \caption{Profiles of the different estimates for $\JBH$, corresponding to the vertical cross sections of the contour. The shaded region corresponds to the interval $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$. The profiles of $\kest_{\mathrm{MPE}}$ and $\kest_{\mathrm{ratio}}$ coincide in this case}
 \label{fig:profiles_branin}
 \end{figure*}
@@ -687,14 +697,14 @@ By contrast, $\JBHS$ will show a different behaviour as Figure~\ref{fig:ratio_BH
 
 \begin{figure}[!h]
   \centering
-\includegraphics[width=0.8\textwidth]{Figures/alpha_p_BHs.pdf}
+\includegraphics[width=\onehalfcolumn]{Figures/alpha_p_BHs.pdf}
 \caption{Evolution of the couples $(p,\checkap)$ and corresponding ratio $p/\checkap$ for $\JBHS$. The dashed line indicates the level $p$ associated with the highest ratio}
 \label{fig:ratio_BHs}
 \end{figure}
 
 Compared to the similar plots for $\JBH$ in Figure~\ref{fig:ratio_BH}, $\hat{\checka}_p$ exhibits a smoother behaviour for $\JBHS$ as no abrupt change of slope is easily discernable and the ratio presents a unique maximum for $\hat{p}_{\mathrm{ratio}}=0.766$. The numerical values of the estimations $\kest$ presented in Table~\ref{tab:recap_estimates_BHs} show that, contrary to $\JBH$, the calibrated values are more spread over $\Kspace$.
 
-\begin{table*}[!h]
+\begin{table}[!h]
 \centering
 \caption{Estimations performed for $\JBHS$, sorted by value}
 \label{tab:recap_estimates_BHs}
@@ -706,14 +716,14 @@ $\hatkmean$ & 1.752 \\
 $\hatkvar$ & 2.638 \\ 
 $\kest_1,~p=1$ & 2.798   \\ \bottomrule
 \end{tabular}
-\end{table*}
+\end{table}
 
 
 Profiles of the different estimates of $\JBHS$ are shown in Figure~\ref{fig:profiles_branin_switch}.
 
 \begin{figure*}[!h]
   \centering
-\includegraphics[width=0.8\textwidth]{Figures/profile_BHs.pdf}
+\includegraphics[width=\onehalfcolumn]{Figures/profile_BHs.pdf}
 \caption{Profiles of the different estimates for $\JBHS$. Those profiles are the vertical cross sections of the contours above. The shaded region corresponds to the interval $[J^*(\mathbf{u}), \hat{\checka}_1 J^*(\mathbf{u})]$}
 \label{fig:profiles_branin_switch}
 \end{figure*}
@@ -784,7 +794,7 @@ The different steps of the estimation are illustrated Figure~\ref{fig:estimation
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=.9\textwidth]{Figures/RobustSWEmis_plots.pdf}
+\includegraphics[width=\singlecolumnsize]{Figures/RobustSWEmis_plots.pdf}
 \caption{Procedure of robust calibration for the shallow water problem. Top: contours of $J$, conditional minimisers and $\{(\mathbf{k},\mathbf{U}=\mathbf{u}) | J(\mathbf{k},\mathbf{u}) = \hat{\alpha}_1 J^*(\mathbf{u})\}$. Middle: Conditional moments and histogram and KDE of the conditional minimisers. Bottom: $\hat{\Gamma}_{\alpha_p}$ for different levels $p$}
 \label{fig:estimation_swe}
 \end{figure}
@@ -795,7 +805,7 @@ Looking at $p\mapsto \alpha_p$ and $p\mapsto p/\alpha_p$ on Figure~\ref{fig:alph
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.9\textwidth]{Figures/alpha_SWE}
+  \includegraphics[width=\onehalfcolumn]{Figures/alpha_SWE}
   \caption{Evolution of $\alpha_p$ for different levels $p$, and ratio, for the shallow water problem}
 \label{fig:alpha_p_SWE}
 \end{figure}
@@ -805,7 +815,7 @@ As a basis for comparison, the global minimiser of $J$ over $\Kspace \times \Usp
 
 
 
-\begin{table*}[!h]
+\begin{table}[!h]
 \centering
 \caption{Calibrated values of $\mathbf{k}$ according to different criteria, for the shallow water problem}
 \begin{tabular}{lr} \toprule
@@ -820,19 +830,21 @@ $\hatkp,~p=0.70$ & 0.560 \\
 $\hatkvar$ & 0.990\\ \bottomrule
 \end{tabular}
 \label{tab:recap_estimates_metaSWE}
-\end{table*}
+\end{table}
+
 Similarly as for $\JBH$ and $\JBHS$, the profiles are depicted Figure~\ref{fig:profiles_swe}.
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=.8\textwidth]{Figures/profile_swe}
+  \includegraphics[width=\onehalfcolumn]{Figures/profile_swe}
   \caption{Profiles for the calibration problem, for the shallow water case}
 \label{fig:profiles_swe}
 \end{figure}
-We can see that the performances of $\kest_1$ and $\hatkmean$ are very similar, but $\kest_1$ has better performances when $\mathbf{u} > 0.6$. When comparing with the global optimiser $\kest_{\mathrm{global}}$, $\kest_1$ performs better when $\mathbf{u}<0.625$, so more than half of the time. % As $\mathbf{U}$ is uniformly distributed on $\Uspace=[0.5,0.7]$, we can graphically estimate that the probability that $\kest_1$ outperforms $\kest_{\mathrm{global}}$ is greater than $0.5$, that is that $\Prob_\mathbf{U}\left[J(\kest_1,\mathbf{U})<J(\kest_{\mathrm{global}},\mathbf{U})\right] > 0.5$.
 
 
-% The calibration of this numerical model is done in order to get a calibrated value $\kest$, that will be used for forecasts, using the same numerical model.
+We can see that the performances of $\kest_1$ and $\hatkmean$ are very similar, but $\kest_1$ has better performances when $\mathbf{u} > 0.6$. When comparing with the global optimiser $\kest_{\mathrm{global}}$, $\kest_1$ performs better when $\mathbf{u}<0.625$, so more than half of the time.
 We are now going to compare how well some of those calibrated values compare in a forecast context.
+
+
 \subsection{Assessing the quality of the forecast of the calibrated model}
 For the calibration, the model has been integrated on a time-period $[0, T]$, called assimilation window, and have been compared with the observation of the sea water height on the same time-period.
 We now want to compare the quality of the different forecasts originating from different calibrated bottom frictions.
@@ -865,7 +877,7 @@ Averaging $S(\mathbf{\kest})$ over the time steps between $T$ and $T_{\mathrm{pr
 
 \begin{figure*}[!h]
 \centering
-\includegraphics[width=.9\textwidth]{Figures/L2_full_rel.pdf}
+\includegraphics[width=\onehalfcolumn]{Figures/L2_full_rel.pdf}
 \caption{Squared forecast error for the shallow water case, depending on the calibrated parameter. The left figure shows the squared error time-averaged as a function of the spatial coordinate $x$, while the right barplot shows the relative change of the mean forecast error, averaged over time and space, taken w.r.t.\ to the best attained performance for $\mathbf{k}^*(0.7)$}
 \label{fig:forecast_squared_error}
 \end{figure*}
@@ -878,17 +890,18 @@ It may seem surprising that some parameters calibrated without a robustness aspe
 One issue with the squared forecast error is that it will penalize strongly the forecasts that present high variability with respect to the environmental conditions.
 A way to deal with this is to use another metric, that takes the probabilistic nature of the forecasts into account.
 
+
 \subsubsection{Continuous Ranked Probability Score}
 Given the random variables $\mathcal{M}_{\mathrm{pred}}(\kest, \mathbf{U})$ and $\mathcal{M}_{\mathrm{pred}}^o(\mathbf{U})$, representing the probabilistic forecast and the probabilistic observations, we can define the cumulative distribution functions (CDF) $F_{\mathrm{pred}}(\cdot, \kest)$ and $F^o_{\mathrm{pred}}(\cdot)$
 The Continuous ranked probability score (CRPS) measures the squared difference between the predicted CDF $F_{\mathrm{pred}}$ using a calibrated value, and the CDF of the observations $F_{\mathrm{pred}}^o$. 
 \begin{equation}
 \label{eq:def_crps}
-\mathrm{CRPS}(\mathbf{k}) = \int_{\mathbb{R}} (F_{\mathrm{pred}}(\xi,\mathbf{k}) - F^o_{\mathrm{pred}}(x))^2 \,\mathrm{d}\xi
+\mathrm{CRPS}(\mathbf{k}) = \int_{\mathbb{R}} (F_{\mathrm{pred}}(\xi,\mathbf{k}) - F^o_{\mathrm{pred}}(\xi))^2 \,\mathrm{d}\xi
 \end{equation}
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=.9\textwidth]{Figures/CRPS_full_rel}
+  \includegraphics[width=\onehalfcolumn]{Figures/CRPS_full_rel}
   \caption{CRPS computed for different calibrated parameters for the shallow water case. The left figure shows the CRPS time-averaged as a function of the spatial coordinate $x$, and the right figure shows the relative change of the CRPS averaged over time and space, taken with respect to the best attained CRPS for $\mathbf{k}^*(0.7)$}
 \label{fig:forecast_crps}
 \end{figure}

@@ -17,7 +17,7 @@
 %% Template article for Elsevier's document class `elsarticle'
 %% with harvard style bibliographic references
 
-\documentclass[preprint, 1p]{elsarticle}
+\documentclass[preprint, review, 1p]{elsarticle}
 
 %% Use the option review to obtain double line spacing
 %% \documentclass[preprint,review,12pt]{elsarticle}
@@ -216,10 +216,11 @@ Taking into account aleatoric uncertainties in optimisation problems takes sever
 
 %Taking into account aleatoric uncertainties while calibrating the model (reducing epistemic uncertainties) is often referred as {\it robust control problem} in the literature (see for instance, \arthur{REFs}), or optimization under uncertainties \citep{petrone_robustness_2011, seshadri_density-matching_2014,cook_horsetail_2018}.
 
-Let's denote $\mathbf{k} \in \Kspace$ the parameter set to be estimated to reduce epistemic errors. The aleatoric uncertainties are modelled as a random vector $\mathbf{U}$ whose sample space is $\Uspace$. The probability measure of $\mathbf{U}$ is $\Prob_{\mathbf{U}}$, and its density, if it exists, is $p_{\mathbf{U}}$. %Furthermore, $\mathbf{u}^t$ (used to generate $\mathbf{y}^{\mathrm{obs}}$) is sampled from $\mathbf{U}$.
+Let's denote $\mathbf{k} \in \Kspace$ the parameter set to be estimated to reduce epistemic errors. The aleatoric uncertainties are modelled as a random vector $\mathbf{U}$ whose sample space is $\Uspace$. The probability measure of $\mathbf{U}$ is $\Prob_{\mathbf{U}}$, and its density, if it exists, is $p_{\mathbf{U}}$. \victor{\#3: Did the authors implicitly assume that the aleatoric uncertainty is independent with the epistemic uncertainty? The authors should clarify this issue.}%Furthermore, $\mathbf{u}^t$ (used to generate $\mathbf{y}^{\mathrm{obs}}$) is sampled from $\mathbf{U}$.
 %
 The cost function $J(\mathbf{k}, \mathbf{U})$ is a random variable in this context. %, quantity of interest summarising what we aim to represent with our numerical system $J(\mathbf{k}, \mathbf{U})$ is a random variable that will be further designed as the cost function. 
-It is most often defined as the squared norm of a given function $\mathcal{G}(\mathbf{k}, \mathbf{U})$% involving the numerical model. 
+It is most often defined as the squared norm of a given function $\mathcal{G}(\mathbf{k}, \mathbf{U})$% involving the numerical model.
+\victor{\# 2: How should one choose and/or construct $U$ ?}
 \begin{align}
   \label{eq:def_cost_fun}
   J(\mathbf{k},\mathbf{U}) & = \frac12\|\mathcal{G}(\mathbf{k}, \mathbf{U})\|^2
@@ -258,6 +259,10 @@ The worst-case approach \citep{marzat_worst-case_2013} is another popular method
 
 Accounting for the probabilistic nature of  $\mathbf{U}$ leads to study the distribution of the random variable $J(\mathbf{k},\mathbf{U})$, or the distribution of its minimisers ${\mathbf{k}}_{\mathbf{U}}$. The latter is referred as 
 the distribution of the conditional minimisers, notion that appeared notably in~\cite{villemonteix_informational_2006} and in~\cite{hennig_entropy_2011} for a global optimisation purpose. Both approaches and related robust estimates are described in Section~\ref{robust formulations}. Section~\ref{sec:relax_constraint} introduces a new class of estimators, by relaxing the constraint of optimality and defining regions of acceptability, similarly as~\cite{buhmann_robust_2013} in discrete combinatorial problems, or~\cite{kouvelis_algorithms_1992,snyder_stochastic_2004} in operation research. The intention is that a robust estimate provides values of the cost function close enough to the attainable minimum for each configuration induced by $\mathbf{u}\in\Uspace$. Illustration of the various described methods are given on a numerical exemple in Section~\ref{sec:SWE_application}.
+\victor{\# 1: In the existing literature, there are many robust estimation approaches, such as distributionally robust methods and the regularization strategy to improve robustness. What are the specific values of relative regret in case studies? Why this regret metric matter in real practice? The novelty should be highlighted in the revised manuscript by comparing with the above mentioned approaches.}
+
+
+\victor{\# 4: The literature review on optimization under uncertainties is relatively good. However, it still needs improvement to reflect the recent advances in this area. To help the reader get to know the state-of-the-art, the authors should add the work on "optimization under uncertainty in the era of big data and deep learning" in the revised manuscript}
 
 % ----------------------------------------------------------------------------
 
@@ -456,9 +461,12 @@ Instead of just considering the optimal minimisers, we introduce a bit of leeway
 % ----------------------------------------------------------------------------
 
 
-\section{Relative regret-based family of estimators}%A new family of robust estimators \elise{titre a revoir}}
+ \section{Relative regret-based family of estimators}%A new family of robust estimators \elise{titre a revoir}}
+ \victor{\# 5:For the proposed "relative regret-based family of estimators", the authors seem to know the probability distribution of u perfectly, this is impractical for real applications. Please consider some realistic applications where this distribution can be known and why it can be known perfectly.}
+\victor{\# 6: Why only consider relative regret? How about absolute regret (the difference between the estimated one and the optimal value)? Should the authors use the worst-case relative regret if only uncertainty set is known. The authors should carefully address this issue.}
 \label{sec:relax_constraint}
 \subsection{Relaxing the optimality constraint}
+
 The density of minimisers has been estimated by optimising $\mathbf{k}\mapsto J(\mathbf{k},\mathbf{U}=\mathbf{u})$ over $\Kspace$ for different realisations of $\mathbf{u}$. Instead of focusing on optimal values, we propose to consider their {\it acceptable} neighbourhood in terms of performance of the cost function as well.
 To do so, for each $\mathbf{u}$, $\mathbf{k}$ is deemed acceptable when  $J(\mathbf{k},\mathbf{U}=\mathbf{u}) \leq \alpha J^*(\mathbf{u})$, with $\alpha > 1$. 
 %
@@ -516,7 +524,8 @@ This formulation can be linked to the quantiles and Value-at-Risk of the random 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width = \singlecolumnsize]{Figures/FIG04.pdf}
-\caption{Illustration of the influence of different levels $p$ on $\Gamma_{\alpha_p}$ and on $\mathbf{k}_p$ for $\JBHS$}
+\caption{Illustration of the influence of different levels $p$ on $\Gamma_{\alpha_p}$ and on $\mathbf{k}_p$ for $\JBHS$ \victor{\# 7: difficult to identify the difference in color of the last two lines. The authors should revise the figure accordingly.}
+}
 \label{fig:illu_alpha_p}
 \end{figure}
 
@@ -534,7 +543,7 @@ This formulation can be linked to the quantiles and Value-at-Risk of the random 
 %  \Prob_{\mathbf{U}}\left[ \frac{J(\checkkp,\mathbf{U})}{J^*(\mathbf{U})}\in [1, \checka_p]\right] = p
 %\end{equation}
 
-By considering the particular case where $p=1$, a relation between $\checkk_1$ and $\checka_1$ can be derived, by using Eq.~\eqref{eq:def_alpha_check} and the strict positivity of the cost function:
+By considering the particular case where $p=1$, a relation between $\checkk_1$ and $\checka_1$ can be derived, by using Eq.~\eqref{eq:def_alpha_check} and the strict positivity of the cost function: \victor{\# 8: if the probability distribution Pu is perfectly known for the chance constraint, it seems to be trivial to the sample average approximation (SAA) method. How can the authors quantify the error of using this approximation method? Will it have an impact on the calibration results? The authors should explain it in detail}
 \begin{equation}
   \label{eq:def_alpha1}
   \Prob_{\mathbf{U}}\left[\frac{J(\mathbf{k}_1,\mathbf{U})}{ J^*(\mathbf{U}) } \leq \checka_1\right]=1
@@ -590,7 +599,7 @@ Another possibility is to model this compromise by the ratio $(p/\checkap)$, as 
 % We are now going to compute and compare those estimators on the $\JBH$and $\JBHS$ function.
 
 
-
+\victor{\# 9: The authors need to justify why their proposed approach is robust calibration based on a stochastic approach (using probability distribution and chance constraint)?}
 % ----------------------------------------------------------------------------
 \subsection{Numerical Illustration}
 \label{ssec:numerical_illustration}

@@ -1,0 +1,159 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{calc}
+\usepackage{caption}
+% \usepackage{zref-xr}
+% \externaldocument{article}
+\usepackage{easy-todo}
+\usepackage{comment}
+\usepackage{lipsum}
+\usepackage{bbm}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{pdfpages}
+\newcommand{\Var}{\mathbb{V}\text{ar}}
+\newcommand{\Ex}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\DeclareMathOperator*{\argmin}{arg\,min \,}
+\DeclareMathOperator*{\argmax}{arg\,max \,}
+\usepackage{hyperref}
+\usepackage{booktabs}
+
+\begin{document}
+\title{JCOMP-D-20-00132: Authors' response to reviewers:\\
+  Robust calibration of numerical models based on relative regret
+}
+
+
+\maketitle
+We would like to thank the reviewer for their review. Their comments helped us clarify and improve some points in the manuscript, and we got to study some aspects of the problem that we have not necessarily considered before.
+
+In the revised manuscript, we adressed the concerns raised by the reviewer, and made some adjustements on the original text. The changes to the original text have been highlighted in {\color{teal}teal}.
+\section{Reply to the reviewers}
+\begin{enumerate}
+\item\textit{In the existing literature, there are many robust estimation approaches, such as distributionally robust methods and the regularization strategy to improve robustness. What are the specific values of relative regret in case studies?} \textit{ Why this regret metric matter in real practice? The novelty should be highlighted in the revised manuscript by comparing with the above mentioned approaches.}
+
+    In this work, as we assumed that $\mathbf{U}$ is perfectly known, so we did not consider distributional robustness, as now explained l~.84.
+    In this work, we wanted to avoid an \emph{aggregation} approach, where the value of the cost function is integrated with respect to the environmental variable (such as moment optimisation).
+    We wanted instead to consider separately each optimization problem corresponding to each $\mathbf{u}\in \mathbb{U}$, and measure the similarity of the cost function at a value $J(\mathbf{k},\mathbf{u})$ with $J^*(\mathbf{u})$. As now mentioned l.~282, this is linked to the optimisation of the Value-at-Risk, or equivalently, to the minimisation of a quantile, l.~345. This metric allows us to control the risk in terms of deviation from the optimal value.% . For a couple $(p=.90, \alpha_p=1.1)$, this approach allow us to make the following statement true: in 90\% percent of the cases, the objective function does not deviate more than $10\%$ from its optimal value.
+ % l.~109 l.~233, l.~264
+
+
+   % séparer questions, et valider
+  % We 
+\item \textit{For Equation (1), how do the authors choose the sample space U. How should one construct it?}
+  
+We assume that the aleatoric uncertainties, modelled as a random variable $\mathbf{U}$, come from expert knowledge, and then its distribution and its sample space is assumed to be known. This is now explicitely stated l.~62. If it is not known, we refer the reader as advised to the article mentioned in the comment \# 4
+\item \textit{In Page 2, the authors mentioned that "set to be estimated to reduce epistemic errors. The aleatoric uncertainties are modelled as a random vector". Did the authors implicitly assume that the aleatoric uncertainty is independent with the epistemic uncertainty? The authors should clarify this issue.}
+  
+  We assume indeed that the epistemic and aleatoric uncertainties are independent, due to the fact that the aleatoric uncertainties come from some external forcings of models, and that the choice of our control parameter does not affect the aleatoric uncertainties. This is now explicitly addressed in the introduction (l.67).
+ 
+  
+\item \textit{The literature review on optimization under uncertainties is relatively good. However, it still needs improvement to reflect the recent advances in this area. To help the reader get to know the state-of-the-art, the authors should add the work on "optimization under uncertainty in the era of big data and deep learning" in the revised manuscript.
+  }
+
+  We indeed overlooked the problem of the possibly unknown distribution of $\mathbf{U}$. The paper is now cited in the literature review l.~64. In this section, we mention especially data-driven methods to model the aleatoric uncertainties, and mention now the case of distributional robustness.
+
+  
+\item \textit{For the proposed "relative regret-based family of estimators", the authors seem to know the probability distribution of u perfectly, this is impractical for real applications. Please consider some realistic applications where this distribution can be known and why it can be known perfectly.
+  }
+
+  We added a small discussion on the presumed knowledge of the distribution of $\mathbf{U}$ in the introduction l.~60. The  uncertainties are supposed to be known reasonably well, as they may come from empirical observations, or expert knowledge, in order to have relevant probabilistic description.
+  
+\item \textit{Why only consider relative regret? How about absolute regret (the difference between the estimated one and the optimal value)? Should the authors use the worst-case relative regret if only uncertainty set is known. The authors should carefully address this issue.}
+
+  We added a comparison between relative and additive regret p.~13, l.~261, and motivated the choiceof the relative regret: choosing the relative regret allows the decider to put less weight on the region around $\mathbf{k}^*(\mathbf{u})$ when $\mathbf{u}$ corresponds to a bad situation (\textit{i.e.} when $J^*(\mathbf{u})$ is large). We hope this is clarified by the explanation l.~262.
+  
+\item \textit{In Figure 4, it is difficult to identify the difference in color of the last two lines. The authors should revise the figure accordingly.}
+  
+  The colors and linestyles in Figure 4 have been updated for more clarity.
+  
+\item \textit{ For Equation (19), if the probability distribution Pu is perfectly known for the chance constraint, it seems to be trivial to the sample average approximation (SAA) method. How can the authors quantify the error of using this approximation method? Will it have an impact on the calibration results? The authors should explain it in detail.}
+
+  
+  Eq.~(19) is now Eq.~(22) in the revised document. We introduced in Eq.~(25) the Sample Average Approximation of the Eq.~(20). Using SAA, the resulting $\hat{\alpha}_1$ is a lower bound on the true value. Furthermore, we can also use this estimated value to get a probabilistic upper bound on $\alpha_p$ for the prescribed level $p=(\eta/2)^{1/N}$, meaning that the approximated solution will be at least feasible at such a level with probability $1-\eta$. 
+  
+\item \textit{The authors need to justify why their proposed approach is robust calibration based on a stochastic approach (using probability distribution and chance constraint)?}
+From a random objective function $J(\mathbf{k}, \mathbf{U})$, we introduce the relative-regret which is a normalized quantity (l.~270). Our approach is then to introduce a chance-constraint on this relative-regret, as done Eq.~(20), in order to be able to control the deviations relative to the optimal value with some probability. In the case of almost-surely verified constraints (Eq.~(21) and (22)), this approach is quite similar to optimising in the worst-case the relative-regret, as highlighted Eq.~(24). Given $p$ and $\alpha_p$, our approach look then to minimise the relative-regret for the proportion $p$ of best-cases as now explained l.~286. We also highlighted the principle and novelty of our approach in the abstract l.11, and in the conclusion l.~557.
+  
+\end{enumerate}
+
+\section{Summary of the changes}
+\emph{Abstract (p.1)}
+\begin{itemize}  
+\item l.~5-8: clarified the distinction between control parameters, and uncontrollable random variables
+\item l~.11-16: highlighted the role and novelty of the relative regret in this article
+\end{itemize}
+\emph{Introduction (p.1)}
+\begin{itemize}
+\item l.~34-37: added source of aleatoric uncertainties for ocean modelling
+\item l.~38-48: added effect of omitting the uncertainties in problems
+\item l.~48-51: added examples of the necessity of taking into account uncertainties, from a risk management perspective
+\item l.~52-56: added different vocabulary found in the literature which convey the same idea
+\item l.~57: fixed some typos and english mistakes.
+\item l.~60: we explicit the knowledge of the distribution of $\mathbf{U}$.
+\item l.~64: added state-of-the-art strategies to model aleatoric uncertainties and citation to Ning \& You.
+\item l~.66-68: we clarify that the distributinto $\mathbf{U}$ is not dependent on the value of $\mathbf{k}$
+\item l.~73: a reference to an exemple of such a cost function is added
+\item l.~82: fixed typo
+\item l.~84-85: added the mention of distributional robustness 
+\item l.~92: added mention of overcalibration
+\item l.~83: typo
+\item l.~96,98,99: reformulation for clarity
+\item l.~109: added rationale of the relative regret
+\item l.~115: typo
+\end{itemize}
+\emph{Section 2 (p.5)}
+\begin{itemize}
+\item l.~119: change for clarification
+\end{itemize}
+\emph{Section 3.1 (p.11)}
+\begin{itemize}
+\item l.~232-238: clarification of the construction and definition of the relative-regret 
+\item l.~253: added reminder that $\mathbf{K}^*$ is discrete.
+\item l.~261-272: comparison between additive and relative regret, and justification of the use of relative-regret
+\item l.~278-279: formulation of the problem in terms of chance-constraints in Eq.~(20)
+\item l.~281-282: clarification of the link with the Value-at-Risk 
+\item l.~283-286: interpretation of $\alpha_p$ in terms of bounding probabilistically the relative-error
+\item l.~287-288: rewrote the definition of the RRE
+\item l.~289-291: typo and english reformation
+\item Figure 4 (p.14): changed linestyle, and added quick interpretation in the caption 
+\item l.~293: added small synthesis on the properties of the RRE
+\end{itemize}
+\emph{Section 3.2 (p.14)}
+  \begin{itemize}
+\item l.~301: added subsection Almost-surely bounded relative-regret
+\item l.~302-308: formulation of the a.s.\ bounded relative-regret in terms of chance constraint in Eq.~(21) and property verified by $\mathbf{k}_1$ and $\alpha_1$
+\item l.~309-314: link with uncertain set and Savage's minimax approach for decision under uncertainty
+\item l.~315-317: SAA formulation of the a.s. bounded constraint
+\item l.~317-325: Probabilistic bounding of $\alpha_1$, and level $p=(\eta/2)^{1/N}$ guaranteed probabilistically
+\item l.~330-333: clarify formulation of the general case $p \leq 1$
+\item l~.336-337: estimation of $\Gamma_\alpha$ with indicator functions (Eq.~(27))
+\item l~.339: possibility of unsatisfactory $(p, \alpha_p)$
+\item l.~344: minimization of the quantile of order $p$ of the ratio $J / J^*$.
+\end{itemize}
+ \emph{Conclusion (p.31)}
+\begin{itemize}
+\item l~.557-564: summary of the robustness aspect of the RRE
+\item l~.578-580: reformulation of the sequential design of experiment strategies.
+\end{itemize}
+
+
+\end{document}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

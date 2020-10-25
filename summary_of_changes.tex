@@ -1,0 +1,104 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{calc}
+\usepackage{caption}
+% \usepackage{zref-xr}
+% \externaldocument{article}
+\usepackage{easy-todo}
+\usepackage{comment}
+\usepackage{lipsum}
+\usepackage{bbm}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{pdfpages}
+\newcommand{\Var}{\mathbb{V}\text{ar}}
+\newcommand{\Ex}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\DeclareMathOperator*{\argmin}{arg\,min \,}
+\DeclareMathOperator*{\argmax}{arg\,max \,}
+\usepackage{hyperref}
+\usepackage{booktabs}
+
+\begin{document}
+\title{JCOMP-D-20-00132: Summary of the changes:\\
+  Robust calibration of numerical models based on relative regret
+}
+
+
+\maketitle
+\emph{Abstract (p.1)}
+\begin{itemize}  
+\item l.~5-8: clarified the distinction between control parameters, and uncontrollable random variables
+\item l~.11-16: highlighted the role and novelty of the relative regret in this article
+\end{itemize}
+\emph{Introduction (p.1)}
+\begin{itemize}
+\item l.~34-37: added source of aleatoric uncertainties for ocean modelling
+\item l.~38-48: added effect of omitting the uncertainties in problems
+\item l.~48-51: added examples of the necessity of taking into account uncertainties, from a risk management perspective
+\item l.~52-56: added different vocabulary found in the literature which convey the same idea
+\item l.~57: fixed some typos and english mistakes.
+\item l.~60: we explicit the knowledge of the distribution of $\mathbf{U}$.
+\item l.~64: added state-of-the-art strategies to model aleatoric uncertainties and citation to Ning \& You.
+\item l~.66-68: we clarify that the distributinto $\mathbf{U}$ is not dependent on the value of $\mathbf{k}$
+\item l.~73: a reference to an exemple of such a cost function is added
+\item l.~82: fixed typo
+\item l.~84-85: added the mention of distributional robustness 
+\item l.~92: added mention of overcalibration
+\item l.~83: typo
+\item l.~96,98,99: reformulation for clarity
+\item l.~109: added rationale of the relative regret
+\item l.~115: typo
+\end{itemize}
+\emph{Section 2 (p.5)}
+\begin{itemize}
+\item l.~119: change for clarification
+\end{itemize}
+\emph{Section 3.1 (p.11)}
+\begin{itemize}
+\item l.~232-238: clarification of the construction and definition of the relative-regret 
+\item l.~253: added reminder that $\mathbf{K}^*$ is discrete.
+\item l.~261-272: comparison between additive and relative regret, and justification of the use of relative-regret
+\item l.~278-279: formulation of the problem in terms of chance-constraints in Eq.~(20)
+\item l.~281-282: clarification of the link with the Value-at-Risk 
+\item l.~283-286: interpretation of $\alpha_p$ in terms of bounding probabilistically the relative-error
+\item l.~287-288: rewrote the definition of the RRE
+\item l.~289-291: typo and english reformation
+\item Figure 4 (p.14): changed linestyle, and added quick interpretation in the caption 
+\item l.~293: added small synthesis on the properties of the RRE
+\end{itemize}
+\emph{Section 3.2 (p.14)}
+  \begin{itemize}
+\item l.~301: added subsection Almost-surely bounded relative-regret
+\item l.~302-308: formulation of the a.s.\ bounded relative-regret in terms of chance constraint in Eq.~(21) and property verified by $\mathbf{k}_1$ and $\alpha_1$
+\item l.~309-314: link with uncertain set and Savage's minimax approach for decision under uncertainty
+\item l.~315-317: SAA formulation of the a.s. bounded constraint
+\item l.~317-325: Probabilistic bounding of $\alpha_1$, and level $p=(\eta/2)^{1/N}$ guaranteed probabilistically
+\item l.~330-333: clarify formulation of the general case $p \leq 1$
+\item l~.336-337: estimation of $\Gamma_\alpha$ with indicator functions (Eq.~(27))
+\item l~.339: possibility of unsatisfactory $(p, \alpha_p)$
+\item l.~344: minimization of the quantile of order $p$ of the ratio $J / J^*$.
+\end{itemize}
+ \emph{Conclusion (p.31)}
+\begin{itemize}
+\item l~.557-564: summary of the robustness aspect of the RRE
+\item l~.578-580: reformulation of the sequential design of experiment strategies.
+\end{itemize}
+\end{document}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,3 +1,5 @@
+
+
 @article{walker_defining_2003,
   author =        {Walker, Warren E. and Harremo{\"e}s, Poul and
                    Rotmans, Jan and {van der Sluijs}, Jeroen P. and
@@ -27,12 +29,86 @@
   language =      {en},
 }
 
+@article{das_variational_1992,
+  author =        {Das, S. K. and Lardner, R. W.},
+  journal =       {International Journal for Numerical Methods in
+                   Fluids},
+  month =         aug,
+  number =        {3},
+  pages =         {313--327},
+  title =         {Variational Parameter Estimation for a
+                   Two-Dimensional Numerical Tidal Model},
+  volume =        {15},
+  year =          {1992},
+  abstract =      {It is shown that the parameters in a two-dimensional
+                   (depth-averaged) numerical tidal model can be
+                   estimated accurately by assimilation of data from
+                   tide gauges. The tidal model considered is a
+                   semi-linearized one in which kinematical
+                   non-linearities are neglected but non-linear bottom
+                   friction is included. The parameters to be estimated
+                   (bottom friction coefficient and water depth) are
+                   assumed to be position-dependent and are approximated
+                   by piecewise linear interpolations between certain
+                   nodal values. The numerical scheme consists of a
+                   two-level leapfrog method. The adjoint scheme is
+                   constructed on the assumption that a certain norm of
+                   the difference between computed and observed
+                   elevations at the tide gauges should be minimized. It
+                   is shown that a satisfactory numerical minimization
+                   can be completed using either the
+                   Broyden-Fletcher-Goldfarb-Shanno (BFGS) quasi-Newton
+                   algorithm or Nash's truncated Newton algorithm. On
+                   the basis of a number of test problems, it is shown
+                   that very effective estimation of the nodal values of
+                   the parameters can be achieved provided the number of
+                   data stations is sufficiently large in relation to
+                   the number of nodes.},
+  doi =           {10.1002/fld.1650150305},
+  issn =          {1097-0363},
+  language =      {en},
+}
+
 @phdthesis{boutet_estimation_2015,
   author =        {Boutet, Martial},
-  school =        {Universit{\'e} d'Aix Marseille},
+  school =        {Universit\'e d'Aix Marseille},
   title =         {Estimation Du Frottement Sur Le Fond Pour La
-                   Mod{\'e}lisation de La Mar{\'e}e Barotrope},
+                   Mod\'elisation de La Mar\'ee Barotrope},
   year =          {2015},
+}
+
+@article{ten_brummelhuis_parameter_1990,
+  author =        {{ten Brummelhuis}, P. G. J. and Heemink, A. W.},
+  journal =       {Stochastic Hydrology and Hydraulics},
+  month =         sep,
+  number =        {3},
+  pages =         {193--208},
+  title =         {Parameter Identification in Tidal Models with
+                   Uncertain Boundary Conditions},
+  volume =        {4},
+  year =          {1990},
+  abstract =      {In this paper a parameter estimation algorithm is
+                   developed to estimate uncertain parameters in two
+                   dimensional shallow water flow models. Since in
+                   practice the open boundary conditions of these models
+                   are usually not known accurately, the uncertainty of
+                   these boundary conditions has to be taken into
+                   account to prevent that boundary errors are
+                   interpreted by the estimation procedure as parameter
+                   fluctuations. Therefore the open boundary conditions
+                   are embedded into a stochastic environment and a
+                   constant gain extended Kalman filter is employed to
+                   identify the state of the system. Defining a error
+                   functional that measures the differences between the
+                   filtered state of the system and the measurements, a
+                   quasi Newton method is employed to determine the
+                   minimum of this functional. To reduce the
+                   computational burden, the gradient of the criterium
+                   that is required using the quasi Newton method is
+                   determined by solving the adjoint system.},
+  doi =           {10.1007/BF01543083},
+  issn =          {1435-151X},
+  language =      {en},
 }
 
 @article{huyse_free-form_2001,
@@ -41,6 +117,168 @@
                    Uncertainty Using Maximum Expected Value and
                    Second-Order Second-Moment Strategies},
   year =          {2001},
+}
+
+@article{kuczera_there_2010,
+  author =        {Kuczera, George and Renard, Benjamin and Thyer, Mark and
+                   Kavetski, Dmitri},
+  journal =       {Hydrological Sciences Journal},
+  month =         aug,
+  number =        {6},
+  pages =         {980--991},
+  title =         {There Are No Hydrological Monsters, Just Models and
+                   Observations with Large Uncertainties!},
+  volume =        {55},
+  year =          {2010},
+  abstract =      {Catchments that do not behave in the way the
+                   hydrologist expects, expose the frailties of
+                   hydrological science, particularly its unduly
+                   simplistic treatment of input and model uncertainty.
+                   A conceptual rainfall\textendash runoff model
+                   represents a highly simplified hypothesis of the
+                   transformation of rainfall into runoff. Sub-grid
+                   variability and mis-specification of processes
+                   introduce an irreducible model error, about which
+                   little is currently known. In addition, hydrological
+                   observation systems are far from perfect, with the
+                   principal catchment forcing (rainfall) often subject
+                   to large sampling errors. When ignored or treated
+                   simplistically, these errors develop into monsters
+                   that destroy our ability to model certain catchments.
+                   In this paper, these monsters are tackled using
+                   Bayesian Total Error Analysis, a framework that
+                   accounts for user-specified sources of error and
+                   yields quantitative insights into how prior knowledge
+                   of these uncertainties affects our ability to infer
+                   models and use them for predictive purposes. A case
+                   study involving a catchment with an apparent water
+                   balance anomaly (a hydrological monstrosity!)
+                   illustrates these concepts. It is found that, in the
+                   absence of additional information, the
+                   rainfall\textendash runoff record is insufficient to
+                   explain this anomaly \textendash{} it could be due to
+                   a large export of groundwater, systematic
+                   overestimation of catchment rainfall of the order of
+                   40\%, or a conspiracy of these factors. There is ``no
+                   free lunch'' in hydrology. The rainfall\textendash
+                   runoff record on its own is insufficient to decompose
+                   the different sources of uncertainty affecting
+                   calibration, testing and prediction, and hydrological
+                   monstrosities will persist until additional
+                   independent knowledge of uncertainties is obtained.
+                   Citation Kuczera, G., Renard, B., Thyer, M. \&
+                   Kavetski, D. (2010) There are no hydrological
+                   monsters, just models and observations with large
+                   uncertainties! Hydrol. Sci. J. 55(6), 980\textendash
+                   991.},
+  doi =           {10.1080/02626667.2010.504677},
+  issn =          {0262-6667},
+}
+
+@article{wong_neglecting_2018,
+  author =        {Wong, Tony E. and Klufas, Alexandra and
+                   Srikrishnan, Vivek and Keller, Klaus},
+  journal =       {Environmental Research Letters},
+  month =         jul,
+  number =        {7},
+  pages =         {074019},
+  publisher =     {{IOP Publishing}},
+  title =         {Neglecting Model Structural Uncertainty
+                   Underestimates Upper Tails of Flood Hazard},
+  volume =        {13},
+  year =          {2018},
+  abstract =      {Coastal flooding drives considerable risks to many
+                   communities, but projections of future flood risks
+                   are deeply uncertain. The paucity of observations of
+                   extreme events often motivates the use of statistical
+                   approaches to model the distribution of extreme storm
+                   surge events. One key deep uncertainty that is often
+                   overlooked is model structural uncertainty. There is
+                   currently no strong consensus among experts regarding
+                   which class of statistical model to use as a `best
+                   practice'. Robust management of coastal flooding
+                   risks requires coastal managers to consider the
+                   distinct possibility of non-stationarity in storm
+                   surges. This increases the complexity of the
+                   potential models to use, which tends to increase the
+                   data required to constrain the model. Here, we use a
+                   Bayesian model averaging approach to analyze the
+                   balance between (i) model complexity sufficient to
+                   capture decision-relevant risks and (ii) data
+                   availability to constrain complex model structures.
+                   We characterize deep model structural uncertainty
+                   through a set of calibration experiments.
+                   Specifically, we calibrate a set of models ranging in
+                   complexity using long-term tide gauge observations
+                   from the Netherlands and the United States. We find
+                   that in both considered cases, roughly half of the
+                   model weight is associated with the non-stationary
+                   models. Our approach provides a formal framework to
+                   integrate information across model structures, in
+                   light of the potentially sizable modeling
+                   uncertainties. By combining information from multiple
+                   models, our inference sharpens for the projected
+                   storm surge 100 year return levels, and estimated
+                   return levels increase by several centimeters. We
+                   assess the impacts of data availability through a set
+                   of experiments with temporal subsets and model
+                   comparison metrics. Our analysis suggests that about
+                   70 years of data are required to stabilize estimates
+                   of the 100 year return level, for the locations and
+                   methods considered here.},
+  doi =           {10.1088/1748-9326/aacb3d},
+  issn =          {1748-9326},
+  language =      {en},
+}
+
+@article{hu_robust_2011,
+  author =        {Hu, Yi and Rao, Singiresu},
+  journal =       {Journal of Mechanical Design},
+  month =         nov,
+  pages =         {111009},
+  title =         {Robust {{Design}} of {{Horizontal Axis Wind Turbines
+                   Using Taguchi Method}}},
+  volume =        {133},
+  year =          {2011},
+  abstract =      {The robust design of horizontal axis wind turbines,
+                   including both parameter design and tolerance design,
+                   is presented. A simple way of designing robust
+                   horizontal axis wind turbine systems under realistic
+                   conditions is outlined with multiple design
+                   parameters (variables), multiple objectives, and
+                   multiple constraints simultaneously by using the
+                   traditional Taguchi method and its extensions. The
+                   performance of the turbines is predicted using the
+                   axial momentum theory and the blade element momentum
+                   theory. In the parameter design stage, the energy
+                   output of the turbine is maximized using the Taguchi
+                   method and an extended penalty-based Taguchi method
+                   is proposed to solve constrained parameter design
+                   problems. The results of the unconstrained and
+                   constrained parameter design problems, in terms of
+                   the objective function and constraints are compared.
+                   Using an appropriate set of tolerance settings of the
+                   parameters, the tolerance design problem is
+                   formulated so as to yield an economical design, while
+                   ensuring a minimal variability in the performance of
+                   the wind turbine. The resulting multi-objective
+                   tolerance design problem is solved using the
+                   traditional Taguchi method. The present work provides
+                   a simple and economical approach for the robust
+                   optimal design of horizontal axis wind turbines.},
+  doi =           {10.1115/1.4004989},
+}
+
+@phdthesis{brevault_contributions_2015,
+  author =        {Brevault, L.},
+  month =         oct,
+  school =        {Ecole Nationale Sup\'erieure des Mines de
+                   Saint-\'Etienne},
+  type =          {Theses},
+  title =         {Contributions to Multidisciplinary Design
+                   Optimization under Uncertainty, Application to Launch
+                   Vehicle Design.},
+  year =          {2015},
 }
 
 @article{lelievre_consideration_2016,
@@ -99,7 +337,7 @@
   journal =       {Engineering Optimization},
   month =         apr,
   number =        {4},
-  pages =         {549-567},
+  pages =         {549--567},
   title =         {Horsetail Matching: A Flexible Approach to
                    Optimization under Uncertainty},
   volume =        {50},
@@ -128,6 +366,46 @@
                    demonstrated.},
   doi =           {10.1080/0305215X.2017.1327581},
   issn =          {0305-215X, 1029-0273},
+  language =      {en},
+}
+
+@article{ning_optimization_2019,
+  author =        {Ning, Chao and You, Fengqi},
+  journal =       {Computers \& Chemical Engineering},
+  month =         jun,
+  pages =         {434--448},
+  title =         {Optimization under Uncertainty in the Era of Big Data
+                   and Deep Learning: {{When}} Machine Learning Meets
+                   Mathematical Programming},
+  volume =        {125},
+  year =          {2019},
+  abstract =      {This paper reviews recent advances in the field of
+                   optimization under uncertainty via a modern data
+                   lens, highlights key research challenges and promise
+                   of data-driven optimization that organically
+                   integrates machine learning and mathematical
+                   programming for decision-making under uncertainty,
+                   and identifies potential research opportunities. A
+                   brief review of classical mathematical programming
+                   techniques for hedging against uncertainty is first
+                   presented, along with their wide spectrum of
+                   applications in Process Systems Engineering. A
+                   comprehensive review and classification of the
+                   relevant publications on data-driven distributionally
+                   robust optimization, data-driven chance constrained
+                   program, data-driven robust optimization, and
+                   data-driven scenario-based optimization is then
+                   presented. This paper also identifies fertile avenues
+                   for future research that focuses on a closed-loop
+                   data-driven optimization framework, which allows the
+                   feedback from mathematical programming to machine
+                   learning, as well as scenario-based optimization
+                   leveraging the power of deep learning techniques.
+                   Perspectives on online learning-based data-driven
+                   multistage optimization with a
+                   learning-while-optimizing scheme are presented.},
+  doi =           {10.1016/j.compchemeng.2019.03.034},
+  issn =          {0098-1354},
   language =      {en},
 }
 
@@ -160,14 +438,14 @@
                    framework for robust data assimilation. The new
                    algorithms continue to produce good analyses in the
                    presence of observation outliers. The approach is
-                   based on replacing the traditional
-                   \$\textbackslash{}L\_2\$ norm formulation of data
-                   assimilation problems with formulations based on
-                   \$\textbackslash{}L\_1\$ and Huber norms. Numerical
-                   experiments using the Lorenz-96 and the shallow water
-                   on the sphere models illustrate how the new
-                   algorithms outperform traditional data assimilation
-                   approaches in the presence of data outliers.},
+                   based on replacing the traditional \$\textbackslash
+                   L\_2\$ norm formulation of data assimilation problems
+                   with formulations based on \$\textbackslash L\_1\$
+                   and Huber norms. Numerical experiments using the
+                   Lorenz-96 and the shallow water on the sphere models
+                   illustrate how the new algorithms outperform
+                   traditional data assimilation approaches in the
+                   presence of data outliers.},
 }
 
 @article{berger_overview_1994,
@@ -184,13 +462,37 @@
   year =          {1994},
 }
 
+@article{rahimian_distributionally_2019,
+  author =        {Rahimian, Hamed and Mehrotra, Sanjay},
+  journal =       {arXiv:1908.05659 [cs, math, stat]},
+  month =         aug,
+  title =         {Distributionally {{Robust Optimization}}: {{A
+                   Review}}},
+  year =          {2019},
+  abstract =      {The concepts of risk-aversion, chance-constrained
+                   optimization, and robust optimization have developed
+                   significantly over the last decade. Statistical
+                   learning community has also witnessed a rapid
+                   theoretical and applied growth by relying on these
+                   concepts. A modeling framework, called
+                   distributionally robust optimization (DRO), has
+                   recently received significant attention in both the
+                   operations research and statistical learning
+                   communities. This paper surveys main concepts and
+                   contributions to DRO, and its relationships with
+                   robust optimization, risk-aversion,
+                   chance-constrained optimization, and function
+                   regularization.},
+  language =      {en},
+}
+
 @article{marzat_worst-case_2013,
   author =        {Marzat, Julien and Walter, Eric and
                    {Piet-Lahanier}, H{\'e}l{\`e}ne},
   journal =       {Journal of Global Optimization},
   month =         apr,
   number =        {4},
-  pages =         {707-727},
+  pages =         {707--727},
   title =         {Worst-Case Global Optimization of Black-Box Functions
                    through {{Kriging}} and Relaxation},
   volume =        {55},
@@ -306,7 +608,7 @@
   journal =       {European Journal of Operational Research},
   month =         dec,
   number =        {2},
-  pages =         {287-303},
+  pages =         {287--303},
   series =        {Strategic {{Planning}} of {{Facilities}}},
   title =         {Algorithms for Robust Single and Multiple Period
                    Layout Planning for Manufacturing Systems},
@@ -405,7 +707,7 @@
 @incollection{kim_guide_2015,
   author =        {Kim, Sujin and Pasupathy, Raghu and Henderson, Shane},
   month =         jan,
-  pages =         {207-243},
+  pages =         {207--243},
   title =         {A {{Guide}} to {{Sample Average Approximation}}},
   volume =        {216},
   year =          {2015},
@@ -471,8 +773,8 @@
 @phdthesis{baudoui_optimisation_2012,
   author =        {Baudoui, Vincent},
   school =        {Toulouse, ISAE},
-  title =         {Optimisation Robuste Multiobjectifs Par Mod{\`e}les
-                   de Substitution},
+  title =         {Optimisation Robuste Multiobjectifs Par Mod\`eles de
+                   Substitution},
   year =          {2012},
 }
 
@@ -488,7 +790,7 @@
   journal =       {Structural and Multidisciplinary Optimization},
   month =         jun,
   number =        {6},
-  pages =         {853-862},
+  pages =         {853--862},
   title =         {The Weighted Sum Method for Multi-Objective
                    Optimization: New Insights},
   volume =        {41},
@@ -529,6 +831,47 @@
   year =          {2004},
 }
 
+@book{silverman_density_2018,
+  author =        {Silverman, B.W.},
+  month =         jan,
+  title =         {Density Estimation: {{For}} Statistics and Data
+                   Analysis},
+  year =          {2018},
+  abstract =      {Although there has been a surge of interest in
+                   density estimation in recent years, much of the
+                   published research has been concerned with purely
+                   technical matters with insufficient emphasis given to
+                   the technique's practical value. Furthermore, the
+                   subject has been rather inaccessible to the general
+                   statistician. The account presented in this book
+                   places emphasis on topics of methodological
+                   importance, in the hope that this will facilitate
+                   broader practical application of density estimation
+                   and also encourage research into relevant theoretical
+                   work. The book also provides an introduction to the
+                   subject for those with general interests in
+                   statistics. The important role of density estimation
+                   as a graphical technique is reflected by the
+                   inclusion of more than 50 graphs and figures
+                   throughout the text. Several contexts in which
+                   density estimation can be used are discussed,
+                   including the exploration and presentation of data,
+                   nonparametric discriminant analysis, cluster
+                   analysis, simulation and the bootstrap, bump hunting,
+                   projection pursuit, and the estimation of hazard
+                   rates and other quantities that depend on the
+                   density. This book includes general survey of methods
+                   available for density estimation. The Kernel method,
+                   both for univariate and multivariate data, is
+                   discussed in detail, with particular emphasis on ways
+                   of deciding how much to smooth and on computation
+                   aspects. Attention is also given to adaptive methods,
+                   which smooth to a greater degree in the tails of the
+                   distribution, and to methods based on the idea of
+                   penalized likelihood.},
+  doi =           {10.1201/9781315140919},
+}
+
 @article{dempster_maximum_1977,
   author =        {Dempster, Arthur P. and Laird, Nan M. and
                    Rubin, Donald B.},
@@ -542,11 +885,11 @@
 
 @article{freedman_histogram_1981,
   author =        {Freedman, David and Diaconis, Persi},
-  journal =       {Zeitschrift f{\"u}r Wahrscheinlichkeitstheorie und
+  journal =       {Zeitschrift f\"ur Wahrscheinlichkeitstheorie und
                    Verwandte Gebiete},
   month =         dec,
   number =        {4},
-  pages =         {453-476},
+  pages =         {453--476},
   title =         {On the Histogram as a Density Estimator:{{L2}}
                    Theory},
   volume =        {57},
@@ -608,13 +951,51 @@
   language =      {en},
 }
 
+@article{savage_theory_1951,
+  author =        {Savage, L. J.},
+  journal =       {Journal of the American Statistical Association},
+  month =         mar,
+  number =        {253},
+  pages =         {55--67},
+  title =         {The {{Theory}} of {{Statistical Decision}}},
+  volume =        {46},
+  year =          {1951},
+  doi =           {10.1080/01621459.1951.10500768},
+  issn =          {0162-1459},
+}
+
+@article{luedtke_sample_2008,
+  author =        {Luedtke, James and Ahmed, Shabbir},
+  journal =       {SIAM Journal on Optimization},
+  number =        {2},
+  pages =         {674--699},
+  publisher =     {{SIAM}},
+  title =         {A Sample Approximation Approach for Optimization with
+                   Probabilistic Constraints},
+  volume =        {19},
+  year =          {2008},
+}
+
+@article{thulin_cost_2014,
+  author =        {Thulin, M{\textbackslash}aans},
+  journal =       {Electronic Journal of Statistics},
+  number =        {1},
+  pages =         {817--840},
+  publisher =     {{The Institute of Mathematical Statistics and the
+                   Bernoulli Society}},
+  title =         {The Cost of Using Exact Confidence Intervals for a
+                   Binomial Proportion},
+  volume =        {8},
+  year =          {2014},
+}
+
 @article{kennedy_bayesian_2001,
   author =        {Kennedy, Marc C. and O'Hagan, Anthony},
   journal =       {Journal of the Royal Statistical Society: Series B
                    (Statistical Methodology)},
   month =         jan,
   number =        {3},
-  pages =         {425-464},
+  pages =         {425--464},
   title =         {Bayesian Calibration of Computer Models},
   volume =        {63},
   year =          {2001},
@@ -658,7 +1039,7 @@
   journal =       {SIAM/ASA Journal on Uncertainty Quantification},
   month =         jan,
   number =        {1},
-  pages =         {490-510},
+  pages =         {490--510},
   title =         {Bayesian {{Adaptive Reconstruction}} of {{Profile
                    Optima}} and {{Optimizers}}},
   volume =        {2},
@@ -730,25 +1111,79 @@
   isbn =          {978-1-4503-3472-3},
 }
 
-
-@book{silverman_density_2018,
-  title={Density estimation for statistics and data analysis},
-  author={Silverman, Bernard W},
-  year={2018},
-  publisher={Routledge}
-}
-
 @article{gneiting_probabilistic_2014,
-  title = {Probabilistic {{Forecasting}}},
-  author = {Gneiting, Tilmann and Katzfuss, Matthias},
-  year = {2014},
-  month = jan,
-  volume = {1},
-  pages = {125--151},
-  issn = {2326-8298},
-  doi = {10.1146/annurev-statistics-062713-085831},
-  abstract = {A probabilistic forecast takes the form of a predictive probability distribution over future quantities or events of interest. Probabilistic forecasting aims to maximize the sharpness of the predictive distributions, subject to calibration, on the basis of the available information set. We formalize and study notions of calibration in a prediction space setting. In practice, probabilistic calibration can be checked by examining probability integral transform (PIT) histograms. Proper scoring rules such as the logarithmic score and the continuous ranked probability score serve to assess calibration and sharpness simultaneously. As a special case, consistent scoring functions provide decision-theoretically coherent tools for evaluating point forecasts. We emphasize methodological links to parametric and nonparametric distributional regression techniques, which attempt to model and to estimate conditional distribution functions; we use the context of statistically postprocessed ensemble forecasts in numerical weather prediction as an example. Throughout, we illustrate concepts and methodologies in data examples.},
-  file = {/home/victor/Zotero/storage/NL6TV4DL/Gneiting et Katzfuss - 2014 - Probabilistic Forecasting.pdf;/home/victor/Zotero/storage/GM53DIYU/annurev-statistics-062713-085831.html},
-  journal = {Annual Review of Statistics and Its Application},
-  number = {1}
+  author =        {Gneiting, Tilmann and Katzfuss, Matthias},
+  journal =       {Annual Review of Statistics and Its Application},
+  month =         jan,
+  number =        {1},
+  pages =         {125--151},
+  title =         {Probabilistic {{Forecasting}}},
+  volume =        {1},
+  year =          {2014},
+  abstract =      {A probabilistic forecast takes the form of a
+                   predictive probability distribution over future
+                   quantities or events of interest. Probabilistic
+                   forecasting aims to maximize the sharpness of the
+                   predictive distributions, subject to calibration, on
+                   the basis of the available information set. We
+                   formalize and study notions of calibration in a
+                   prediction space setting. In practice, probabilistic
+                   calibration can be checked by examining probability
+                   integral transform (PIT) histograms. Proper scoring
+                   rules such as the logarithmic score and the
+                   continuous ranked probability score serve to assess
+                   calibration and sharpness simultaneously. As a
+                   special case, consistent scoring functions provide
+                   decision-theoretically coherent tools for evaluating
+                   point forecasts. We emphasize methodological links to
+                   parametric and nonparametric distributional
+                   regression techniques, which attempt to model and to
+                   estimate conditional distribution functions; we use
+                   the context of statistically postprocessed ensemble
+                   forecasts in numerical weather prediction as an
+                   example. Throughout, we illustrate concepts and
+                   methodologies in data examples.},
+  doi =           {10.1146/annurev-statistics-062713-085831},
+  issn =          {2326-8298},
 }
+
+@inproceedings{ginsbourger_towards_2010,
+  address =       {{Heidelberg}},
+  author =        {Ginsbourger, David and Le Riche, Rodolphe},
+  booktitle =     {{{mODa}} 9 \textendash{} {{Advances}} in
+                   {{Model}}-{{Oriented Design}} and {{Analysis}}},
+  editor =        {Giovagnoli, Alessandra and Atkinson, Anthony C. and
+                   Torsney, Bernard and May, Caterina},
+  pages =         {89--96},
+  publisher =     {{Physica-Verlag HD}},
+  series =        {Contributions to {{Statistics}}},
+  title =         {Towards {{Gaussian Process}}-Based {{Optimization}}
+                   with {{Finite Time Horizon}}},
+  year =          {2010},
+  abstract =      {During the last decade, Kriging-based sequential
+                   optimization algorithms have become standard methods
+                   in computer experiments. These algorithms rely on the
+                   iterative maximization of sampling criteria such as
+                   the Expected Improvement (EI), which takes advantage
+                   of Kriging conditional distributions to make an
+                   explicit trade-off between promising and uncertain
+                   points in the search space. We have recently worked
+                   on a multipoint EI criterion meant to choose
+                   simultaneously several points for synchronous
+                   parallel computation. The results presented in this
+                   article concern sequential procedures with a fixed
+                   number of iterations. We show that maximizing the
+                   usual EI at each iteration is suboptimal. In essence,
+                   the latter amounts to considering the current
+                   iteration as the last one. This work formulates the
+                   problem of optimal strategy for finite horizon
+                   sequential optimization, provides the solution to
+                   this problem in terms of a new multipoint EI, and
+                   illustrates the suboptimality of maximizing the
+                   1-point EI at each iteration on the basis of a first
+                   counter-example.},
+  doi =           {10.1007/978-3-7908-2410-0_12},
+  isbn =          {978-3-7908-2410-0},
+  language =      {en},
+}
+

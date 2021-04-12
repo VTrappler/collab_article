@@ -1,0 +1,55 @@
+% SIAM Shared Information Template
+% This is information that is shared between the main document and any
+% supplement. If no supplement is required, then this information can
+% be included directly in the main document.
+
+
+% Packages and macros go here
+\usepackage{lipsum}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{algorithmic}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\ifpdf
+  \DeclareGraphicsExtensions{.eps,.pdf,.png,.jpg}
+\else
+  \DeclareGraphicsExtensions{.eps}
+\fi
+
+% Add a serial/Oxford comma by default.
+\newcommand{\creflastconjunction}{, and~}
+
+% Used for creating new theorem and remark environments
+\newsiamremark{remark}{Remark}
+\newsiamremark{hypothesis}{Hypothesis}
+\crefname{hypothesis}{Hypothesis}{Hypotheses}
+\newsiamthm{claim}{Claim}
+
+% Sets running headers as well as PDF title and authors
+\headers{Adaptive methods using GP for regret-based estimates}{V. Trappler, E. Arnaud, A. Vidard}
+
+% Title. If the supplement option is on, then "Supplementary Material"
+% is automatically inserted before the title.
+\title{Adaptive methods using GP for regret-based estimates\thanks{Document compiled on \today }% \thanks{Submitted to the editors DATE.
+% \funding{This work was funded by the Fog Research Institute under contract no.~FRI-454.}}
+}
+
+% Authors: full names plus addresses.
+\author{Victor Trappler\thanks{Univ. Grenoble-Alpes  (\email{victor.trappler@univ-grenoble-alpes.fr}, \url{http://vtrappler.github.io/}).}
+\and Elise Arnaud \thanks{Univ Grenoble-Alpes} \and Arthur Vidard\footnotemark[3]}
+
+\usepackage{amsopn}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\kk}{\theta}
+\newcommand{\uu}{u}
+\newcommand{\KK}{\theta}
+\newcommand{\UU}{U}
+\newcommand{\Kspace}{\Theta}
+\newcommand{\Uspace}{\mathbb{U}}
+\newcommand{\Xspace}{\mathbb{X}}
+%%% Local Variables: 
+%%% mode:latex
+%%% TeX-master: "ex_article"
+%%% End: 

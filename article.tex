@@ -17,7 +17,7 @@
 %% Template article for Elsevier's document class `elsarticle'
 %% with harvard style bibliographic references
 
-\documentclass[preprint,review, 1p]{elsarticle}
+\documentclass[preprint, review, 1p]{elsarticle}
 
 %% Use the option review to obtain double line spacing
 %% \documentclass[preprint,review,12pt]{elsarticle}
@@ -34,7 +34,7 @@
 %% For including figures, graphicx.sty has been loaded in
 %% elsarticle.cls. If you prefer to use the old commands
 %% please give \usepackage{epsfig}
-% \usepackage{jcomp}
+%\usepackage{jcomp}
 % \usepackage{framed,multirow}
 %% The amssymb package provides various useful mathematical symbols
 \usepackage{amssymb}
@@ -85,7 +85,8 @@
 \newcommand{\elise}[1]{{\itshape\color{red} ({#1})}}
 \newcommand{\victor}[1]{{\itshape\color{blue}}}
 \newcommand{\remove}[1]{{\color{red} {}}}
-\newcommand{\added}[1]{{\color{teal} #1}}
+\newcommand{\added}[1]{% {\color{teal}
+    #1}
 \usepackage{url}
 \usepackage{xcolor}
 \definecolor{newcolor}{rgb}{.8,.349,.1}
@@ -102,26 +103,8 @@
 
 \journal{Journal of Computational Physics}
 
-\newcommand*\linenomathpatchAMS[1]{%
-  \expandafter\pretocmd\csname #1\endcsname {\linenomathAMS}{}{}%
-  \expandafter\pretocmd\csname #1*\endcsname{\linenomathAMS}{}{}%
-  \expandafter\apptocmd\csname end#1\endcsname {\endlinenomath}{}{}%
-  \expandafter\apptocmd\csname end#1*\endcsname{\endlinenomath}{}{}%
-}
-\expandafter\ifx\linenomath\linenomathWithnumbers
-  \let\linenomathAMS\linenomathWithnumbers
-  %% The following line gets rid of an extra line numbers at the bottom:
-  \patchcmd\linenomathAMS{\advance\postdisplaypenalty\linenopenalty}{}{}{}
-\else
-  \let\linenomathAMS\linenomathNonumbers
-\fi
-\linenomathpatchAMS{gather}
-\linenomathpatchAMS{multline}
-\linenomathpatchAMS{align}
-\linenomathpatchAMS{alignat}
-\linenomathpatchAMS{flalign}
 \begin{document}
-\linenumbers
+% \linenumbers
 %% Title, authors and addresses
 
 %% use the tnoteref command within \title for footnotes;
@@ -572,7 +555,7 @@ In this context, for a given $\mathbf{k}$, the set $R_{\alpha}(\mathbf{k}) \subs
 \begin{linenomath*}
 \begin{equation}
 \label{eq:def_Ralpha}
-R_{\alpha}(\mathbf{k}) = \left\{ \mathbf{u} \in \Uspace \mid J(\mathbf{k},\mathbf{U}=\mathbf{u}) \leq \alpha J^*(\mathbf{u}) \right\}
+R_{\alpha}(\mathbf{k}) = \left\{ \mathbf{u} \in \Uspace \mid J(\mathbf{k},\mathbf{u}) \leq \alpha J^*(\mathbf{u}) \right\}
 \end{equation}
 \end{linenomath*}
 
@@ -609,7 +592,7 @@ $\alpha J^*(\mathbf{U})$.
 
 Noting that without relaxation, \textit{i.e.} when $\alpha$ is set to $1$, $\Gamma_1$ is non-zero if the set $\{\mathbf{u}\in\Uspace \mid J(\mathbf{k},\mathbf{U}=\mathbf{u}) = J^*(\mathbf{u})\}$ has non-zero measure with respect to $\Prob_{\mathbf{U}}$. It happens when the distribution of $\mathbf{K}^*$ presents atoms.
 
-This linked to the definition of the distribution of the minimisers $\mathbf{K}^*$. For instance, if $\Kspace$ is a discrete set, \added{$\mathbf{K}^*$ is a discrete random variable}, and we can rewrite $\Gamma_1$ as $\Gamma_1(\mathbf{k})=\Prob_{\mathbf{U}}\left[J(\mathbf{k},\mathbf{U}=\mathbf{u}) = J^*(\mathbf{U})\right] = \Prob_{\mathbf{U}}\left[\mathbf{k} = \mathbf{k}^*(\mathbf{U})\right]$ which is the probability mass function of $\mathbf{K}^*$.
+This linked to the definition of the distribution of the minimisers $\mathbf{K}^*$. For instance, if $\Kspace$ is a discrete set, \added{$\mathbf{K}^*$ is a discrete random variable}, and we can rewrite $\Gamma_1$ as $\Gamma_1(\mathbf{k})=\Prob_{\mathbf{U}}\left[J(\mathbf{k},\mathbf{U}) = J^*(\mathbf{U})\right] = \Prob_{\mathbf{U}}\left[\mathbf{k} = \mathbf{k}^*(\mathbf{U})\right]$ which is the probability mass function of $\mathbf{K}^*$.
 
 The motivation behind this relaxation is to take into account the local behaviour of the function around the conditional minimisers.
 For a given set of environmental conditions $\mathbf{u}$, if the function $\mathbf{k} \mapsto J(\mathbf{k},\mathbf{U}=\mathbf{u})$ is flat around its minimum $\mathbf{k}^*(\mathbf{u})$, then choosing  $\mathbf{k}^*(\mathbf{u}) + \epsilon$ (for a small $\epsilon$) will produce a value closer to the minimum than when the function has a high curvature.
